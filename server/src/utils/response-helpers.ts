@@ -16,7 +16,7 @@ export const SendSuccess = <T>(
   res.status(statusCode).json(response);
 };
 
-export const asynHandler = (fn: Function) => {
+export const asyncHandler = (fn: Function) => {
   return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };

@@ -4,3 +4,9 @@ export interface ApiResponse<T> {
   message?: string;
   error?: string;
 }
+
+export enum UserRole {
+  ADMIN = 'admin',
+  DOCTOR = "doctor",
+  PATIENT = "patient"
+};

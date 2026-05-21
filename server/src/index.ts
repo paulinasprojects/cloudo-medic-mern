@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db";
 import { syncModels } from "./models";
 import { errorHandler, notFound } from "./middleware/error-handler";
+import userRoutes from "./routes/user-routes";
 
 dotenv.config();
 
@@ -15,6 +16,8 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello Cloudo Medic");
 });
+
+app.use("/api/auth", userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
