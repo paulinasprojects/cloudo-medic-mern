@@ -1,7 +1,32 @@
 import sequelize from "../config/db";
 import User from "./User";
+import DoctorProfile from "./DoctorProfile";
+import PatientProfile from "./PatientProfile";
 
-export { User };
+User.hasOne(DoctorProfile, {
+  foreignKey: "userId",
+  as: "doctorProfile",
+  onDelete: "CASCADE",
+});
+
+DoctorProfile.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user"
+});
+
+User.hasOne(PatientProfile, {
+  foreignKey: "userId",
+  as: "patientProfile",
+  onDelete: "CASCADE",
+});
+
+PatientProfile.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user"
+});
+
+
+export { User, DoctorProfile, PatientProfile };
 export const syncModels = async (): Promise<void> => {
   const isDev = process.env.NODE_ENV === "development";
 

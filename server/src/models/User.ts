@@ -10,6 +10,7 @@ InferCreationAttributes<User>> {
   declare password: string;
   declare firstName: CreationOptional<string>;
   declare lastName: CreationOptional<string>;
+  declare image: CreationOptional<string | null>;
   declare role: CreationOptional<UserRole>;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
@@ -74,6 +75,16 @@ User.init({
     }
   },
 },
+ image: {
+    type: DataTypes.STRING(1000),
+    allowNull: true,
+    defaultValue: null,
+    validate: {
+      isUrl: {
+        msg: "Image must be a valid url"
+      }
+    }
+  },
   role: {
     type: DataTypes.ENUM(...Object.values(UserRole)),
     allowNull: false,
