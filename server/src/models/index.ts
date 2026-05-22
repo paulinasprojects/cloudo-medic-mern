@@ -2,6 +2,7 @@ import sequelize from "../config/db";
 import User from "./User";
 import DoctorProfile from "./DoctorProfile";
 import PatientProfile from "./PatientProfile";
+import Appointment from "./Appointment";
 
 User.hasOne(DoctorProfile, {
   foreignKey: "userId",
@@ -25,8 +26,30 @@ PatientProfile.belongsTo(User, {
   as: "user"
 });
 
+DoctorProfile.hasMany(Appointment, {
+  foreignKey: "doctorId",
+  as: "appointments",
+  onDelete: "CASCADE",
+});
 
-export { User, DoctorProfile, PatientProfile };
+PatientProfile.hasMany(Appointment, {
+  foreignKey: "patientId",
+  as: "appointments",
+  onDelete: "CASCADE",
+});
+
+Appointment.belongsTo(DoctorProfile, {
+  foreignKey: "doctorId",
+  as: "doctorProfile"
+});
+
+Appointment.belongsTo(PatientProfile, {
+  foreignKey: "patientId",
+  as: "patientProfile"
+});
+
+
+export { User, DoctorProfile, PatientProfile, Appointment };
 export const syncModels = async (): Promise<void> => {
   const isDev = process.env.NODE_ENV === "development";
 

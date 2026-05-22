@@ -10,3 +10,9 @@ export enum UserRole {
   DOCTOR = "doctor",
   PATIENT = "patient"
 };
+
+export enum AppointmentStatus {
+  SCHEDULED = "scheduled",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled"
+}

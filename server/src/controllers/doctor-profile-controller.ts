@@ -3,7 +3,6 @@ import { User, DoctorProfile } from "../models";
 import { AppError } from "../middleware/error-handler";
 import { SendSuccess, asyncHandler } from "../utils/response-helpers";
 import { UserRole } from "../types";
-import { spec } from "node:test/reporters";
 
 
 export const getDoctorProfile = asyncHandler(

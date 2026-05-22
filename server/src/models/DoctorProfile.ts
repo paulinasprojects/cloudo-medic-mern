@@ -1,6 +1,7 @@
 import { CreationOptional, DataTypes, InferAttributes, ForeignKey, InferCreationAttributes, Model, NonAttribute } from "sequelize";
 import sequelize from "../config/db";
 import User from "./User";
+import Appointment from "./Appointment";
 
 export class DoctorProfile extends Model<InferAttributes<DoctorProfile>,
 InferCreationAttributes<DoctorProfile>> {
@@ -19,6 +20,7 @@ InferCreationAttributes<DoctorProfile>> {
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
   declare user?: NonAttribute<User>
+  declare appointents?: NonAttribute<Appointment[]>
 }
 
 DoctorProfile.init({
@@ -62,7 +64,8 @@ DoctorProfile.init({
     type: DataTypes.DATE,
     allowNull: false,
     validate: {
-      notEmpty: {
+      isDate: {
+        args: true,
         msg: "Date of birth cannot be empty"
       },
     }
