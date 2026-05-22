@@ -1,7 +1,9 @@
 import bcrypt from "bcryptjs";
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, NonAttribute } from "sequelize";
 import sequelize from "../config/db";
 import { UserRole } from "../types";
+import DoctorProfile from "./DoctorProfile";
+import PatientProfile from "./PatientProfile";
 
 export class User extends Model<InferAttributes<User>, 
 InferCreationAttributes<User>> {
@@ -14,6 +16,8 @@ InferCreationAttributes<User>> {
   declare role: CreationOptional<UserRole>;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
+  declare doctorProfile?: NonAttribute<DoctorProfile>;
+  declare patientProfile?: NonAttribute<PatientProfile>;
 
   async comparePassword(candidatePassword: string): Promise<boolean> {
     return bcrypt.compare(candidatePassword, this.password);
