@@ -126,14 +126,6 @@ export const updatePatientProfileByAdmin = asyncHandler(
       where: {
         userId
       },
-      include: [
-        {
-          model: User,
-          where: {
-            role: UserRole.ADMIN
-          }
-        }
-      ]
     });
     
     if (!profile) {
@@ -198,19 +190,15 @@ export const deletePatientProfile = asyncHandler(
       where: {
         userId,
       },
-      include: [
-        {
-          model: User,
-          where: {
-            role: UserRole.PATIENT,
-          },
-        },
-      ],
     });
 
     if (!profile) {
       throw new AppError("Patient not found", 404);
     }
+
+     if (profile.user?.role !== UserRole.ADMIN) {
+          throw new AppError("Unauthorized access", 403)
+      }
 
     await profile.destroy();
 

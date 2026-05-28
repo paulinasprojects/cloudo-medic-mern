@@ -3,6 +3,7 @@ import User from "./User";
 import DoctorProfile from "./DoctorProfile";
 import PatientProfile from "./PatientProfile";
 import Appointment from "./Appointment";
+import Prescription from "./Prescription";
 
 User.hasOne(DoctorProfile, {
   foreignKey: "userId",
@@ -48,8 +49,29 @@ Appointment.belongsTo(PatientProfile, {
   as: "patientProfile"
 });
 
+DoctorProfile.hasMany(Prescription, {
+  foreignKey: "doctorId",
+  as: "prescriptions",
+  onDelete: "CASCADE",
+});
 
-export { User, DoctorProfile, PatientProfile, Appointment };
+PatientProfile.hasMany(Prescription, {
+  foreignKey: "patientId",
+  as: "prescriptions",
+  onDelete: "CASCADE"
+});
+
+Prescription.belongsTo(DoctorProfile, {
+  foreignKey: "doctorId",
+  as: "doctorProfile"
+});
+
+Prescription.belongsTo(PatientProfile, {
+  foreignKey: "patientId",
+  as: "patientProfile"
+})
+
+export { User, DoctorProfile, PatientProfile, Appointment, Prescription };
 export const syncModels = async (): Promise<void> => {
   const isDev = process.env.NODE_ENV === "development";
 

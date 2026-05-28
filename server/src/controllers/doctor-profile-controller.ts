@@ -82,14 +82,6 @@ export const updateDoctorProfileByDoctor = asyncHandler(
       where: {
         userId,
       },
-      include: [
-        {
-          model: User,
-          where: {
-            role: UserRole.DOCTOR,
-          },
-        },
-      ],
     });
 
     if (!profile) {
@@ -137,14 +129,6 @@ export const updateDoctorProfileByAdmins = asyncHandler(
       where: {
         userId,
       },
-      include: [
-        {
-          model: User,
-          where: {
-            role: UserRole.DOCTOR,
-          },
-        },
-      ],
     });
 
     if (!profile) {
@@ -204,18 +188,14 @@ export const deleteDoctorProfile = asyncHandler(
         where: {
             userId,
           },
-          include: [
-            {
-              model: User,
-              where: {
-                role: UserRole.DOCTOR,
-              },
-            },
-          ],
         });
     
         if (!profile) {
           throw new AppError("Doctor not found", 404);
+        }
+
+        if (profile.user?.role !== UserRole.ADMIN) {
+          throw new AppError("Unauthorized access", 403)
         }
     
         await profile.destroy();

@@ -2,6 +2,7 @@ import { CreationOptional, DataTypes, InferAttributes, ForeignKey, InferCreation
 import sequelize from "../config/db";
 import User from "./User";
 import Appointment from "./Appointment";
+import Prescription from "./Prescription";
 
 export class DoctorProfile extends Model<InferAttributes<DoctorProfile>,
 InferCreationAttributes<DoctorProfile>> {
@@ -21,6 +22,7 @@ InferCreationAttributes<DoctorProfile>> {
   declare updatedAt: CreationOptional<Date>;
   declare user?: NonAttribute<User>
   declare appointents?: NonAttribute<Appointment[]>
+  declare prescriptions?: NonAttribute<Prescription[]>
 }
 
 DoctorProfile.init({
