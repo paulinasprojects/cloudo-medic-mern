@@ -27,11 +27,11 @@ export const getDoctorProfile = asyncHandler(
     };
 
     if (!user.doctorProfile) {
-      throw new AppError("Doctor profle not found", 404)
+      throw new AppError("Doctor not found", 404)
     };
   
 
-    SendSuccess(res, user.doctorProfile, "Profile retrieved successfuly!")
+    SendSuccess(res, user.doctorProfile, "Profile retrieved successfully!")
   }
 )
 
@@ -69,11 +69,11 @@ export const createDoctorProfile = asyncHandler(
       consultationFee,
     });
 
-    SendSuccess(res, profile, "Profile created successfuly", 201);
+    SendSuccess(res, profile, "Profile created successfully", 201);
   }
 )
 
-export const updateDoctorProfile = asyncHandler(
+export const updateDoctorProfileByDoctor = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { address, phoneNumber, bio, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
     const userId = req.userId;
@@ -93,7 +93,7 @@ export const updateDoctorProfile = asyncHandler(
     });
 
     if (!profile) {
-      throw new AppError("No doctor profile found", 404);
+      throw new AppError("Doctor not found", 404);
     }
 
     if (address) {
@@ -128,6 +128,74 @@ export const updateDoctorProfile = asyncHandler(
     SendSuccess(res, updatededProfile, "Profile updated successfully!")
   }
 )
+export const updateDoctorProfileByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { address, phoneNumber, bio, dateOfBirth, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
+    const userId = req.userId;
+    
+    const profile = await DoctorProfile.findOne({
+      where: {
+        userId,
+      },
+      include: [
+        {
+          model: User,
+          where: {
+            role: UserRole.DOCTOR,
+          },
+        },
+      ],
+    });
+
+    if (!profile) {
+      throw new AppError("Doctor not found", 404);
+    }
+
+
+    if (profile.user?.role !== UserRole.ADMIN) {
+      throw new AppError("Unauthorized access", 403)
+    }
+
+    if (address) {
+      profile.address = address;
+    }
+
+    if (phoneNumber) {
+      profile.phoneNumber = phoneNumber;
+    }
+
+    if (bio) {
+      profile.bio = bio;
+    }
+
+    if (dateOfBirth) {
+      profile.dateOfBirth = dateOfBirth;
+    }
+
+    if (specialization) {
+      profile.specialization = specialization
+    };
+
+    if (hospital) {
+      profile.hospital = hospital
+    };
+
+    if (licenseNumber) {
+      profile.licenseNumber = licenseNumber
+    };
+
+    if (consultationFee) {
+      profile.consultationFee = consultationFee
+    };
+    
+    if (yearsOfExperience) {
+      profile.yearsOfExperience = yearsOfExperience;
+    }
+
+    const updatededProfile = await profile.save()
+    SendSuccess(res, updatededProfile, "Profile updated successfully!")
+  }
+)
 
 export const deleteDoctorProfile = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -147,7 +215,7 @@ export const deleteDoctorProfile = asyncHandler(
         });
     
         if (!profile) {
-          throw new AppError("Doctor profile not found", 404);
+          throw new AppError("Doctor not found", 404);
         }
     
         await profile.destroy();

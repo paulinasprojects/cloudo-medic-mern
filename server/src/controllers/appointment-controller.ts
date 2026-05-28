@@ -21,7 +21,6 @@ const appointmentIncludes = [
   },
 ];
  
-// Admin route /api/appointments
 
 export const getAllAppointmentsByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -45,12 +44,10 @@ export const getAllAppointmentsByAdmins = asyncHandler(
       });
       return SendSuccess(res, appointments, "Appointments retrieved successfuly!");
     } else {
-      throw new AppError("Unauthorized access", 400)
+      throw new AppError("Unauthorized access", 403)
     };
   }
 )
-
-// Doctor route /api/appointments/doctor
 
 export const getAllAppointmentsByDoctors = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -92,7 +89,6 @@ export const getAllAppointmentsByDoctors = asyncHandler(
   }
 )
 
-// Patient route /api/appointments/patient
 export const getAllAppointmentsByPatients = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.userId;
@@ -133,7 +129,7 @@ export const getAllAppointmentsByPatients = asyncHandler(
   }
 )
 
-// admin  /api/appointments/doctor/:doctorId
+
 export const getAppointmentsByDoctorId = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.userId;
@@ -175,7 +171,6 @@ export const getAppointmentsByDoctorId = asyncHandler(
 }
 )
 
-// admin  /api/appointments/patient/:patientId
 
 export const getAppointmentsByPatientId = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -219,7 +214,6 @@ export const getAppointmentsByPatientId = asyncHandler(
   }
 )
 
-// admin - any appointment /api/appointments/:id
 export const getAppointmentByIdByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
@@ -559,7 +553,7 @@ export const updateAppointmentByPatients = asyncHandler(
     if (!appointment) {
       throw new AppError("Appointment not found", 404)
     }
-    
+
 
     if (user.role === UserRole.PATIENT) {
       const patientProfile = await PatientProfile.findOne({

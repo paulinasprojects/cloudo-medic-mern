@@ -26,7 +26,7 @@ export const getPatientProfile = asyncHandler(
       };
 
       if (!user.patientProfile) {
-        throw new AppError("Patient profile not found", 404);
+        throw new AppError("Patient not found", 404);
       };
 
       SendSuccess(res, user.patientProfile, "Profile retrieved successfully");
@@ -73,9 +73,9 @@ export const createPatientProfile = asyncHandler(
 )
 
 
-export const updatePatientProfile = asyncHandler(
+export const updatePatientProfileByPatient = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { address, phoneNumber, emergencyContactName, emergencyContactNumber, allergies, medicalHistory } = req.body;
+    const { address, phoneNumber, emergencyContactName, emergencyContactNumber } = req.body;
     const userId = req.userId;
 
     const profile = await PatientProfile.findOne({
@@ -93,7 +93,7 @@ export const updatePatientProfile = asyncHandler(
     });
 
     if (!profile) {
-      throw new AppError("Patient profile not found", 404)
+      throw new AppError("Patient not found", 404)
     };
 
     if (address) {
@@ -103,6 +103,71 @@ export const updatePatientProfile = asyncHandler(
     if (phoneNumber) {
       profile.phoneNumber = phoneNumber
     };
+
+    if (emergencyContactName) {
+      profile.emergencyContactName = emergencyContactName;
+    }
+
+    if (emergencyContactNumber) {
+      profile.emergencyContactNumber = emergencyContactNumber;
+    }
+
+    const updatedProfile = await profile.save();
+
+    SendSuccess(res, updatedProfile, "Profile updated successfuly");
+  }
+)
+export const updatePatientProfileByAdmin = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { address, phoneNumber, bio, dateOfBirth, gender, bloodType, emergencyContactName, emergencyContactNumber, allergies, medicalHistory } = req.body;
+    const userId = req.userId;
+
+    const profile = await PatientProfile.findOne({
+      where: {
+        userId
+      },
+      include: [
+        {
+          model: User,
+          where: {
+            role: UserRole.ADMIN
+          }
+        }
+      ]
+    });
+    
+    if (!profile) {
+      throw new AppError("Patient not found", 404)
+    };
+
+    if (profile.user?.role !== UserRole.ADMIN) {
+      throw new AppError("Unauthorized access", 403)
+    }
+
+    if (address) {
+      profile.address = address;
+    };
+
+    if (phoneNumber) {
+      profile.phoneNumber = phoneNumber
+    };
+
+    if (bio) {
+      profile.bio = bio;
+    }
+
+    if (dateOfBirth) {
+      profile.dateOfBirth = dateOfBirth;
+    }
+
+    if (gender) {
+      profile.gender = gender
+    }
+
+    if (bloodType) {
+      profile.bloodType = bloodType
+    }
+
 
     if (emergencyContactName) {
       profile.emergencyContactName = emergencyContactName;
@@ -144,7 +209,7 @@ export const deletePatientProfile = asyncHandler(
     });
 
     if (!profile) {
-      throw new AppError("Patient profile not found", 404);
+      throw new AppError("Patient not found", 404);
     }
 
     await profile.destroy();
