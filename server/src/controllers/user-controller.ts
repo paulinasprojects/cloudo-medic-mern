@@ -75,7 +75,7 @@ export const updateUser = asyncHandler(
     };
 
     if (!firstName && !lastName && !email && !password) {
-      throw new AppError("Please provide first name, last name, email or password to update your password", 400);
+      throw new AppError("Please provide first name, last name, email or password to update your information", 400);
     }
 
     if (firstName) {
@@ -97,6 +97,6 @@ export const updateUser = asyncHandler(
 
     const updatedUser = await user.save();
 
-    SendSuccess(res, updatedUser.toSafeJSON(), "Password changed successfuly")
+    SendSuccess(res, updatedUser.toSafeJSON(), "User updated successfuly")
   }
 )

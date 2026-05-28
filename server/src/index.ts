@@ -6,6 +6,7 @@ import { errorHandler, notFound } from "./middleware/error-handler";
 import userRoutes from "./routes/user-routes";
 import doctorProfileRoutes from "./routes/doctor-profile-routes";
 import patientProfileRoutes from "./routes/patient-profile-routes";
+import appointmentRoutes from "./routes/appointment-routes";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/auth", userRoutes);
 app.use("/api/profile/doctors", doctorProfileRoutes);
 app.use("/api/profile/patients", patientProfileRoutes);
+app.use("/api/appointments", appointmentRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -66,7 +66,7 @@ PatientProfile.init({
      validate: {
       isDate: {
         args: true,
-        msg: "Date of birth cannot be empty"
+        msg: "Date of birth have to be a date"
       }
     }
   },

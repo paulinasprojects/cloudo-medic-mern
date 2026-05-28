@@ -75,7 +75,7 @@ User.init({
     allowNull: false,
      validate: {
       notEmpty: {
-        msg: "First name cannot be empty"
+        msg: "Last name cannot be empty"
     }
   },
 },

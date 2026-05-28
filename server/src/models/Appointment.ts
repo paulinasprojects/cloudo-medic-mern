@@ -26,10 +26,18 @@ Appointment.init({
   patientId: {
     type: DataTypes.UUID,
     allowNull: false,
+    references: {
+      model: "patient_profiles",
+      key: "id"
+    },
   },
   doctorId: {
     type: DataTypes.UUID,
     allowNull: false,
+     references: {
+      model: "doctor_profiles",
+      key: "id"
+    },
   },
   appointmentDate: {
     type: DataTypes.DATE,
@@ -62,7 +70,18 @@ Appointment.init({
 {
   sequelize,
   tableName: "appointments",
-  modelName: "Appointment"
+  modelName: "Appointment",
+  indexes: [
+    {
+      fields: ["doctorId"],
+    },
+    {
+      fields: ["patientId"],
+    },
+    {
+      fields: ["appointmentDate"],
+    },
+  ]
 }
 )
 

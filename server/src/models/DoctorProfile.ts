@@ -66,7 +66,7 @@ DoctorProfile.init({
     validate: {
       isDate: {
         args: true,
-        msg: "Date of birth cannot be empty"
+        msg: "Date of birth have to be a date"
       },
     }
   },
@@ -102,7 +102,7 @@ DoctorProfile.init({
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: "License number be empty"
+        msg: "License number cannot be empty"
       }
     }
   },
