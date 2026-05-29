@@ -43,3 +43,17 @@ export const  requireAdmin = (req: Request, res: Response, next: NextFunction) =
   }
   next();
 };
+
+export const requirePatient = (req: Request, res: Response, next: NextFunction) => {
+  if (req.userRole !== UserRole.PATIENT) {
+    throw new AppError("Patient access required", 403)
+  }
+  next();
+}
+
+export const requireDoctor = (req: Request, res: Response, next: NextFunction) => {
+  if (req.userRole !== UserRole.DOCTOR) {
+    throw new AppError("Doctor access required", 403)
+  }
+  next();
+};

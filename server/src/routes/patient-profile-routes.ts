@@ -1,12 +1,15 @@
 import { Router } from "express";
 import { getPatientProfile, createPatientProfile, updatePatientProfileByPatient } from "../controllers/patient-profile-controller";
-import { requireAuth } from "../middleware/auth-middleware";
+import { requireAuth, requirePatient } from "../middleware/auth-middleware";
 
 const router = Router();
 
-router.get("/", requireAuth, getPatientProfile);
-router.post("/", requireAuth, createPatientProfile);
-router.post("/", requireAuth, updatePatientProfileByPatient);
+router.use(requireAuth)
+router.use(requirePatient)
+
+router.get("/", getPatientProfile);
+router.post("/", createPatientProfile);
+router.post("/", updatePatientProfileByPatient);
 
 
 export default router;

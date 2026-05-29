@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { requireAuth } from "../middleware/auth-middleware";
+import { requireAuth, requireDoctor, requirePatient } from "../middleware/auth-middleware";
 import {
   getAllAppointmentsByDoctors, 
   getAllAppointmentsByPatients, 
@@ -12,12 +12,12 @@ import {
 
 const router = Router();
 
-router.get("/:id", requireAuth, getAppointmentByIdByDoctor);
-router.get("/:id", requireAuth, getAppointmentByIdByPatient);
-router.get("/doctor", requireAuth, getAllAppointmentsByDoctors);
-router.get("/patient", requireAuth, getAllAppointmentsByPatients);
-router.post("/", requireAuth, createAppointment);
-router.post("/:id", requireAuth, updateAppointmentByDoctors);
-router.post("/:id", requireAuth, updateAppointmentByPatients);
+router.get("/:id", requireAuth, requireDoctor, getAppointmentByIdByDoctor);
+router.get("/:id", requireAuth, requirePatient, getAppointmentByIdByPatient);
+router.get("/doctor", requireAuth, requireDoctor, getAllAppointmentsByDoctors);
+router.get("/patient", requireAuth, requirePatient, getAllAppointmentsByPatients);
+router.post("/", requireAuth, requireDoctor, createAppointment);
+router.post("/:id", requireAuth, requireDoctor, updateAppointmentByDoctors);
+router.post("/:id", requireAuth, requirePatient, updateAppointmentByPatients);
 
 export default router;

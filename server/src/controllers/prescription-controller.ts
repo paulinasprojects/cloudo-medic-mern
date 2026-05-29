@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from "express";
+import { Op } from "sequelize";
 import { asyncHandler, SendSuccess } from "../utils/response-helpers";
 import { AppError } from "../middleware/error-handler";
-import { UserRole } from "../types";
-import {Op} from "sequelize";
 
 
 import Prescription from "../models/Prescription";
@@ -38,11 +37,6 @@ export const getAllPrescriptionsByDoctors = asyncHandler(
       throw new AppError("User not found", 404)
     }
 
-     if (user.role !== UserRole.DOCTOR) {
-      throw new AppError("Only a doctor can get all prescriptions", 403);
-    }
-
-    if (user.role === UserRole.DOCTOR) {
       const doctorProfile = await DoctorProfile.findOne({
         where: {
           userId
@@ -62,7 +56,6 @@ export const getAllPrescriptionsByDoctors = asyncHandler(
       });
 
       return SendSuccess(res, prescriptions, "Prescriptions retrieved successfully")
-    }
   }
 )
 
@@ -80,11 +73,6 @@ export const getAllPrescriptionsByPatients = asyncHandler(
       throw new AppError("User not found", 404)
     }
 
-    if (user.role !== UserRole.PATIENT) {
-      throw new AppError("Only a patient can get all prescriptions", 403);
-    }
-
-    if (user.role === UserRole.PATIENT) {
       const patientProfile = await PatientProfile.findOne({
         where: {
           userId
@@ -105,7 +93,6 @@ export const getAllPrescriptionsByPatients = asyncHandler(
 
       return SendSuccess(res, prescriptions, "Prescriptions retrieved successfully")
     }
-  }
 )
 
 
@@ -123,11 +110,6 @@ export const getActivePrescriptionsByPatients = asyncHandler(
       throw new AppError("User not found", 404)
     };
 
-    if (user.role !== UserRole.PATIENT) {
-      throw new AppError("Only a patient can get active prescriptions", 403);
-    }
-
-    if (user.role === UserRole.PATIENT) {
     const patientProfile = await PatientProfile.findOne({
       where: {
         userId
@@ -154,7 +136,6 @@ export const getActivePrescriptionsByPatients = asyncHandler(
       });
       
       return SendSuccess(res, prescriptions, "Active prescriptions retrieved successfully!")
-    };
   }
 )
 
@@ -171,12 +152,7 @@ export const getExpiredPrescriptionsByPatients = asyncHandler(
     if (!user) {
       throw new AppError("User not found", 404)
     };
-
-    if (user.role !== UserRole.PATIENT) {
-      throw new AppError("Only a patient can get expired prescriptions", 403);
-    }
-
-     if (user.role === UserRole.PATIENT) {
+     
     const patientProfile = await PatientProfile.findOne({
       where: {
         userId
@@ -200,7 +176,6 @@ export const getExpiredPrescriptionsByPatients = asyncHandler(
       });
       
       return SendSuccess(res, prescriptions, "Active prescriptions retrieved successfully!")
-    }
   }
 )
 
@@ -230,7 +205,6 @@ export const getPrescriptionByIdByDoctors = asyncHandler(
       throw new AppError("Prescription not found", 404)
     };
 
-    if (user.role === UserRole.DOCTOR) {
       const doctorProfile = await DoctorProfile.findOne({
         where: {
           userId
@@ -242,7 +216,6 @@ export const getPrescriptionByIdByDoctors = asyncHandler(
       };
 
       SendSuccess(res, prescription, "Prescription retrieved successfully")
-    }
   }
 )
 
@@ -272,7 +245,6 @@ export const getPrescriptionByIdByPatients = asyncHandler(
       throw new AppError("Prescription not found", 404)
     }
 
-    if (user.role === UserRole.PATIENT) {
       const patientProfile = await PatientProfile.findOne({
         where: {
           userId
@@ -282,7 +254,6 @@ export const getPrescriptionByIdByPatients = asyncHandler(
       if (!patientProfile || prescription.patientId !== patientProfile.id) {
         throw new AppError("You do not have access to this prescription", 403)
       }
-    }
 
     SendSuccess(res, prescription, "Prescription retrieved successfully");
   }
@@ -307,9 +278,6 @@ export const createPrescription = asyncHandler(
       throw new AppError("User not found", 404)
     }
 
-    if (user.role !== UserRole.DOCTOR) {
-      throw new AppError("Only doctors can create prescriptions", 403)
-    };
 
     const doctorProfile = await DoctorProfile.findOne({
       where: {
@@ -377,10 +345,6 @@ export const updatePrescription = asyncHandler(
     if (!prescription) {
       throw new AppError("Prescription not found", 404)
     }
-
-    if (user.role !== UserRole.DOCTOR) {
-      throw new AppError("Only doctors can create prescriptions", 403)
-    };
 
     const doctorProfile = await DoctorProfile.findOne({
       where: {

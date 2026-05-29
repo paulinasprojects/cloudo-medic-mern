@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { requireAuth } from "../middleware/auth-middleware";
+import { requireAuth, requireDoctor, requirePatient } from "../middleware/auth-middleware";
 import { 
   getAllPrescriptionsByDoctors,
   getAllPrescriptionsByPatients,
@@ -13,13 +13,13 @@ import {
 
 const router = Router();
 
-router.get("/", requireAuth, getActivePrescriptionsByPatients);
-router.get("/", requireAuth, getExpiredPrescriptionsByPatients);
-router.get("/:id", requireAuth, getPrescriptionByIdByDoctors);
-router.get("/:id", requireAuth, getPrescriptionByIdByPatients);
-router.get("/doctor", requireAuth, getAllPrescriptionsByDoctors);
-router.get("/patient", requireAuth, getAllPrescriptionsByPatients);
-router.post("/", requireAuth, createPrescription);
-router.post("/:id", requireAuth, updatePrescription);
+router.get("/", requireAuth, requirePatient, getActivePrescriptionsByPatients);
+router.get("/", requireAuth, requirePatient, getExpiredPrescriptionsByPatients);
+router.get("/:id", requireAuth, requireDoctor, getPrescriptionByIdByDoctors);
+router.get("/:id", requireAuth, requirePatient, getPrescriptionByIdByPatients);
+router.get("/doctor", requireAuth, requireDoctor, getAllPrescriptionsByDoctors);
+router.get("/patient", requireAuth, requirePatient, getAllPrescriptionsByPatients);
+router.post("/", requireAuth, requireDoctor, createPrescription);
+router.post("/:id", requireAuth, requireDoctor, updatePrescription);
 
 export default router;

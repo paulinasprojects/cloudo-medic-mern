@@ -43,7 +43,6 @@ export const createDoctorProfile = asyncHandler(
       const user = await User.findOne({
         where: {
           id: userId,
-          role: UserRole.DOCTOR
         },
     });
 
@@ -51,9 +50,6 @@ export const createDoctorProfile = asyncHandler(
       throw new AppError("User not found", 404)
     };
 
-    if (user.role !== UserRole.DOCTOR) {
-      throw new AppError("You are not a doctor", 400)
-    };
 
     const profile = await DoctorProfile.create({
       userId: userId,

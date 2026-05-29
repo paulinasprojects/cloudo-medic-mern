@@ -36,12 +36,6 @@ export const getAllAppointmentsByDoctors = asyncHandler(
       throw new AppError("User not found", 404)
     }
 
-    if (user.role !== UserRole.DOCTOR) {
-      throw new AppError("Only a doctor can get all appointments", 403);
-    }
-
-    
-    if (user.role === UserRole.DOCTOR) {
       const doctorProfile = await DoctorProfile.findOne({
         where: {
           userId
@@ -61,7 +55,6 @@ export const getAllAppointmentsByDoctors = asyncHandler(
       });
 
       return SendSuccess(res, appointments, "Appointments retrieved successfully!")
-    };
   }
 )
 
@@ -79,11 +72,6 @@ export const getAllAppointmentsByPatients = asyncHandler(
       throw new AppError("User not found", 404)
     };
 
-    if (user.role !== UserRole.PATIENT) {
-      throw new AppError("Only a patient can get all appointments", 403);
-    }
-
-    if (user.role === UserRole.PATIENT) {
       const patientProfile = await PatientProfile.findOne({
         where: {
           userId
@@ -103,7 +91,6 @@ export const getAllAppointmentsByPatients = asyncHandler(
       });
         
       return SendSuccess(res, appointments, "Appointments retrieved successfully!")
-    }
   }
 )
 
@@ -134,7 +121,6 @@ export const getAppointmentByIdByDoctor = asyncHandler(
       throw new AppError("Appointment not found", 404)
     };
 
-    if (user.role === UserRole.DOCTOR) {
       const doctorProfile = await DoctorProfile.findOne({
         where: {
           userId
@@ -144,8 +130,6 @@ export const getAppointmentByIdByDoctor = asyncHandler(
       if (!doctorProfile || appointment.doctorId !== doctorProfile.id) {
         throw new AppError("You do not have access to this appointment", 403)
       }
-    }
-
     SendSuccess(res, appointment, "Appointment retrieved successfully")
   }
 )
@@ -176,7 +160,6 @@ export const getAppointmentByIdByPatient = asyncHandler(
       throw new AppError("Appointment not found", 404)
     };
 
-    if (user.role === UserRole.PATIENT) {
       const patientProfile = await PatientProfile.findOne({
         where: {
           userId
@@ -186,7 +169,6 @@ export const getAppointmentByIdByPatient = asyncHandler(
       if (!patientProfile || appointment.patientId !== patientProfile.id) {
         throw new AppError("You do not have access to this appointment", 403)
       }
-    }
 
     SendSuccess(res, appointment, "Appointment retrieved successfully")
   }
@@ -209,12 +191,7 @@ export const createAppointment = asyncHandler(
 
      if (!user) {
           throw new AppError("User not found", 404);
-      }
-
-     
-    if (user.role !== UserRole.DOCTOR) {
-      throw new AppError("Only doctors can create appointments", 403)
-    }  
+      } 
 
     const doctorProfile = await DoctorProfile.findOne({
       where: {
@@ -283,9 +260,6 @@ export const updateAppointmentByDoctors = asyncHandler(
       throw new AppError("User not found", 404)
     }
 
-    if (user.role !== UserRole.DOCTOR) {
-        throw new AppError("Only a doctor can update this appointment", 403);
-    }
 
     const appointment = await Appointment.findOne({
       where: {
@@ -297,13 +271,12 @@ export const updateAppointmentByDoctors = asyncHandler(
       throw new AppError("Appointment not found", 404)
     }
 
-    // if (appointment.status !== AppointmentStatus.SCHEDULED) {
-    //   throw new AppError(
-    //     `Cannot update an appointment that is already ${appointment.status}`, 400
-    //   )
-    // };
+    if (appointment.status !== AppointmentStatus.SCHEDULED) {
+      throw new AppError(
+        `Cannot update an appointment that is already ${appointment.status}`, 400
+      )
+    };
 
-    if (user.role === UserRole.DOCTOR) {
       const doctorProfile = await DoctorProfile.findOne({
         where: {
           userId
@@ -337,7 +310,7 @@ export const updateAppointmentByDoctors = asyncHandler(
       }
 
       if (appointmentDate !== undefined) appointment.appointmentDate = date;
-    }
+
 
     const updatedAppointment = await appointment.save();
 
@@ -360,10 +333,6 @@ export const updateAppointmentByPatients = asyncHandler(
       throw new AppError("User not found", 404)
     }
 
-    if (user.role !== UserRole.PATIENT) {
-      throw new AppError("Only a patient can update this appointment", 403);
-    }
-
 
     const appointment = await Appointment.findOne({
       where: {
@@ -375,8 +344,6 @@ export const updateAppointmentByPatients = asyncHandler(
       throw new AppError("Appointment not found", 404)
     }
 
-
-    if (user.role === UserRole.PATIENT) {
       const patientProfile = await PatientProfile.findOne({
         where: {
           userId
@@ -392,7 +359,6 @@ export const updateAppointmentByPatients = asyncHandler(
       }
 
       if (status !== undefined) appointment.status = status;
-    }
 
     const updatedAppointment = await appointment.save();
 
