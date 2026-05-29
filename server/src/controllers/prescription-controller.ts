@@ -23,33 +23,6 @@ const prescriptionIncludes = [
   },
 ];
 
-export const getAllPrescriptionsByAdmins = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.userId;
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-    if (!user) {
-      throw new AppError("User not found", 404)
-    };
-
-     if (user.role !== UserRole.ADMIN) {
-      throw new AppError("Unauthorized access", 403);
-    }
-
-    if (user.role === UserRole.ADMIN) {
-      const prescriptions = await Prescription.findAll({
-        include: prescriptionIncludes,
-        order: [["startDate", "ASC"]]
-      });
-      return SendSuccess(res, prescriptions, "Prescriptions retrieved successfully")
-    }
-  }
-)
 
 export const getAllPrescriptionsByDoctors = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -135,91 +108,6 @@ export const getAllPrescriptionsByPatients = asyncHandler(
   }
 )
 
-// admins / doctors only
-export const getPrescriptionsByPatientId = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.userId;
-    const { patientId } = req.params;
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-      if (!user) {
-      throw new AppError("User not found", 404)
-    };
-
-    if (user.role !== UserRole.ADMIN || UserRole.DOCTOR) {
-      throw new AppError("Unauthorized access", 403)
-    }
-
-
-    const patientProfile = await PatientProfile.findOne({
-      where: {
-        id: patientId,
-      }
-    });
-
-    if (!patientProfile) {
-      throw new AppError("Patient not found", 404)
-    }
-
-    const prescriptions = await Prescription.findAll({
-      where: {
-        patientId
-      },
-      include: prescriptionIncludes,
-      order: [["startDate", "ASC"]]
-    });
-    
-    SendSuccess(res, prescriptions, "Prescriptions retrived successfully")
-  }
-)
-
-// admins only
-export const getPrescriptionsByDoctorId = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.userId;
-    const { doctorId } = req.params;
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-    if (!user) {
-      throw new AppError("User not found", 404)
-    }
-
-    if (user.role !== UserRole.ADMIN) {
-      throw new AppError("Unauthorized access", 403)
-    }
-
-
-    const doctorProfile = await DoctorProfile.findOne({
-      where: {
-        id: doctorId,
-      }
-    });
-
-    if (!doctorProfile) {
-      throw new AppError("Doctor not found", 404)
-    };
-
-    const prescriptions = await Prescription.findAll({
-      where: {
-        doctorId
-      },
-      include: prescriptionIncludes,
-      order: [["startDate", "ASC"]]
-    });
-
-    SendSuccess(res, prescriptions, "Prescriptions retrieved successfully")
-  }
-)
 
 export const getActivePrescriptionsByPatients = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -313,40 +201,6 @@ export const getExpiredPrescriptionsByPatients = asyncHandler(
       
       return SendSuccess(res, prescriptions, "Active prescriptions retrieved successfully!")
     }
-  }
-)
-
-export const getPrescriptionByIdByAdmins = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-    const userId = req.userId;
-    
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-    if (!user) {
-      throw new AppError("User not found", 404)
-    };
-
-    if (user.role !== UserRole.ADMIN) {
-      throw new AppError("Unauthorized access", 403)
-    };
-
-    const prescription = await Prescription.findOne({
-      where: {
-        id
-      },
-      include: prescriptionIncludes
-    });
-
-    if (!prescription) {
-      throw new AppError("Prescription not found", 404)
-    };
-
-    SendSuccess(res, prescription, "Prescription retrieved successfully")
   }
 )
 
@@ -558,40 +412,6 @@ export const updatePrescription = asyncHandler(
 
     const updatedPrescription = await prescription.save();
 
-    SendSuccess(res, updatePrescription, "Prescription updated successfully")
-  }
-)
-
-export const deletePrescription = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-    const userId = req.userId;
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-    if (!user) {
-      throw new AppError("User not found", 404)
-    }
-
-    if (user.role !== UserRole.ADMIN) {
-      throw new AppError("Unauthorized access", 403)
-    }
-
-    const prescription = await Prescription.findOne({
-      where: {
-        id
-      }
-    });
-
-    if (!prescription) {
-      throw new AppError("Prescription not found", 404)
-    };
-
-    await prescription.destroy();
-    SendSuccess(res, null, "Prescription deleted successfully!")
+    SendSuccess(res, updatedPrescription, "Prescription updated successfully")
   }
 )

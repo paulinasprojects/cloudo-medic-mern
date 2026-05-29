@@ -22,35 +22,6 @@ const appointmentIncludes = [
 ];
  
 
-export const getAllAppointmentsByAdmins = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.userId;
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-    if (!user) {
-      throw new AppError("User not found", 404)
-    }
-
-    if (user.role !== UserRole.ADMIN) {
-      throw new AppError("Unauthorized access", 403);
-    }
-
-
-    if (user.role === UserRole.ADMIN) {
-      const appointments = await Appointment.findAll({
-        include: appointmentIncludes,
-        order: [["appointmentDate", "ASC"]]
-      });
-      return SendSuccess(res, appointments, "Appointments retrieved successfully!");
-    };
-  }
-)
-
 export const getAllAppointmentsByDoctors = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.userId;
@@ -136,125 +107,6 @@ export const getAllAppointmentsByPatients = asyncHandler(
   }
 )
 
-
-export const getAppointmentsByDoctorId = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.userId;
-    const { doctorId } = req.params;
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-     if (!user) {
-      throw new AppError("User not found", 404)
-    };
-
-
-    if (user.role !== UserRole.ADMIN) {
-      throw new AppError("Unauthorized access", 403);
-    }
-
-    const doctorProfile = await DoctorProfile.findOne({
-      where: {
-        id: doctorId,
-      }
-    });
-
-    if (!doctorProfile) {
-      throw new AppError("Doctor not found", 404)
-    };
-
-    const appointments = await Appointment.findAll({
-      where: {
-        doctorId
-      },
-      include: appointmentIncludes,
-      order: [["appointmentDate", "ASC"]]
-    });
-    SendSuccess(res, appointments, "Appointments retrieved successfully")
-}
-)
-
-
-// admins / doctors only
-export const getAppointmentsByPatientId = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.userId;
-    const { patientId } = req.params;
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-     if (!user) {
-      throw new AppError("User not found", 404)
-    };
-
-
-    if (user.role !== UserRole.ADMIN || UserRole.DOCTOR) {
-      throw new AppError("You have to be an admin", 403);
-    }
-
-    const patientProfile = await PatientProfile.findOne({
-      where: {
-        id: patientId,
-      }
-    });
-
-    if (!patientProfile) {
-      throw new AppError("Patient not found", 404)
-    }
-
-    const appointments = await Appointment.findAll({
-      where: {
-        patientId
-      },
-      include: appointmentIncludes,
-      order: [["appointmentDate", "ASC"]]
-    });
-
-    SendSuccess(res, appointments, "Appointments retrievd successfully")
-  }
-)
-
-export const getAppointmentByIdByAdmins = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-    const userId = req.userId;
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-    if (!user) {
-      throw new AppError("User not found", 404)
-    }
-
-    if (user.role !== UserRole.ADMIN) {
-      throw new AppError("Unauthorized access", 403)
-    }
-
-    const appointment = await Appointment.findOne({
-      where: {
-        id
-      },
-      include: appointmentIncludes
-    });
-
-    if (!appointment) {
-      throw new AppError("Appointment not found", 404);
-    }
-
-    SendSuccess(res, appointment, "Appointment retrieved successfully");
-  }
-)
 
 export const getAppointmentByIdByDoctor = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -415,59 +267,6 @@ export const createAppointment = asyncHandler(
   }
 )
 
-export const updateAppointmentByAdmins = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { appointmentDate, notes, status } = req.body;
-    const { id } = req.params;
-    const userId = req.userId; 
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-    if (!user) {
-      throw new AppError("User not found", 404)
-    }
-
-    if (user.role !== UserRole.ADMIN) {
-        throw new AppError("Unauthorized access", 403);
-    }
-
-    const appointment = await Appointment.findOne({
-      where: {
-        id
-      }
-    });
-
-    if (!appointment) {
-      throw new AppError("Appointment not found", 404)
-    }
-
-    // if (appointment.status !== AppointmentStatus.SCHEDULED) {
-    //   throw new AppError(
-    //     `Cannot update an appointment that is already ${appointment.status}`, 400
-    //   )
-    // };
-
-    const date = appointmentDate ? new Date(appointmentDate) : new Date();
-    const today = new Date();
-
-    if (date < today) {
-      throw new AppError("Cannot create an appointment for a past date", 400)
-    }
-
-    if (user.role === UserRole.ADMIN) {
-      if (status !== undefined) appointment.status = status;
-      if (notes !== undefined) appointment.notes = notes;
-      if (appointmentDate !== undefined) appointment.appointmentDate = date;
-    }
-
-    const updatedAppointment = await appointment.save();
-
-    SendSuccess(res, updatedAppointment, "Appointment updated successfully");  }
-)
 export const updateAppointmentByDoctors = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { appointmentDate, notes, status } = req.body;
@@ -598,40 +397,5 @@ export const updateAppointmentByPatients = asyncHandler(
     const updatedAppointment = await appointment.save();
 
     SendSuccess(res, updatedAppointment, "Appointment updated successfully");  
-  }
-)
-
-export const deleteAppointment = asyncHandler(
-  async (res: Response, req: Request, next: NextFunction) => {
-    const { id } = req.params;
-    const userId = req.userId;
-
-    const user = await User.findOne({
-      where: {
-        id: userId
-      }
-    });
-
-    if (!user) {
-      throw new AppError("User not found", 404)
-    }
-
-    if (user.role !== UserRole.ADMIN) {
-      throw new AppError("Unauthorized access", 403);
-    }
-
-    const appointment = await Appointment.findOne({
-      where: {
-        id
-      }
-    });
-
-    if (!appointment) {
-      throw new AppError("Appointment not found", 404)
-    }
-
-    await appointment.destroy();
-
-    SendSuccess(res, null, "Appointment deleted successfully");
   }
 )

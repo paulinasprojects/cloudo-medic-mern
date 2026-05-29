@@ -1,11 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { AppError } from "./error-handler";
+import { UserRole } from "../types";
 
 declare global {
   namespace Express {
     interface Request {
       userId: string;
+      userRole: UserRole
     }
   }
 }
@@ -28,8 +30,16 @@ export const requireAuth = (req: Request, res: Response, next: NextFunction) => 
     throw new Error("JWT_SECRET is not defiend in the .env")
   }
   
-  const decoded = jwt.verify(token, secret) as { userId: string }
+  const decoded = jwt.verify(token, secret) as { userId: string, role: UserRole }
   req.userId = decoded.userId;
-
+  req.userRole = decoded.role;
+  
   next();
 }
+
+export const  requireAdmin = (req: Request, res: Response, next: NextFunction) => {
+  if (req.userRole !== UserRole.ADMIN) {
+    throw new AppError("Admin access required", 403);
+  }
+  next();
+};

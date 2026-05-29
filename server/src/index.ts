@@ -8,6 +8,7 @@ import doctorProfileRoutes from "./routes/doctor-profile-routes";
 import patientProfileRoutes from "./routes/patient-profile-routes";
 import appointmentRoutes from "./routes/appointment-routes";
 import prescriptionsRoutes from "./routes/prescription-routes";
+import adminRoutes from "./routes/admin-routes";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use("/api/profile/doctors", doctorProfileRoutes);
 app.use("/api/profile/patients", patientProfileRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/prescriptions", prescriptionsRoutes);
+app.use("/api/admin", adminRoutes)
 
 app.use(notFound);
 app.use(errorHandler);
