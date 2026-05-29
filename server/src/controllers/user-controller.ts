@@ -97,6 +97,6 @@ export const updateUser = asyncHandler(
 
     const updatedUser = await user.save();
 
-    SendSuccess(res, updatedUser.toSafeJSON(), "User updated successfuly")
+    SendSuccess(res, updatedUser.toSafeJSON(), "User updated successfully")
   }
 )

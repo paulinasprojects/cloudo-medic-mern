@@ -79,7 +79,7 @@ Prescription.init({
 {
   sequelize,
   tableName: "prescriptions",
-  modelName: "Prescrition",
+  modelName: "Prescription",
   indexes: [
     {
       fields: ["doctorId"],

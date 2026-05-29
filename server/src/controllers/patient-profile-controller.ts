@@ -68,7 +68,7 @@ export const createPatientProfile = asyncHandler(
       medicalHistory
     });
 
-    SendSuccess(res, profile, "Profile created successfuly", 201);
+    SendSuccess(res, profile, "Profile created successfully", 201);
   }
 )
 
@@ -114,7 +114,7 @@ export const updatePatientProfileByPatient = asyncHandler(
 
     const updatedProfile = await profile.save();
 
-    SendSuccess(res, updatedProfile, "Profile updated successfuly");
+    SendSuccess(res, updatedProfile, "Profile updated successfully");
   }
 )
 export const updatePatientProfileByAdmin = asyncHandler(
@@ -179,7 +179,7 @@ export const updatePatientProfileByAdmin = asyncHandler(
 
     const updatedProfile = await profile.save();
 
-    SendSuccess(res, updatedProfile, "Profile updated successfuly");
+    SendSuccess(res, updatedProfile, "Profile updated successfully");
   }
 )
 
