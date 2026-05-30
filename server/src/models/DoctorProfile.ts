@@ -3,6 +3,7 @@ import sequelize from "../config/db";
 import User from "./User";
 import Appointment from "./Appointment";
 import Prescription from "./Prescription";
+import MedicalTest from "./MedicalTest";
 
 export class DoctorProfile extends Model<InferAttributes<DoctorProfile>,
 InferCreationAttributes<DoctorProfile>> {
@@ -23,6 +24,7 @@ InferCreationAttributes<DoctorProfile>> {
   declare user?: NonAttribute<User>
   declare appointents?: NonAttribute<Appointment[]>
   declare prescriptions?: NonAttribute<Prescription[]>
+  declare medicalTests?: NonAttribute<MedicalTest[]>
 }
 
 DoctorProfile.init({

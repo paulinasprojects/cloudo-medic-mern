@@ -4,6 +4,7 @@ import DoctorProfile from "./DoctorProfile";
 import PatientProfile from "./PatientProfile";
 import Appointment from "./Appointment";
 import Prescription from "./Prescription";
+import MedicalTest from "./MedicalTest";
 
 User.hasOne(DoctorProfile, {
   foreignKey: "userId",
@@ -71,7 +72,29 @@ Prescription.belongsTo(PatientProfile, {
   as: "patientProfile"
 })
 
-export { User, DoctorProfile, PatientProfile, Appointment, Prescription };
+DoctorProfile.hasMany(MedicalTest, {
+  foreignKey: "doctorId",
+  as: "medical_tests",
+  onDelete: "CASCADE"
+});
+
+PatientProfile.hasMany(MedicalTest, {
+  foreignKey: "patientId",
+  as: "medical_tests",
+  onDelete: "CASCADE"
+});
+
+MedicalTest.belongsTo(DoctorProfile, {
+  foreignKey: "doctorId",
+  as: "doctorProfile"
+});
+
+MedicalTest.belongsTo(PatientProfile, {
+  foreignKey: "patientId",
+  as: "patientProfile"
+});
+
+export { User, DoctorProfile, PatientProfile, Appointment, Prescription, MedicalTest };
 export const syncModels = async (): Promise<void> => {
   const isDev = process.env.NODE_ENV === "development";
 

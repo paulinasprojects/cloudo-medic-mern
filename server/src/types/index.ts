@@ -16,3 +16,10 @@ export enum AppointmentStatus {
   COMPLETED = "completed",
   CANCELLED = "cancelled"
 }
+
+export enum MedicalTestStatus {
+  SCHEDULED = "scheduled",
+  PENDING = "pending",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled"
+}
