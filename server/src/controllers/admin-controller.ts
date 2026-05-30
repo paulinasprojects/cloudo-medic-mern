@@ -6,8 +6,9 @@ import Prescription from "../models/Prescription";
 import Appointment from "../models/Appointment";
 import DoctorProfile from "../models/DoctorProfile";
 import PatientProfile from "../models/PatientProfile";
+import MedicalTest from "../models/MedicalTest";
 import User from "../models/User";
-import { AppointmentStatus } from "../types";
+import { AppointmentStatus, MedicalTestStatus } from "../types";
 
 const allIncludes = [
   {
@@ -685,5 +686,108 @@ export const deletePrescriptionByAdmins = asyncHandler(
 
     await prescription.destroy();
     SendSuccess(res, null, "Prescription deleted successfully!")
+  }
+)
+
+export const getAllMedicalTestsByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+  
+      const allMedicalTests = await MedicalTest.findAll({
+        include: allIncludes,
+        order: [["date", "ASC"]]
+      });
+      return SendSuccess(res, allMedicalTests, "All medical tests retrieved successfully")
+  }
+)
+
+export const getAllScheduledTestsByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+    
+      const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+
+    const scheduledMedicalTests = await MedicalTest.findAll({
+      where: {
+        status: MedicalTestStatus.SCHEDULED
+      },
+      include: allIncludes,
+      order: [["date", "ASC"]]
+    });
+      
+      SendSuccess(res, scheduledMedicalTests, "Scheduled tests retrieved successfully")
+  }
+)
+export const getAllCompletedTestsByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+    
+      const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+
+    const completedMedicalTests = await MedicalTest.findAll({
+      where: {
+        status: MedicalTestStatus.COMPLETED
+      },
+      include: allIncludes,
+      order: [["date", "ASC"]]
+    });
+      
+      SendSuccess(res, completedMedicalTests, "Completed tests retrieved successfully")
+  }
+)
+
+export const deleteMedicalTestByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const medicalTest = await MedicalTest.findOne({
+      where: {
+        id
+      }
+    });
+
+    if (!medicalTest) {
+      throw new AppError("medicalTest not found", 404)
+    };
+
+    await medicalTest.destroy();
+    SendSuccess(res, null, "Medical test deleted successfully!")
   }
 )

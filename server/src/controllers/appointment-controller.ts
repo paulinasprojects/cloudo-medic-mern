@@ -271,12 +271,6 @@ export const updateAppointmentByDoctors = asyncHandler(
       throw new AppError("Appointment not found", 404)
     }
 
-    if (appointment.status !== AppointmentStatus.SCHEDULED) {
-      throw new AppError(
-        `Cannot update an appointment that is already ${appointment.status}`, 400
-      )
-    };
-
       const doctorProfile = await DoctorProfile.findOne({
         where: {
           userId

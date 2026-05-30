@@ -19,7 +19,11 @@ import {
   getPrescriptionsByDoctorId, 
   getPrescriptionByIdByAdmins, 
   updatePrescriptionByAdmins, 
-  deletePrescriptionByAdmins, 
+  deletePrescriptionByAdmins,
+  getAllMedicalTestsByAdmins,
+  getAllCompletedTestsByAdmins,
+  getAllScheduledTestsByAdmins,
+  deleteMedicalTestByAdmins
 } from "../controllers/admin-controller";
 
 const router = Router();
@@ -58,5 +62,10 @@ router.get("/prescriptions/doctor/:doctorId", requireAuth, getPrescriptionsByDoc
 router.post("/prescriptions/:id", requireAuth, updatePrescriptionByAdmins);
 router.delete("/prescriptions/:id", requireAuth, deletePrescriptionByAdmins);
 
+{/* Medical Tests Routes */}
+router.get("/medicaltests",  getAllMedicalTestsByAdmins);
+router.get("/medicaltests/scheduled",  getAllScheduledTestsByAdmins);
+router.get("/medicaltests/completed",  getAllCompletedTestsByAdmins);
+router.get("/medicaltests/:id",  deleteMedicalTestByAdmins);
 
 export default router;
