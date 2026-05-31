@@ -6,7 +6,11 @@ interface RoleRouteProps {
 }
 
 const RoleRoute = ({ allowedRoles }: RoleRouteProps) => {
-  const { isAuthenticated, user } = useAuthStore();
+  const { user, isAuthenticated, isInitialized } = useAuthStore();
+
+  if (!isInitialized) {
+    return <div>Loading...</div>;
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;

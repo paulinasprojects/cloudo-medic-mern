@@ -1,4 +1,4 @@
-import { ApiResponse,AuthResponse } from "@/types/types";
+import { ApiResponse,AuthResponse, User } from "@/types/types";
 import api from "./api";
 import { LoginRequest, SignupRequest } from "@/types/auth-types";
 
@@ -11,3 +11,8 @@ export const login = async (data: LoginRequest) => {
   const response = await api.post<ApiResponse<AuthResponse>>("/auth/login", data);
   return response.data;
 };
+
+export const getUser = async () => {
+  const response = await api.get<ApiResponse<User>>("/auth/user");
+  return response.data;
+}

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import SignupPage from "@/pages/signup-page";
 import PublicRoute from "@/components/routes/public-route";
@@ -7,11 +8,23 @@ import RoleRoute from "@/components/routes/role-route";
 import DoctorPage from "@/pages/doctor-page";
 import PatientPage from "@/pages/patient-page";
 import LoginPage from "@/pages/login-page";
+import Homepage from "./pages/home-page";
+import HomeLayout from "./components/layouts/home-layout";
+import { useAuthStore } from "./store/auth-store";
 
 function App() {
+  const { isAuthenticated, getUser } = useAuthStore();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getUser();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Routes>
-      <Route path="/" element={<div>homepage</div>} />
+      <Route path="/" element={<HomeLayout><Homepage /></HomeLayout>} />
       <Route element={<PublicRoute />}>
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -21,10 +34,10 @@ function App() {
           <Route path="/admin" element={<AdminPage />} />
         </Route>
         <Route element={<RoleRoute allowedRoles={["doctor"]} />}>
-          <Route path="/admin" element={<DoctorPage />} />
+          <Route path="/doctor" element={<DoctorPage />} />
         </Route>
         <Route element={<RoleRoute allowedRoles={["patient"]} />}>
-          <Route path="/admin" element={<PatientPage />} />
+          <Route path="/patient" element={<PatientPage />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" />} />

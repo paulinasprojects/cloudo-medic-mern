@@ -92,3 +92,21 @@ export const updateUser = asyncHandler(
     SendSuccess(res, updatedUser.toSafeJSON(), "User updated successfully")
   }
 )
+
+export const getUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+    
+    SendSuccess(res, user.toSafeJSON(), "Profile retrieved successfully")
+  }
+)
