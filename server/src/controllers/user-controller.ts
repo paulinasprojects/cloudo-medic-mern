@@ -61,7 +61,7 @@ export const login = asyncHandler(
 
 export const updateUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { email,  password, firstName, lastName } = req.body;
+    const { email,  password } = req.body;
     const userId = req.userId;
 
     const user = await User.findOne({
@@ -74,16 +74,8 @@ export const updateUser = asyncHandler(
       throw new AppError("User not found", 404)
     };
 
-    if (!firstName && !lastName && !email && !password) {
-      throw new AppError("Please provide first name, last name, email or password to update your information", 400);
-    }
-
-    if (firstName) {
-      user.firstName = firstName
-    };
-
-    if (lastName) {
-      user.lastName = lastName
+    if (!email && !password) {
+      throw new AppError("Please provide email or password to update your information", 400);
     }
     
     if (email) {

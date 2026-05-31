@@ -107,6 +107,90 @@ export const getAllUsers = asyncHandler(
   }
 )
 
+export const updateUserByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+     const { email,  password, firstName, lastName, role } = req.body;
+     const { id } = req.params;
+     const userId = req.userId;
+      
+    const user = await User.findOne({
+          where: {
+            id: userId
+          }
+        });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+     const userToUpdate = await User.findOne({
+      where: {
+        id
+      }
+     });
+
+     if (!userToUpdate) {
+      throw new AppError("User not found", 404)
+     }
+
+      if (email) {
+      userToUpdate.email = email.toLowerCase().trim()
+    }
+
+
+    if (password) {
+      userToUpdate.password = password;
+    }
+
+    if (firstName) {
+      userToUpdate.firstName = firstName
+    };
+
+    if (lastName) {
+      userToUpdate.lastName = lastName
+    }
+
+    if (role) {
+      userToUpdate.role = role
+    }
+
+    const updatedUser = await userToUpdate.save();
+
+    SendSuccess(res, updatedUser.toSafeJSON(), "User updated successfully")
+  }
+)
+
+export const deleteUserByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const userId = req.userId;
+      
+    const user = await User.findOne({
+          where: {
+            id: userId
+          }
+        });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const userToDelete = await User.findOne({
+      where: {
+        id
+      }
+    });
+
+    if (!userToDelete) {
+      throw new AppError("User not found", 404)
+    }
+
+    await userToDelete.destroy();
+
+    SendSuccess(res, null, "User deleted successfully");
+  }
+)
+
 export const updateDoctorProfileByAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { address, phoneNumber, bio, dateOfBirth, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;

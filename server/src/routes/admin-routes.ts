@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { requireAdmin, requireAuth } from "../middleware/auth-middleware";
 import { 
-  getAllUsers, 
+  getAllUsers,
+  updateUserByAdmins,
+  deleteUserByAdmins,
   getAllDoctors, 
   getAllPatients, 
   updateDoctorProfileByAdmin, 
@@ -33,6 +35,8 @@ router.use(requireAdmin);
 
 {/* Users Routes */}
 router.get("/users", getAllUsers);
+router.post("/users/:id", updateUserByAdmins);
+router.delete("/users/:id", deleteUserByAdmins);
 
 {/* Doctors Routes */}
 router.get("/doctors", getAllDoctors);
