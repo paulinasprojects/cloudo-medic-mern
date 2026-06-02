@@ -23,3 +23,39 @@ export enum MedicalTestStatus {
   COMPLETED = "completed",
   CANCELLED = "cancelled"
 }
+
+export enum BloodTest {
+  CBC = "cbc",
+  BMP = "bmp",
+  RBC = "rbc",
+  HCT = "hct",
+  WBC = "wbc",
+  LDL = "ldl",
+  HDL = "hdl",
+  VITAMIND = "vitamind",
+  TSH = "tsh",
+}
+
+export enum Biochemistry {
+  GLUCOSE = "glucose",
+  CREAT = "creat",
+  ASAT = "asat",
+  ALAT = "alat",
+  eGFR = "egfr"
+}
+
+export enum ImagingTest {
+  CTSCAN = "ctscan",
+  CTA = "cta",
+  MRI = "mri",
+  PET = "pet",
+  MAMMOGRAPHY = "mammography",
+  ECHOCARDIOGRAM = "echocardiogram", 
+}
+
+export enum Urine {
+  URINE = "urine",
+  GLUCOSE = "glucose",
+  PROTEIN = "protein",
+  BLOOD = "blood",
+}

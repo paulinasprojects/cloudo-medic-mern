@@ -107,6 +107,6 @@ export const getUser = asyncHandler(
       throw new AppError("User not found", 404)
     };
     
-    SendSuccess(res, user.toSafeJSON(), "Profile retrieved successfully")
+    SendSuccess(res, user.toSafeJSON(), "User retrieved successfully")
   }
 )

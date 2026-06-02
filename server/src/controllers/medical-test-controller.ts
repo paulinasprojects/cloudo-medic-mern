@@ -78,12 +78,12 @@ export const getAllMedicalTestsByDoctors = asyncHandler(
     });
   
     if (!doctorProfile) {
-      throw new AppError("Patient not found", 404)
+      throw new AppError("Doctor not found", 404)
     }
 
     const allMedicalTests = await MedicalTest.findAll({
       where: {
-        patientId: doctorProfile.id
+        doctorId: doctorProfile.id
       },
       include: testsIncludes,
       order: [["date", "ASC"]]
@@ -150,12 +150,12 @@ export const getAllScheduledTestsByDoctors = asyncHandler(
     });
   
       if (!doctorProfile) {
-        throw new AppError("Patient not found", 404)
+        throw new AppError("Doctor not found", 404)
       }
 
       const scheduledMedicalTests = await MedicalTest.findAll({
         where: {
-          patientId: doctorProfile.id,
+          doctorId: doctorProfile.id,
           status: MedicalTestStatus.SCHEDULED
         },
         include: testsIncludes,
@@ -224,12 +224,12 @@ export const getAllCompletedTestsByDoctors = asyncHandler(
     });
   
       if (!doctorProfile) {
-        throw new AppError("Patient not found", 404)
+        throw new AppError("Doctor not found", 404)
       }
 
       const completedMedicalTests = await MedicalTest.findAll({
         where: {
-          patientId: doctorProfile.id,
+          doctorId: doctorProfile.id,
           status: MedicalTestStatus.COMPLETED
         },
         include: testsIncludes,
@@ -322,10 +322,10 @@ export const getMedicalTestByIdByPatients = asyncHandler(
 
 export const createMedicalTestByDoctors = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { patientId, date, notes } = req.body;
+    const { patientId, date, notes, bloodTests, biochemistryTests, imagingTests, urineTests } = req.body;
     const userId = req.userId;
 
-    if (!patientId || !date) {
+    if (!patientId && !date) {
       throw new AppError("Please provide a patient and a date to create a medical test", 400)
     }
 
@@ -370,6 +370,10 @@ export const createMedicalTestByDoctors = asyncHandler(
       doctorId: doctorProfile.id,
       patientId,
       date: testDate,
+      biochemistryTests,
+      bloodTests,
+      imagingTests,
+      urineTests,
       notes: notes ?? null,
       status: MedicalTestStatus.SCHEDULED,
      });
@@ -380,7 +384,7 @@ export const createMedicalTestByDoctors = asyncHandler(
 
 export const updateMedicalTestByDoctors = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { date, notes, status } = req.body;
+    const { date, notes, status, bloodTests, biochemistryTests, imagingTests, urineTests } = req.body;
     const { id } = req.params;
     const userId = req.userId;
 
@@ -437,11 +441,27 @@ export const updateMedicalTestByDoctors = asyncHandler(
      const today = new Date();
 
      if (testDate < today) {
-      throw new AppError("Cannot create a medical test for a past date", 400)
+      throw new AppError("Cannot update a medical test for a past date", 400)
      };
 
      if (date !== undefined) {
-      medicalTest.date = date
+      medicalTest.date = testDate
+     }
+
+     if (bloodTests !== undefined) {
+      medicalTest.bloodTests = bloodTests;
+     }
+
+     if (biochemistryTests !== undefined) {
+      medicalTest.biochemistryTests = biochemistryTests;
+     }
+
+     if (imagingTests !== undefined) {
+      medicalTest.imagingTests = imagingTests;
+     }
+
+     if (urineTests !== undefined) {
+      medicalTest.urineTests = urineTests;
      }
 
      const updatedMedicalTest = await medicalTest.save();

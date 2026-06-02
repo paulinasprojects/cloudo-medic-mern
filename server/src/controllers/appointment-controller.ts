@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { asyncHandler, SendSuccess } from "../utils/response-helpers";
 import { AppError } from "../middleware/error-handler";
-import { AppointmentStatus, UserRole } from "../types";
+import { AppointmentStatus } from "../types";
 
 import Appointment from "../models/Appointment";
 import DoctorProfile from "../models/DoctorProfile";
@@ -179,7 +179,7 @@ export const createAppointment = asyncHandler(
     const { patientId, appointmentDate, notes } = req.body;
     const userId = req.userId; 
 
-    if (!patientId || !appointmentDate) {
+    if (!patientId && !appointmentDate) {
       throw new AppError("Please provide a patient and an appointment date", 400);
     }
 
