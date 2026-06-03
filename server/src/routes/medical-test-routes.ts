@@ -7,6 +7,10 @@ getAllCompletedTestsByDoctors,
 getAllCompletedTestsByPatients,
 getAllScheduledTestsByDoctors,
 getAllScheduledTestsByPatients,
+getScheduledTestByIdByDoctors,
+getScheduledTestByIdByPatients,
+getCompletedTestByIdByDoctors,
+getCompletedTestByIdByPatients,
 getMedicalTestByIdByDoctors,
 getMedicalTestByIdByPatients,
 createMedicalTestByDoctors,
@@ -21,6 +25,10 @@ router.get("/doctor/completed", requireAuth, requireDoctor, getAllCompletedTests
 router.get("/patient/completed", requireAuth, requirePatient, getAllCompletedTestsByPatients);
 router.get("/doctor/scheduled", requireAuth, requireDoctor, getAllScheduledTestsByDoctors);
 router.get("/patient/scheduled", requireAuth, requirePatient, getAllScheduledTestsByPatients);
+router.get("/doctor/scheduled/:id", requireAuth, requireDoctor, getScheduledTestByIdByDoctors);
+router.get("/patient/scheduled/:id", requireAuth, requirePatient, getScheduledTestByIdByPatients);
+router.get("/doctor/completed/:id", requireAuth, requireDoctor, getCompletedTestByIdByDoctors);
+router.get("/patient/completed/:id", requireAuth, requirePatient, getCompletedTestByIdByPatients);
 router.get("/:id", requireAuth, requireDoctor, getMedicalTestByIdByDoctors);
 router.get("/:id", requireAuth, requirePatient, getMedicalTestByIdByPatients);
 router.post("/", requireAuth, requireDoctor, createMedicalTestByDoctors);

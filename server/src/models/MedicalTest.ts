@@ -3,6 +3,7 @@ import sequelize from "../config/db";
 import PatientProfile from "./PatientProfile";
 import DoctorProfile from "./DoctorProfile";
 import { MedicalTestStatus, BloodTest, Biochemistry, ImagingTest, Urine } from "../types";
+import { AppError } from "../middleware/error-handler";
 
 export class MedicalTest extends Model<InferAttributes<MedicalTest>,
 InferCreationAttributes<MedicalTest>> {
@@ -10,10 +11,10 @@ InferCreationAttributes<MedicalTest>> {
   declare patientId: ForeignKey<PatientProfile["id"]>;
   declare doctorId: ForeignKey<DoctorProfile["id"]>;
   declare date: Date;
-  declare bloodTests?: CreationOptional<BloodTest>; 
-  declare biochemistryTests?: CreationOptional<Biochemistry>; 
-  declare imagingTests?: CreationOptional<ImagingTest>; 
-  declare urineTests?: CreationOptional<Urine>; 
+  declare bloodTests?: CreationOptional<BloodTest[] | null>; 
+  declare biochemistryTests?: CreationOptional<Biochemistry[] | null>; 
+  declare imagingTests?: CreationOptional<ImagingTest[] | null>; 
+  declare urineTests?: CreationOptional<Urine[] | null>; 
   declare status: CreationOptional<MedicalTestStatus>;
   declare notes: CreationOptional<string | null>;
   declare createdAt: CreationOptional<Date>;
@@ -60,47 +61,67 @@ MedicalTest.init({
       validate: {
         isIn: {
           args: [Object.values(MedicalTestStatus)],
-          msg: `Medical test must be one of: ${Object.values(MedicalTestStatus).join(" ")}`
+          msg: `Medical test must be one of: ${Object.values(MedicalTestStatus).join(", ")}`
         }
       }
   },
   bloodTests: {
-    type: DataTypes.ENUM(...Object.values(BloodTest)),
+    type: DataTypes.JSON,
     allowNull: true,
+    defaultValue: null,
     validate: {
-      isIn: {
-        args: [Object.values(BloodTest)],
-        msg: `Blood test must be one of ${Object.values(BloodTest).join(" ")}`
+      isValidBloodTests(value: BloodTest[]) {
+        if (!value) return;
+        const valid = Object.values(BloodTest);
+        const invalid = value.filter(v => !valid.includes(v));
+        if (invalid.length > 0) {
+          throw new Error(`Invalid blood test: ${invalid.join(", ")}`)
+        }
       }
     }
   },
   biochemistryTests: {
-    type: DataTypes.ENUM(...Object.values(Biochemistry)),
+    type: DataTypes.JSON,
     allowNull: true,
+    defaultValue: null,
     validate: {
-      isIn: {
-        args: [Object.values(Biochemistry)],
-        msg: `Biochemistry test must be one of ${Object.values(Biochemistry).join(" ")}`
+      isValidBiochemistryTests(value: Biochemistry[]) {
+        if (!value) return;
+        const valid = Object.values(Biochemistry);
+        const invalid = value.filter(v => !valid.includes(v));
+        if (invalid.length > 0) {
+          throw new Error(`Invalid biochemistry test: ${invalid.join(", ")}`)
+        }
       }
     }
   },
   imagingTests: {
-    type: DataTypes.ENUM(...Object.values(ImagingTest)),
+    type: DataTypes.JSON,
     allowNull: true,
-    validate: {
-      isIn: {
-        args: [Object.values(ImagingTest)],
-        msg: `Imaging test must be one of ${Object.values(ImagingTest).join(" ")}`
+    defaultValue: null,
+     validate: {
+      isValidImagingTests(value: ImagingTest[]) {
+        if (!value) return;
+        const valid = Object.values(ImagingTest);
+        const invalid = value.filter(v => !valid.includes(v));
+        if (invalid.length > 0) {
+          throw new Error(`Invalid imaging test: ${invalid.join(", ")}`)
+        }
       }
     }
   },
   urineTests: {
-    type: DataTypes.ENUM(...Object.values(Urine)),
+    type: DataTypes.JSON,
     allowNull: true,
+    defaultValue: null,
     validate: {
-      isIn: {
-        args: [Object.values(Urine)],
-        msg: `Urine test must be one of ${Object.values(Urine).join(" ")}`
+      isValidUrineTests(value: Urine[]) {
+        if (!value) return;
+        const valid = Object.values(Urine);
+        const invalid = value.filter(v => !valid.includes(v));
+        if (invalid.length > 0) {
+          throw new Error(`Invalid urine test: ${invalid.join(", ")}`)
+        }
       }
     }
   },
@@ -116,6 +137,17 @@ MedicalTest.init({
   sequelize,
   tableName: "medical_tests",
   modelName: "MedicalTest",
+  hooks: {
+    beforeCreate: (test: MedicalTest) => {
+      const hasTests = test.bloodTests?.length || 
+                       test.biochemistryTests?.length ||
+                       test.imagingTests?.length || 
+                       test.urineTests?.length;
+      if (!hasTests) {
+        throw new AppError("At least one test must be selected", 400)
+      }                 
+    }   
+  },
   indexes: [
     {
       fields: ["doctorId"]

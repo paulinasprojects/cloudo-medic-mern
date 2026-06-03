@@ -166,6 +166,173 @@ export const getAllScheduledTestsByDoctors = asyncHandler(
   }
 )
 
+export const getScheduledTestByIdByDoctors = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+     const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+    
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+
+    const medicalTest = await MedicalTest.findOne({
+      where: {
+        id,
+        status: MedicalTestStatus.SCHEDULED
+      },
+      include: testsIncludes,
+    });
+
+    if (!medicalTest) {
+      throw new AppError("Medical test not found", 404)
+    };
+
+    const doctorProfile = await DoctorProfile.findOne({
+      where: {
+        userId,
+      }
+    });
+
+    if (!doctorProfile || medicalTest.doctorId !== doctorProfile.id) {
+      throw new AppError("You do not have access to this medical test", 403)
+    }
+
+    SendSuccess(res, medicalTest, "Scheduled medical test retrieved successfully")
+  }
+)
+
+export const getScheduledTestByIdByPatients = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+        const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+    
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+
+    const medicalTest = await MedicalTest.findOne({
+      where: {
+        id,
+        status: MedicalTestStatus.COMPLETED
+      },
+      include: testsIncludes,
+    });
+
+    if (!medicalTest) {
+      throw new AppError("Medical test not found", 404)
+    };
+
+    const patientProfile = await PatientProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!patientProfile || medicalTest.patientId !== patientProfile.id) {
+      throw new AppError("You do not have access to this medical test", 403)
+    }
+
+    SendSuccess(res, medicalTest, "Medical test retrieved successfully")
+  }
+)
+export const getCompletedTestByIdByDoctors = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+     const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+    
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+
+    const medicalTest = await MedicalTest.findOne({
+      where: {
+        id,
+        status: MedicalTestStatus.COMPLETED
+      },
+      include: testsIncludes,
+    });
+
+    if (!medicalTest) {
+      throw new AppError("Medical test not found", 404)
+    };
+
+    const doctorProfile = await DoctorProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!doctorProfile || medicalTest.doctorId !== doctorProfile.id) {
+      throw new AppError("You do not have access to this medical test", 403)
+    }
+
+    SendSuccess(res, medicalTest, "Completed medical test retrieved successfully")
+  }
+)
+
+export const getCompletedTestByIdByPatients = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+    
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+
+    const medicalTest = await MedicalTest.findOne({
+      where: {
+        id,
+        status: MedicalTestStatus.COMPLETED
+      },
+      include: testsIncludes,
+    });
+
+    if (!medicalTest) {
+      throw new AppError("Medical test not found", 404)
+    };
+
+    const patientProfile = await PatientProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!patientProfile || medicalTest.patientId !== patientProfile.id) {
+      throw new AppError("You do not have access to this medical test", 403)
+    }
+
+    SendSuccess(res, medicalTest, "Medical test retrieved successfully")
+  }
+)
+
 export const getAllCompletedTestsByPatients = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.userId;

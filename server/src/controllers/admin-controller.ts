@@ -195,7 +195,18 @@ export const updateDoctorProfileByAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { address, phoneNumber, bio, dateOfBirth, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
     const { id } = req.params;
-    
+     const userId = req.userId;
+     const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+
     const profile = await DoctorProfile.findOne({
       where: {
         id
@@ -250,6 +261,17 @@ export const updateDoctorProfileByAdmin = asyncHandler(
 export const deleteDoctorProfileByAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
+  const userId = req.userId;
+  const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
   const profile = await DoctorProfile.findOne({
     where: {
         id
@@ -274,11 +296,21 @@ export const deleteDoctorProfileByAdmin = asyncHandler(
 export const updatePatientProfileByAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { address, phoneNumber, bio, dateOfBirth, gender, bloodType, emergencyContactName, emergencyContactNumber, allergies, medicalHistory } = req.body;
+    const { id } = req.params;
     const userId = req.userId;
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
 
     const profile = await PatientProfile.findOne({
       where: {
-        userId
+        id
       },
     });
     
@@ -336,6 +368,16 @@ export const updatePatientProfileByAdmin = asyncHandler(
 export const deletePatientProfileByAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
    const { id } = req.params;
+   const userId = req.userId;
+   const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
   
    const profile = await PatientProfile.findOne({
       where: {
@@ -353,7 +395,7 @@ export const deletePatientProfileByAdmin = asyncHandler(
     SendSuccess(
       res,
       null,
-      "Patient profile deleted successfully!"
+      "Patient deleted successfully!"
     );
   }
 )
@@ -518,6 +560,10 @@ export const updateAppointmentByAdmins = asyncHandler(
       )
     };
 
+    if (status !== undefined) {
+      appointment.status = status
+    };
+
     const date = appointmentDate ? new Date(appointmentDate) : new Date();
     const today = new Date();
 
@@ -525,9 +571,11 @@ export const updateAppointmentByAdmins = asyncHandler(
       throw new AppError("Cannot create an appointment for a past date", 400)
     }
 
-    if (status !== undefined) appointment.status = status;
+    if (appointmentDate !== undefined) {
+      appointment.appointmentDate = date;
+    }
+
     if (notes !== undefined) appointment.notes = notes;
-    if (appointmentDate !== undefined) appointment.appointmentDate = date;
 
     const updatedAppointment = await appointment.save();
 
@@ -868,7 +916,7 @@ export const deleteMedicalTestByAdmins = asyncHandler(
     });
 
     if (!medicalTest) {
-      throw new AppError("medicalTest not found", 404)
+      throw new AppError("Medical test not found", 404)
     };
 
     await medicalTest.destroy();

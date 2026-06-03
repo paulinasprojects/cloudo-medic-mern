@@ -41,7 +41,7 @@ export enum Biochemistry {
   CREAT = "creat",
   ASAT = "asat",
   ALAT = "alat",
-  eGFR = "egfr"
+  EGFR = "egfr"
 }
 
 export enum ImagingTest {

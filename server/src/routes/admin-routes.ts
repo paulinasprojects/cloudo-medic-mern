@@ -41,13 +41,13 @@ router.delete("/users/:id", deleteUserByAdmins);
 {/* Doctors Routes */}
 router.get("/doctors", getAllDoctors);
 router.post("/doctors/:id", updateDoctorProfileByAdmin);
-router.post("/doctors/:id", deleteDoctorProfileByAdmin);
+router.delete("/doctors/:id", deleteDoctorProfileByAdmin);
 
 
 {/* Patients Routes */}
 router.get("/patients", getAllPatients);
 router.post("/patients/:id", updatePatientProfileByAdmin);
-router.post("/patients/:id", deletePatientProfileByAdmin);
+router.delete("/patients/:id", deletePatientProfileByAdmin);
 
 {/* Appointments Routes */}
 
@@ -55,21 +55,21 @@ router.get("/appointments", getAllAppointmentsByAdmins);
 router.get("/appointments/doctor/:doctorId", getAppointmentsByDoctorId);
 router.get("/appointments/patient/:patientId", getAppointmentsByPatientId);
 router.get("/appointments/:id", getAppointmentByIdByAdmins);
-router.post("/appointments/:id", requireAuth, updateAppointmentByAdmins);
-router.delete("/appointments/:id", requireAuth, deleteAppointmentByAdmins);
+router.post("/appointments/:id", updateAppointmentByAdmins);
+router.delete("/appointments/:id", deleteAppointmentByAdmins);
 
 {/* Prescriptions Routes */}
 router.get("/prescriptions", getAllPrescriptionsByAdmins);
-router.get("/prescriptions/:id", requireAuth, getPrescriptionByIdByAdmins);
-router.get("/prescriptions/patient/:patientId", requireAuth, getPrescriptionsByPatientId);
-router.get("/prescriptions/doctor/:doctorId", requireAuth, getPrescriptionsByDoctorId);
-router.post("/prescriptions/:id", requireAuth, updatePrescriptionByAdmins);
-router.delete("/prescriptions/:id", requireAuth, deletePrescriptionByAdmins);
+router.get("/prescriptions/:id", getPrescriptionByIdByAdmins);
+router.get("/prescriptions/patient/:patientId", getPrescriptionsByPatientId);
+router.get("/prescriptions/doctor/:doctorId", getPrescriptionsByDoctorId);
+router.post("/prescriptions/:id", updatePrescriptionByAdmins);
+router.delete("/prescriptions/:id", deletePrescriptionByAdmins);
 
 {/* Medical Tests Routes */}
 router.get("/medicaltests",  getAllMedicalTestsByAdmins);
 router.get("/medicaltests/scheduled",  getAllScheduledTestsByAdmins);
 router.get("/medicaltests/completed",  getAllCompletedTestsByAdmins);
-router.get("/medicaltests/:id",  deleteMedicalTestByAdmins);
+router.delete("/medicaltests/:id",  deleteMedicalTestByAdmins);
 
 export default router;
