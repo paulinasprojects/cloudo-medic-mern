@@ -1,7 +1,18 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @layer base {
+  body {
+    @apply bg-dark-purple-900;
+  }
+
   button {
     @apply cursor-pointer;
   }
+}
+
+@theme {
+  --color-dark-purple-900: #181b25;
+  --color-dark-blue-900: #0e121b;
 }

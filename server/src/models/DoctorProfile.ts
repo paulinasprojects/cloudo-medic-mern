@@ -4,6 +4,7 @@ import User from "./User";
 import Appointment from "./Appointment";
 import Prescription from "./Prescription";
 import MedicalTest from "./MedicalTest";
+import { DoctorEducation, DoctorLevel } from "../types";
 
 export class DoctorProfile extends Model<InferAttributes<DoctorProfile>,
 InferCreationAttributes<DoctorProfile>> {
@@ -13,6 +14,8 @@ InferCreationAttributes<DoctorProfile>> {
   declare phoneNumber: string;
   declare bio: CreationOptional<string | null>;
   declare dateOfBirth: Date;
+  declare education: CreationOptional<DoctorEducation>;
+  declare doctorLevel: CreationOptional<DoctorLevel>
   declare gender: string;
   declare specialization: string;
   declare hospital: string;
@@ -72,6 +75,26 @@ DoctorProfile.init({
         args: true,
         msg: "Date of birth have to be a date"
       },
+    }
+  },
+  education: {
+    type: DataTypes.ENUM(...Object.values(DoctorEducation)),
+    allowNull: false,
+    validate: {
+      isIn: {
+        args: [Object.values(DoctorEducation)],
+        msg: `Education must be one of: ${Object.values(DoctorEducation).join(", ")}`
+      }
+    },
+  },
+  doctorLevel: {
+    type: DataTypes.ENUM(...Object.values(DoctorLevel)),
+    allowNull: false,
+    validate: {
+      isIn: {
+        args: [Object.values(DoctorLevel)],
+        msg: `Doctor must be one of: ${Object.values(DoctorLevel).join(", ")}`
+      }
     }
   },
   gender: {

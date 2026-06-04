@@ -29,16 +29,16 @@ export default function SignupForm() {
   };
 
   return (
-    <section className="w-full mx-auto px-4 py-4 sm:px-0">
+    <section className="w-full mx-auto px-4 py-4 sm:px-4">
       <div className="border border-[#EBEBEB] rounded-3xl p-10">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {error && (
-            <div className="mt-5 text-red-500 text-sm">
+            <span className="mt-5 text-red-500 text-sm">
               {error}
-            </div>
+            </span>
           )}
           <div className="flex flex-col gap-2 mt-6">
-            <label htmlFor="first-name" className="text-sm font-medium">First Name</label>
+            <label htmlFor="first-name" className="text-sm font-medium text-white">First Name</label>
             <input
               type="text"
               id="first-name"
@@ -46,10 +46,10 @@ export default function SignupForm() {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               disabled={isLoading}
-              className="px-4 py-1 border border-slate-700 rounded-full text-gray-700 placeholder:text-sm focus:outline-none focus:border-slate-300 transition-colors"
+              className="px-4 py-1 border border-slate-700 rounded-full text-white placeholder:text-sm placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
             />
             <div className="flex flex-col gap-2">
-              <label htmlFor="last-name" className="text-sm font-medium">Last Name</label>
+              <label htmlFor="last-name" className="text-sm font-medium text-white">Last Name</label>
               <input
                 type="text"
                 id="last-name"
@@ -57,11 +57,11 @@ export default function SignupForm() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 disabled={isLoading}
-                className="px-4 py-1 border border-slate-700 rounded-full text-gray-700 placeholder:text-sm focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-white placeholder:text-sm placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-medium">Email</label>
+              <label htmlFor="email" className="text-sm font-medium text-white">Email</label>
               <input
                 type="email"
                 id="email"
@@ -69,11 +69,11 @@ export default function SignupForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
-                className="px-4 py-1 border border-slate-700 rounded-full text-gray-700 placeholder:text-sm focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-white placeholder:text-sm placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="password" className="text-sm font-medium">Password</label>
+              <label htmlFor="password" className="text-sm font-medium text-white">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -82,7 +82,7 @@ export default function SignupForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="w-full px-4 py-1 border border-slate-700 rounded-full text-gray-700 placeholder:text-sm focus:outline-none focus:border-slate-300 transition-colors"
+                  className="w-full px-4 py-1 border border-slate-700 rounded-full text-white placeholder:text-sm placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
                 />
                 <button
                   type="button"
@@ -99,13 +99,13 @@ export default function SignupForm() {
               </div>
             </div>
             <div className="flex flex-col gap-2 mt-2">
-              <label htmlFor="role" className="text-sm font-medium">Are you a patient or doctor?</label>
+              <label htmlFor="role" className="text-sm font-medium text-white">Are you a patient or doctor?</label>
               <select
                 name="role" id="role"
                 value={role}
                 onChange={(e) => setRole(e.target.value as UserRole)}
                 disabled={isLoading}
-                className="px-4 py-3 border border-slate-700 rounded-sm text-gray-700 placeholder:text-sm focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-3 border border-slate-700 rounded-sm text-white placeholder:text-sm placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
               >
                 {Object.values(UserRole).splice(1, 3).map((role) => (
                   <option value={role} key={role}>
@@ -118,7 +118,7 @@ export default function SignupForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-6 py-3 bg-amber-600 text-gray-100 rounded-full hover:bg-amber-700 transition-colors cursor-pointer font-medium"
+            className="px-6 py-3 bg-white text-black rounded-full hover:bg-white/80 transition-colors cursor-pointer font-medium"
           >
             {isLoading ? (
               "Signing up"
@@ -129,7 +129,7 @@ export default function SignupForm() {
         </form>
         <p className="text-center text-gray-400 mt-5 text-sm font-normal">
           Already have an account?{" "}
-          <Link to="/login" className="text-[12px] text-[#121212] hover:text-[#121212]/50 transition-colors">
+          <Link to="/login" className="text-[12px] text-white hover:text-white/80 transition-colors">
             Sign in
           </Link>
         </p>

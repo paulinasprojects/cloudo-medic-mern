@@ -193,7 +193,7 @@ export const deleteUserByAdmins = asyncHandler(
 
 export const updateDoctorProfileByAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { address, phoneNumber, bio, dateOfBirth, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
+    const { address, phoneNumber, bio, dateOfBirth, doctorLevel, education, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
     const { id } = req.params;
      const userId = req.userId;
      const user = await User.findOne({
@@ -231,6 +231,14 @@ export const updateDoctorProfileByAdmin = asyncHandler(
 
     if (dateOfBirth) {
       profile.dateOfBirth = dateOfBirth;
+    }
+
+    if (education) {
+      profile.education = education;
+    }
+
+    if (doctorLevel) {
+      profile.doctorLevel = doctorLevel;
     }
 
     if (specialization) {

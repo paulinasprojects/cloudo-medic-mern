@@ -11,6 +11,19 @@ export enum UserRole {
   PATIENT = "patient"
 };
 
+export enum DoctorLevel {
+   INTERN = "intern",
+   RESIDENT = "resident",
+   FELLOW = "fellow",
+   ATTENDING = "attending"
+}
+
+export enum DoctorEducation {
+  UNDERGRADUATE = "undergraduate",
+  PRIMARY = "primary",
+  GRADUATE = "graduate",
+}
+
 export enum AppointmentStatus {
   SCHEDULED = "scheduled",
   COMPLETED = "completed",

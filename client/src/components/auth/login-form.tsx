@@ -45,24 +45,24 @@ const LoginForm = () => {
       <div className="border border-[#e8e8e8] rounded-xl p-10">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {error && (
-            <div className="mt-5 text-red-400 text-sm">
+            <span className="mt-5 text-red-400 text-sm">
               {error}
-            </div>
+            </span>
           )}
           <div className="flex flex-col gap-2 mt-6">
-            <label htmlFor="email" className="text-sm font-medium">Email</label>
+            <label htmlFor="email" className="text-sm font-medium text-white">Email</label>
             <input
               type="email"
               id="email"
-              placeholder="E.g, email@company.com"
+              placeholder="E.g, email@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={isLoading}
-              className="px-4 py-1 border border-slate-700 rounded-full text-gray-700 placeholder:text-sm focus:outline-none focus:border-slate-300 transition-colors"
+              className="px-4 py-1 border border-slate-700 rounded-full text-white placeholder:text-sm placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="password" className="text-sm font-medium">Password</label>
+            <label htmlFor="password" className="text-sm font-medium text-white">Password</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -71,7 +71,7 @@ const LoginForm = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isLoading}
-                className="w-full px-4 py-1 border border-slate-700 rounded-full text-gray-700 placeholder:text-sm focus:outline-none focus:border-slate-300 transition-colors"
+                className="w-full px-4 py-1 border border-slate-700 rounded-full text-white placeholder:text-sm placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
               />
               <button
                 type="button"
@@ -90,7 +90,7 @@ const LoginForm = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-6 py-3 bg-amber-600 text-gray-100 rounded-full hover:bg-amber-700 transition-colors cursor-pointer font-medium"
+            className="px-6 py-3 bg-white text-black rounded-full hover:bg-white/80 transition-colors cursor-pointer font-medium"
           >
             {isLoading ? (
               "Signing in"
@@ -101,7 +101,7 @@ const LoginForm = () => {
         </form>
         <p className="text-center text-gray-400 mt-5 text-sm font-normal">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-[12px] text-[#121212] hover:text-[#121212]/50 transition-colors">
+          <Link to="/signup" className="text-[12px] text-white hover:text-white/80 transition-colors">
             Sign Up
           </Link>
         </p>
