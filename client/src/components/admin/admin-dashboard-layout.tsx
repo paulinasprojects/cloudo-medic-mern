@@ -1,5 +1,4 @@
 import { HugeiconsIcon } from "@hugeicons/react";
-import { DashboardBrowsingIcon, Doctor01Icon, PatientIcon, Invoice01Icon, Settings02Icon } from "@hugeicons/core-free-icons";
 import { useAuthStore } from "@/store/auth-store";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../common/dropdown-menu";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -7,39 +6,14 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/utils/utils";
 import AdminMobileMenu from "./admin-mobile-menu";
 import { CloudoLogo } from "../common/cloudo-logo";
+import { links } from "@/types/header-links";
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const links = [
-    {
-      title: "Dashboard",
-      href: "/admin",
-      icon: DashboardBrowsingIcon,
-    },
-    {
-      title: "Doctors",
-      href: "/admin/doctors",
-      icon: Doctor01Icon,
-    },
-    {
-      title: "Patients",
-      href: "/admin/patients",
-      icon: PatientIcon,
-    },
-    {
-      title: "Analytics",
-      href: "/admin/analytics",
-      icon: Invoice01Icon,
-    },
-    {
-      title: "Settings",
-      href: "/admin/settings",
-      icon: Settings02Icon,
-    },
-  ]
+
 
   function handleLogout() {
     logout();
@@ -47,7 +21,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
   }
 
   return (
-    <header className="text-white xl:px-12.5 py-8.5 px-5">
+    <header className="text-white xl:px-12.5 xl:py-8.5 py-6 px-5">
       <div className="flex items-center gap-4 justify-between">
         <AdminMobileMenu />
         <nav className="bg-dark-purple-900 px-3 py-4 rounded-full lg:block hidden">
@@ -82,7 +56,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                 <ChevronDown className="size-5 text-white" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent sideOffset={0} className="flex flex-col min-w-38.75 gap-4 bg-dark-blue-900 text-white rounded-bl-md rounded-br-md">
+            <DropdownMenuContent sideOffset={0} className="flex flex-col min-w-38.75 gap-4 bg-dark-purple-900 text-white rounded-bl-md rounded-br-md">
               <DropdownMenuItem className="focus:bg-white focus:text-black transition duration-300">
                 <Link to="/admin" className="flex w-full items-center justify-between">
                   Go to Dashboard
