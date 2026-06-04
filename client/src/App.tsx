@@ -11,6 +11,7 @@ import LoginPage from "@/pages/login-page";
 import Homepage from "./pages/home-page";
 import HomeLayout from "./components/layouts/home-layout";
 import { useAuthStore } from "./store/auth-store";
+import AdminDashboardLayout from "./components/admin/admin-dashboard-layout";
 
 function App() {
   const { isAuthenticated, getUser } = useAuthStore();
@@ -31,7 +32,7 @@ function App() {
       </Route>
       <Route element={<AuthRoute />}>
         <Route element={<RoleRoute allowedRoles={["admin"]} />}>
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<AdminDashboardLayout><AdminPage /></AdminDashboardLayout>} />
         </Route>
         <Route element={<RoleRoute allowedRoles={["doctor"]} />}>
           <Route path="/doctor" element={<DoctorPage />} />

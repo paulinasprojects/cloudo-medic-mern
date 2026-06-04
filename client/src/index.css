@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-dark-purple-900;
+    @apply bg-black/90;
   }
 
   button {
@@ -13,6 +13,6 @@
 }
 
 @theme {
-  --color-dark-purple-900: #181b25;
-  --color-dark-blue-900: #0e121b;
+  --color-dark-purple-900: hsl(150, 21%, 5%);
+  --color-dark-blue-900: hsl(222, 32%, 8%)
 }

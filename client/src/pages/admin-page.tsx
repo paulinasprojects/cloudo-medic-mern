@@ -1,6 +1,10 @@
+import AdminDashboard from "@/components/admin/admin-dashboard"
+
 const AdminPage = () => {
   return (
-    <div>AdminPage</div>
+    <main>
+      <AdminDashboard />
+    </main>
   )
 }
 
