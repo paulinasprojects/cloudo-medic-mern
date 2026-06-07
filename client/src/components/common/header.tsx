@@ -1,8 +1,10 @@
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Moon, Sun } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/auth-store";
 import { User } from "@/types/types";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu";
+import { useTheme } from "@/store/theme-store";
+import { CloudoLogoLight, CloudoLogoDark } from "./cloudo-logo";
 
 
 interface Props {
@@ -13,18 +15,22 @@ interface Props {
 export default function Header({ user, isAuthenticated }: Props) {
   const { logout } = useAuthStore();
   const navigate = useNavigate();
+  const { toggleTheme, theme } = useTheme();
 
   function handleLogout() {
     logout();
     navigate("/")
   }
 
-
   return (
     <header className="p-5">
       <nav className="flex items-center justify-between">
         <Link to="/">
-          <img src="/claudo-medic-logo.svg" width={150} height={150} />
+          {theme === "dark" ? (
+            <CloudoLogoLight width={150} height={150} />
+          ) : (
+            <CloudoLogoDark width={150} height={150} />
+          )}
         </Link>
         {isAuthenticated && user?.role === "admin" && (
           <div>
@@ -120,9 +126,14 @@ export default function Header({ user, isAuthenticated }: Props) {
           </div>
         )}
         {!isAuthenticated && (
-          <div className="flex items-center gap-4">
-            <Link to="/login" className="px-6 py-2 bg-white text-black rounded-full hover:bg-white/80 duration-300 transition-colors cursor-pointer" >Login</Link>
-            <Link to="/signup" className="px-6 py-2  bg-dark-blue-900 hover:bg-dark-blue-900/70 text-white rounded-full cursor-pointer transition-colors duration-300 hover:text-white/70">Sign up</Link>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button onClick={toggleTheme} className="rounded-full p-2 hover:bg-black/5 dark:hover:bg-white/5 duration-300 transition-colors">
+                {theme === "dark" ? <Sun className="size-5" /> : <Moon className="size-5" />}
+              </button>
+              <Link to="/login" className="px-6 py-2  bg-black text-white dark:bg-white dark:text-black rounded-full  transition-colors cursor-pointer" >Login</Link>
+              <Link to="/signup" className="px-6 py-2  bg-black text-white dark:bg-white dark:text-black rounded-full cursor-pointer transition-colors duration-300">Sign up</Link>
+            </div>
           </div>
         )}
       </nav>

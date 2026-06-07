@@ -4,17 +4,19 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/utils/utils";
 import { } from "radix-ui";
-import { CloudoLogo } from "../common/cloudo-logo";
+import { CloudoLogoDark, CloudoLogoLight } from "../common/cloudo-logo";
 import { links } from "@/types/header-links";
+import { useTheme } from "@/store/theme-store";
 
 const AdminMobileMenu = () => {
   const { pathname } = useLocation();
+  const { theme } = useTheme();
 
   return (
     <div className="lg:hidden block">
       <Sheet>
         <SheetTrigger asChild>
-          <HugeiconsIcon icon={Menu01FreeIcons} className="text-white" width={25} height={25} />
+          <HugeiconsIcon icon={Menu01FreeIcons} className="text-black dark:text-white cursor-pointer" width={25} height={25} />
         </SheetTrigger>
         <SheetContent side="left" showCloseButton={false}>
           <SheetHeader className="hidden">
@@ -24,12 +26,16 @@ const AdminMobileMenu = () => {
             <SheetDescription>this content here</SheetDescription>
           </SheetHeader>
           <div className="my-10 flex items-center justify-center">
-            <CloudoLogo />
+            {theme === "dark" ? (
+              <CloudoLogoLight width={150} height={150} />
+            ) : (
+              <CloudoLogoDark width={150} height={150} />
+            )}
           </div>
           <ul className="flex flex-col items-center gap-12">
             {links.map((link) => (
               <li key={link.href} >
-                <Link to={link.href} className={cn("text-gray-500 hover:text-white duration-300 transition flex items-center gap-4", pathname === link.href && "text-white hover:text-gray-500")}>
+                <Link to={link.href} className={cn("text-gray-400 hover:text-black dark:hover:text-white duration-300 transition flex items-center gap-4", pathname === link.href && "text-black dark:text-white dark:hover:text-gray-500")}>
                   <HugeiconsIcon icon={link.icon} size={25} />
                   <span className="text-2xl">{link.title}</span>
                 </Link>
