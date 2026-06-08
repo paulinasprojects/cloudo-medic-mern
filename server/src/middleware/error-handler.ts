@@ -18,7 +18,7 @@ export const notFound = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export const errorHandler = (err: any, _req: Request, res: Response) => {
+export const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunction) => {
   let statusCode = err.statusCode ?? 500;
   let message = err.message ?? "Internal server error";
 

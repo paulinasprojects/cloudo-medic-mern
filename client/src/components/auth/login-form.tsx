@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/auth-store"
 
 const LoginForm = () => {
-  const { login, error, isLoading } = useAuthStore();
+  const { login, error, isLoading, clearError } = useAuthStore();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    clearError();
+  }, [clearError]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,55 +49,57 @@ const LoginForm = () => {
       <div className="border border-[#e8e8e8] rounded-xl p-10">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {error && (
-            <span className="mt-5 text-red-400 text-sm">
+            <span className="text-red-400 text-sm">
               {error}
             </span>
           )}
-          <div className="flex flex-col gap-2 mt-6">
-            <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="E.g, email@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={isLoading}
-              className="px-4 py-1 border border-slate-700 rounded-full text-foreground placeholder:text-sm placeholder:text-foreground focus:outline-none focus:border-slate-300 transition-colors"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="password" className="text-sm font-medium text-foreground">Password</label>
-            <div className="relative">
+          <div className="flex flex-col gap-4 mt-6">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email" className="text-sm font-medium text-black dark:text-white">Email</label>
               <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="email"
+                id="email"
+                placeholder="E.g, email@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
-                className="w-full px-4 py-1 border border-slate-700 rounded-full text-foreground placeholder:text-sm placeholder:text-foreground focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
               />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                disabled={isLoading}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowe"
-              >
-                {showPassword ? (
-                  <EyeOff className="size-5" />
-                ) : (
-                  <Eye className="size-5" />
-                )}
-              </button>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="password" className="text-sm font-medium text-black dark:text-white ">Password</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isLoading}
+                  className="w-full px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm  placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  disabled={isLoading}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {showPassword ? (
+                    <EyeOff className="size-5" />
+                  ) : (
+                    <Eye className="size-5" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
           <button
             type="submit"
             disabled={isLoading}
-            className="px-6 py-3  rounded-full dark:bg-white dark:text-black bg-black text-white  transition-colors cursor-pointer font-medium"
+            className="px-6 py-3 rounded-full dark:bg-white dark:text-black bg-black text-white  transition-colors cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
-              "Signing in"
+              "Signing In"
             ) : (
               "Sign In"
             )}
@@ -101,7 +107,7 @@ const LoginForm = () => {
         </form>
         <p className="text-center text-gray-400 mt-5 text-sm font-normal">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-[12px] text-foreground hover:text-foreground/80 transition-colors">
+          <Link to="/signup" className="text-[12px] text-black dark:text-white transition-colors">
             Sign Up
           </Link>
         </p>

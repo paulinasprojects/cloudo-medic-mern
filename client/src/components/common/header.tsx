@@ -52,9 +52,8 @@ export default function Header({ user, isAuthenticated }: Props) {
                     <ChevronRight />
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
                   <button
-                    onClick={handleLogout}
                     className="rounded-full transition-colors cursor-pointer">
                     Logout
                   </button>
@@ -83,9 +82,8 @@ export default function Header({ user, isAuthenticated }: Props) {
                     <ChevronRight />
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
                   <button
-                    onClick={handleLogout}
                     className="rounded-full transition-colors cursor-pointer">
                     Logout
                   </button>
@@ -114,9 +112,8 @@ export default function Header({ user, isAuthenticated }: Props) {
                     <ChevronRight />
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
                   <button
-                    onClick={handleLogout}
                     className=" rounded-full transition-colors cursor-pointer">
                     Logout
                   </button>

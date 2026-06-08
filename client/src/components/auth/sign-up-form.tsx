@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Eye, EyeOff } from 'lucide-react';
 import { UserRole } from "@/types/types";
 import { useAuthStore } from "@/store/auth-store";
@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function SignupForm() {
-  const { signup, error, isLoading } = useAuthStore();
+  const { signup, error, isLoading, clearError } = useAuthStore();
   const [firstName, setFirstName] = useState<string>("")
   const [lastName, setLastName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
@@ -14,6 +14,10 @@ export default function SignupForm() {
   const [role, setRole] = useState<UserRole>(UserRole.PATIENT);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    clearError();
+  }, [clearError]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,16 +34,16 @@ export default function SignupForm() {
 
   return (
     <section className="w-full mx-auto px-4 py-4 sm:px-4">
-      <div className="border border-[#b2b0b0] rounded-3xl p-10">
+      <div className="border border-[#e8e8e8] rounded-3xl p-10">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {error && (
-            <span className="mt-5 text-red-500 text-sm">
+            <span className="text-red-500 text-sm">
               {error}
             </span>
           )}
           <div className="flex flex-col gap-4 mt-6">
             <div className="flex flex-col gap-2">
-              <label htmlFor="first-name" className="text-sm font-medium text-foreground">First Name</label>
+              <label htmlFor="first-name" className="text-sm font-medium text-black dark:text-white">First Name</label>
               <input
                 type="text"
                 id="first-name"
@@ -47,11 +51,11 @@ export default function SignupForm() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 disabled={isLoading}
-                className="px-4 py-1 border border-slate-700 rounded-full text-foreground placeholder:text-sm placeholder:text-foreground focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="last-name" className="text-sm font-medium text-foreground">Last Name</label>
+              <label htmlFor="last-name" className="text-sm font-medium text-black dark:text-white">Last Name</label>
               <input
                 type="text"
                 id="last-name"
@@ -59,11 +63,11 @@ export default function SignupForm() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 disabled={isLoading}
-                className="px-4 py-1 border border-slate-700 rounded-full text-foreground placeholder:text-sm placeholder:text-foreground focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
+              <label htmlFor="email" className="text-sm font-medium text-black dark:text-white">Email</label>
               <input
                 type="email"
                 id="email"
@@ -71,11 +75,11 @@ export default function SignupForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
-                className="px-4 py-1 border border-slate-700 rounded-full text-foreground placeholder:text-sm placeholder:text-foreground focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="password" className="text-sm font-medium text-foreground">Password</label>
+              <label htmlFor="password" className="text-sm font-medium text-black dark:text-white">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -84,7 +88,7 @@ export default function SignupForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="w-full px-4 py-1 border border-slate-700 rounded-full text-foreground placeholder:text-sm placeholder:text-foreground focus:outline-none focus:border-slate-300 transition-colors"
+                  className="w-full px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm  placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
                 />
                 <button
                   type="button"
@@ -101,14 +105,14 @@ export default function SignupForm() {
               </div>
             </div>
             <div className="flex flex-col gap-2 mt-2">
-              <label htmlFor="role" className="text-sm font-medium text-foreground">Are you a patient or doctor?</label>
+              <label htmlFor="role" className="text-sm font-medium text-black dark:text-white">Are you a patient or doctor?</label>
               <select
                 name="role"
                 id="role"
                 value={role}
                 onChange={(e) => setRole(e.target.value as UserRole)}
                 disabled={isLoading}
-                className="px-4 py-3 border border-slate-700 rounded-sm text-foreground placeholder:text-sm placeholder:text-foreground focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-3 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm  placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
               >
                 {Object.values(UserRole).splice(1, 3).map((role) => (
                   <option value={role} key={role}>
@@ -121,7 +125,7 @@ export default function SignupForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-6 py-3 dark:bg-white dark:text-black bg-black text-white rounded-full transition-colors cursor-pointer font-medium"
+            className="px-6 py-3 dark:bg-white dark:text-black bg-black text-white rounded-full transition-colors cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               "Signing Up"
@@ -132,7 +136,7 @@ export default function SignupForm() {
         </form>
         <p className="text-center text-gray-400 mt-5 text-sm font-normal">
           Already have an account?{" "}
-          <Link to="/login" className="text-[12px] text-foreground hover:text-foreground/80 transition-colors">
+          <Link to="/login" className="text-[12px] text-black dark:text-white  transition-colors">
             Sign in
           </Link>
         </p>
