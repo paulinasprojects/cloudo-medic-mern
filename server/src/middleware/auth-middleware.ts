@@ -57,3 +57,10 @@ export const requireDoctor = (req: Request, res: Response, next: NextFunction) =
   }
   next();
 };
+
+export const requireAdminOrDoctor = (req: Request, res: Response, next: NextFunction) => {
+  if (req.userId !== UserRole.DOCTOR || UserRole.ADMIN) {
+     throw new AppError("Doctor or Admin access required", 403)
+  }
+  next();
+}

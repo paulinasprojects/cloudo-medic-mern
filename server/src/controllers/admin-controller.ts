@@ -191,6 +191,40 @@ export const deleteUserByAdmins = asyncHandler(
   }
 )
 
+export const createDoctor = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { userId, address, phoneNumber, bio, dateOfBirth, gender, doctorLevel, education, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
+    const userAdmin = req.userId;
+      const user = await User.findOne({
+      where: {
+        id: userAdmin
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const newDoctor = await DoctorProfile.create({
+      userId: userId,
+      address,
+      phoneNumber,
+      bio,
+      dateOfBirth,
+      doctorLevel,
+      education,
+      gender, 
+      specialization,
+      hospital,
+      licenseNumber,
+      yearsOfExperience,
+      consultationFee,
+    });
+
+    SendSuccess(res, newDoctor, "Doctor created successfully", 201);
+  }
+)
+
 export const updateDoctorProfileByAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { address, phoneNumber, bio, dateOfBirth, doctorLevel, education, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
@@ -298,6 +332,39 @@ export const deleteDoctorProfileByAdmin = asyncHandler(
       null,
       "Doctor deleted successfully!"
     );
+  }
+)
+
+export const createPatient = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { userId, address, phoneNumber, bio, dateOfBirth, gender, bloodType, emergencyContactName, emergencyContactNumber, allergies, medicalHistory } = req.body;
+    
+    const userAdmin = req.userId;
+      const user = await User.findOne({
+      where: {
+        id: userAdmin
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const newPatient = await PatientProfile.create({
+      userId: userId,
+      address,
+      phoneNumber,
+      bio,
+      dateOfBirth,
+      gender,
+      bloodType,
+      emergencyContactName,
+      emergencyContactNumber,
+      allergies,
+      medicalHistory
+    });
+
+    SendSuccess(res, newPatient, "Patient created successfully", 201);
   }
 )
 

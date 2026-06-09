@@ -10,6 +10,7 @@ interface AuthStore extends AuthState {
   getUser: () => Promise<void>;
   logout: () => void;
   isInitialized: boolean;
+  clearError: () => void;
 }
 
 const savedToken = localStorage.getItem(TOKEN_KEY);
@@ -102,4 +103,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
       error: null,
     })
   },
+  clearError: () => {
+    set({  error: null })
+  }
 }))

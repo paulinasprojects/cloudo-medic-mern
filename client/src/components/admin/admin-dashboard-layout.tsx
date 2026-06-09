@@ -26,7 +26,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
     <header className=" xl:px-12.5 xl:py-8.5 py-6 px-5">
       <div className="flex items-center gap-4 justify-between">
         <AdminMobileMenu />
-        <nav className="bg-white dark:bg-black px-3 py-4 rounded-full lg:block hidden">
+        <nav className="bg-white dark:bg-[#0e121b] px-3 py-4 rounded-full lg:block hidden">
           <div className="flex gap-6 items-center">
             {theme === "dark" ? (
               <CloudoLogoLight width={150} height={150} />
@@ -54,7 +54,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
           </button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-3 px-2 sm:py-3 max-sm:py-2 bg-white dark:bg-black rounded-full data-[state=open]:rounded-none data-[state=open]:rounded-tl-md data-[state=open]:rounded-tr-md">
+              <button className="flex items-center gap-3 px-2 sm:py-3 max-sm:py-2 bg-white dark:bg-[#0e121b] rounded-full data-[state=open]:rounded-none data-[state=open]:rounded-tl-md data-[state=open]:rounded-tr-md">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="profile image" className="w-10 h-10 rounded-full object-cover" />
                 <div className="flex flex-col items-start">
                   <span className="text-black dark:text-white capitalize text-[16px] font-mono font-bold">{user?.firstName} {" "} {user?.lastName} </span>
@@ -70,9 +70,8 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                   <ChevronRight />
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
+              <DropdownMenuItem onClick={handleLogout} className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                 <button
-                  onClick={handleLogout}
                   className="rounded-full transition-colors cursor-pointer">
                   Logout
                 </button>

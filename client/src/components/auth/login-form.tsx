@@ -3,6 +3,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/auth-store"
+import { getDoctorProfile, getPatientProfile } from "@/services/profile-service";
+import { AxiosError } from "axios";
 
 const LoginForm = () => {
   const { login, error, isLoading, clearError } = useAuthStore();
@@ -20,21 +22,25 @@ const LoginForm = () => {
     await login(email, password);
     const { isAuthenticated, user } = useAuthStore.getState();
 
+    if (!isAuthenticated || !user) return;
+    toast.success("Logged in successfully");
 
-    if (isAuthenticated && user) {
-      toast.success("Logged in successfully")
-      switch (user.role) {
-        case "admin":
-          navigate("/admin");
-          break;
-        case "doctor":
-          navigate("/doctor");
-          break;
-        case "patient":
-          navigate("/patient");
-          break;
-        default:
-          navigate("/");
+    try {
+      if (user.role === "admin") {
+        navigate("/admin")
+      } else if (user.role === "doctor") {
+        const res = await getDoctorProfile();
+        navigate(res.data ? "/doctor" : "/doctor/profile")
+      } else if (user.role === "patient") {
+        const res = await getPatientProfile();
+        navigate(res.data ? "/patient" : "/patient/profile")
+      }
+    } catch (error) {
+      const err = error as AxiosError<{ error: string }>;
+      if (err?.response?.status === 404) {
+        navigate(user.role === "doctor" ? "/doctor/profile" : "/patient/profile")
+      } else {
+        toast.error("Something went wrong. Please try again.");
       }
     }
   }

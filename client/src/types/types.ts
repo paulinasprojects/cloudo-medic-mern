@@ -39,9 +39,59 @@ export interface AuthResponse {
   token: string;
 }
 
-
-export interface AuthResponse {
-  user: User;
-  token: string;
+export interface Doctors {
+  id: string;
+  userId: string;
+  address: string;
+  phoneNumber: string;
+  bio: string;
+  dateOfBirth: string;
+  education: string;
+  doctorLevel: string;
+  gender: string;
+  specialization: string;
+  hospital: string;
+  licenseNumber: string;
+  consultationFee: number;
+  yearsOfExperience: number;
+  createdAt: string;
+  updatedAt: string;
+  user: User; 
+}
+export interface Doctor {
+  id: string;
+  userId: string;
+  address: string;
+  phoneNumber: string;
+  bio: string;
+  dateOfBirth: string;
+  education: string;
+  doctorLevel: string;
+  gender: string;
+  specialization: string;
+  hospital: string;
+  licenseNumber: string;
+  consultationFee: number;
+  yearsOfExperience: number;
+  createdAt: string;
+  updatedAt: string;
+  user: User; 
 }
 
+export interface Patient {
+    id: string;
+  userId: string;
+  address: string;
+  phoneNumber: string;
+  bio: string;
+  dateOfBirth: string;
+    gender: string;
+  bloodType: string;
+  emergencyContactNumber: string;
+  emergencyContactName: string;
+  allergies: string;
+  medicalHistory: string;
+  createdAt: string;
+  updatedAt: string;
+  user: User; 
+}

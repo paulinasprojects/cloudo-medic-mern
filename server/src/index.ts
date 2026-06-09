@@ -31,8 +31,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/auth", userRoutes);
-app.use("/api/profile/doctors", doctorProfileRoutes);
-app.use("/api/profile/patients", patientProfileRoutes);
+app.use("/api/doctor/profile", doctorProfileRoutes);
+app.use("/api/patient/profile", patientProfileRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/prescriptions", prescriptionsRoutes);
 app.use("/api/admin", adminRoutes);

@@ -33,27 +33,31 @@ export default function Header({ user, isAuthenticated }: Props) {
           )}
         </Link>
         {isAuthenticated && user?.role === "admin" && (
-          <div>
+          <div className="flex items-center gap-4">
+            <button onClick={toggleTheme} className="rounded-full p-2 hover:bg-black/5 dark:hover:bg-white/5 duration-300 transition-colors">
+              {theme === "dark" ? <Sun className="size-5" /> : <Moon className="size-5" />}
+            </button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-3 px-2 py-2 bg-white rounded-full data-[state=open]:rounded-none data-[state=open]:rounded-tl-md data-[state=open]:rounded-tr-md">
-                  <img src="/default-user.png" alt="profile image" className="w-10 h-10 rounded-full object-cover" />
+                <button className="flex items-center gap-3 px-2 sm:py-3 max-sm:py-2 bg-white dark:bg-[#0e121b] rounded-full data-[state=open]:rounded-none data-[state=open]:rounded-tl-md data-[state=open]:rounded-tr-md">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="profile image" className="w-10 h-10 rounded-full object-cover" />
                   <div className="flex flex-col items-start">
-                    <span className="text-black capitalize text-[16px] font-mono font-bold">{user?.firstName} {" "} {user?.lastName} </span>
-                    <span className="text-[12px]">{user?.email}</span>
+                    <span className="text-black dark:text-white capitalize text-[16px] font-mono font-bold">{user?.firstName} {" "} {user?.lastName} </span>
+                    <span className="text-[12px] text-black dark:text-white">{user?.email}</span>
                   </div>
-                  <ChevronDown className="size-5" />
+                  <ChevronDown className="size-5 dark:text-white text-black" />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent sideOffset={0} className="flex flex-col min-w-38.75 gap-4 bg-white text-black rounded-bl-md rounded-br-md">
-                <DropdownMenuItem>
+              <DropdownMenuContent sideOffset={0} className="flex flex-col min-w-38.75 gap-4 bg-white dark:bg-black text-black dark:text-white rounded-bl-md rounded-br-md">
+                <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                   <Link to="/admin" className="flex w-full items-center justify-between">
                     Go to Dashboard
                     <ChevronRight />
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleLogout}>
+                <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                   <button
+                    onClick={handleLogout}
                     className="rounded-full transition-colors cursor-pointer">
                     Logout
                   </button>
@@ -63,27 +67,31 @@ export default function Header({ user, isAuthenticated }: Props) {
           </div>
         )}
         {isAuthenticated && user?.role === "patient" && (
-          <div>
+          <div className="flex items-center gap-4">
+            <button onClick={toggleTheme} className="rounded-full p-2 hover:bg-black/5 dark:hover:bg-white/5 duration-300 transition-colors">
+              {theme === "dark" ? <Sun className="size-5" /> : <Moon className="size-5" />}
+            </button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-3 px-4 py-2 max-sm:px-2 bg-white rounded-full data-[state=open]:rounded-none data-[state=open]:rounded-tl-md data-[state=open]:rounded-tr-md">
-                  <img src="/default-user.png" alt="profile image" className="w-10 h-10 rounded-full object-cover" />
+                <button className="flex items-center gap-3 px-2 sm:py-3 max-sm:py-2 bg-white dark:bg-[#0e121b] rounded-full data-[state=open]:rounded-none data-[state=open]:rounded-tl-md data-[state=open]:rounded-tr-md">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="profile image" className="w-10 h-10 rounded-full object-cover" />
                   <div className="flex flex-col items-start">
-                    <span className="text-black capitalize text-[16px] font-mono font-bold">{user?.firstName} {" "} {user?.lastName} </span>
-                    <span className="text-[12px]">{user?.email}</span>
+                    <span className="text-black dark:text-white capitalize text-[16px] font-mono font-bold">{user?.firstName} {" "} {user?.lastName} </span>
+                    <span className="text-[12px] text-black dark:text-white">{user?.email}</span>
                   </div>
-                  <ChevronDown className="size-5" />
+                  <ChevronDown className="size-5 dark:text-white text-black" />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent sideOffset={0} className="flex flex-col min-w-38.75 gap-4 bg-white text-black rounded-bl-md rounded-br-md">
-                <DropdownMenuItem>
+              <DropdownMenuContent sideOffset={0} className="flex flex-col min-w-38.75 gap-4 bg-white dark:bg-black text-black dark:text-white rounded-bl-md rounded-br-md">
+                <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                   <Link to="/patient" className="flex w-full items-center justify-between">
                     Go to Dashboard
                     <ChevronRight />
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleLogout}>
+                <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                   <button
+                    onClick={handleLogout}
                     className="rounded-full transition-colors cursor-pointer">
                     Logout
                   </button>
@@ -93,28 +101,32 @@ export default function Header({ user, isAuthenticated }: Props) {
           </div>
         )}
         {isAuthenticated && user?.role === "doctor" && (
-          <div>
+          <div className="flex items-center gap-4">
+            <button onClick={toggleTheme} className="rounded-full p-2 hover:bg-black/5 dark:hover:bg-white/5 duration-300 transition-colors">
+              {theme === "dark" ? <Sun className="size-5" /> : <Moon className="size-5" />}
+            </button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-3 px-4 py-2 max-sm:px-2 bg-white rounded-full data-[state=open]:rounded-none data-[state=open]:rounded-tl-md data-[state=open]:rounded-tr-md">
-                  <img src="/default-user.png" alt="profile image" className="w-10 h-10 rounded-full object-cover" />
+                <button className="flex items-center gap-3 px-2 sm:py-3 max-sm:py-2 bg-white dark:bg-[#0e121b] rounded-full data-[state=open]:rounded-none data-[state=open]:rounded-tl-md data-[state=open]:rounded-tr-md">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="profile image" className="w-10 h-10 rounded-full object-cover" />
                   <div className="flex flex-col items-start">
-                    <span className="text-black capitalize text-[16px] font-mono font-bold">{user?.firstName} {" "} {user?.lastName} </span>
-                    <span className="text-[12px]">{user?.email}</span>
+                    <span className="text-black dark:text-white capitalize text-[16px] font-mono font-bold">{user?.firstName} {" "} {user?.lastName} </span>
+                    <span className="text-[12px] text-black dark:text-white">{user?.email}</span>
                   </div>
-                  <ChevronDown className="size-5" />
+                  <ChevronDown className="size-5 dark:text-white text-black" />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent sideOffset={0} className="flex flex-col min-w-38.75 gap-4 bg-white text-black rounded-bl-md rounded-br-md">
-                <DropdownMenuItem>
+              <DropdownMenuContent sideOffset={0} className="flex flex-col min-w-38.75 gap-4 bg-white dark:bg-black text-black dark:text-white rounded-bl-md rounded-br-md">
+                <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                   <Link to="/doctor" className="flex w-full items-center justify-between">
                     Go to Dashboard
                     <ChevronRight />
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleLogout}>
+                <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                   <button
-                    className=" rounded-full transition-colors cursor-pointer">
+                    onClick={handleLogout}
+                    className="rounded-full transition-colors cursor-pointer">
                     Logout
                   </button>
                 </DropdownMenuItem>
@@ -122,6 +134,7 @@ export default function Header({ user, isAuthenticated }: Props) {
             </DropdownMenu>
           </div>
         )}
+
         {!isAuthenticated && (
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">

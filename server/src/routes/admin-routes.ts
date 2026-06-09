@@ -5,7 +5,9 @@ import {
   updateUserByAdmins,
   deleteUserByAdmins,
   getAllDoctors, 
-  getAllPatients, 
+  getAllPatients,
+  createDoctor, 
+  createPatient,
   updateDoctorProfileByAdmin, 
   updatePatientProfileByAdmin,
   deleteDoctorProfileByAdmin, 
@@ -40,12 +42,14 @@ router.delete("/users/:id", deleteUserByAdmins);
 
 {/* Doctors Routes */}
 router.get("/doctors", getAllDoctors);
+router.post("/doctors", createDoctor)
 router.post("/doctors/:id", updateDoctorProfileByAdmin);
 router.delete("/doctors/:id", deleteDoctorProfileByAdmin);
 
 
 {/* Patients Routes */}
 router.get("/patients", getAllPatients);
+router.post("/patients", createPatient);
 router.post("/patients/:id", updatePatientProfileByAdmin);
 router.delete("/patients/:id", deletePatientProfileByAdmin);
 

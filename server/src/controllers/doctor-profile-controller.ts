@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { User, DoctorProfile } from "../models";
 import { AppError } from "../middleware/error-handler";
 import { SendSuccess, asyncHandler } from "../utils/response-helpers";
-import { UserRole } from "../types";
 
 
 export const getDoctorProfile = asyncHandler(
@@ -12,7 +11,6 @@ export const getDoctorProfile = asyncHandler(
     const user = await User.findOne({
       where: {
         id: userId,
-        role: UserRole.DOCTOR
       },
       include: [
         {
