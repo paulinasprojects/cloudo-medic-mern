@@ -95,3 +95,13 @@ export interface Patient {
   updatedAt: string;
   user: User; 
 }
+
+export enum BloodTypes {
+  "O+" = "O+",
+  "O-"  = "O-",
+  "A+" = "A+",
+  "A-" = "A-",
+  "B+"= "B+",
+  "AB+" = "AB+",
+  "AB-" = "AB-"
+}

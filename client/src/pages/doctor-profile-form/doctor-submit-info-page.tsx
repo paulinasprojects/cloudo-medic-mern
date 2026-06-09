@@ -44,14 +44,14 @@ const DoctorSubmitInfoPage = () => {
         <h2 className="text-2xl font-bold">Personal Information</h2>
         <div className="grid gap-2 sm:grid-cols-2">
           <p>{state.personalInfo.address}</p>
+          <p>{state.personalInfo.phoneNumber}</p>
           <p>{state.personalInfo.dateOfBirth}</p>
           <p>{state.personalInfo.bio}</p>
           <p>{state.personalInfo.gender}</p>
-          <p>{state.personalInfo.phoneNumber}</p>
         </div>
       </div>
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">Address</h2>
+        <h2 className="text-2xl font-bold">Work Information</h2>
         <div className="grid gap-2 sm:grid-cols-2">
           <p>{state.workInfo.education}</p>
           <p>{state.workInfo.consultationFee}</p>
