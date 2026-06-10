@@ -21,6 +21,12 @@ import DoctorWorkInfoPage from "@/pages/doctor-profile-form/doctor-work-info-pag
 import DoctorSubmitInfoPage from "./pages/doctor-profile-form/doctor-submit-info-page";
 import DoctorProfileGuard from "./guards/doctor-profile-guard";
 import DoctorProfileEdit from "./pages/doctor-edit-profile";
+import PatientProfileEdit from "./pages/patient-profile-edit-page";
+import PatientProfileGuard from "./guards/patient-profile-guard";
+import { PatientProfileFormLayout } from "./components/patient/patient-profile-form-layout";
+import PatientPersonalInfoPage from "./pages/patient-profile-form/patient-personal-info-page";
+import PatientMedicalInfoPage from "./pages/patient-profile-form/patient-medical-info-page";
+import PatientSubmitInfoPage from "./pages/patient-profile-form/patient-submit-info-page";
 
 function App() {
   const { isAuthenticated, getUser } = useAuthStore();
@@ -59,6 +65,14 @@ function App() {
         <Route element={<RoleRoute allowedRoles={["patient"]} />}>
           <Route path="/patient" element={<PatientPage />} />
           <Route path="/patient/profile" element={<PatientProfilePage />} />
+          <Route path="/patient/profile/edit" element={<PatientProfileEdit />} />
+          <Route element={<PatientProfileGuard />}>
+            <Route element={<PatientProfileFormLayout />}>
+              <Route path="/patient/profile/personal-info" element={<PatientPersonalInfoPage />} />
+              <Route path="/patient/profile/medical-info" element={<PatientMedicalInfoPage />} />
+              <Route path="/patient/profile/submit-info" element={<PatientSubmitInfoPage />} />
+            </Route>
+          </Route>
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
