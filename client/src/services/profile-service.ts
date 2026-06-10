@@ -43,3 +43,14 @@ export const createPatient = async (data: {
   const response = await api.post<ApiResponse<Patient>>("/patient/profile", data);
   return response.data;
 }
+
+export const updateDoctor = async (data: {
+  address: string;
+  phoneNumber: string;
+  bio: string;
+  hospital: string;
+  consultationFee: number | string;
+}) => {
+  const response = await api.patch<ApiResponse<Doctor>>("/doctor/profile", data)
+  return response.data;
+}

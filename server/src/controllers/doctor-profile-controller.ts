@@ -71,7 +71,7 @@ export const createDoctorProfile = asyncHandler(
 
 export const updateDoctorProfileByDoctor = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { address, phoneNumber, bio, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
+    const { address, phoneNumber, bio, hospital, consultationFee } = req.body;
     const userId = req.userId;
     
     const profile = await DoctorProfile.findOne({
@@ -96,9 +96,6 @@ export const updateDoctorProfileByDoctor = asyncHandler(
       profile.bio = bio;
     }
 
-    if (specialization) {
-      profile.specialization = specialization
-    };
 
     if (hospital) {
       profile.hospital = hospital
@@ -107,10 +104,6 @@ export const updateDoctorProfileByDoctor = asyncHandler(
     if (consultationFee) {
       profile.consultationFee = consultationFee
     };
-    
-    if (yearsOfExperience) {
-      profile.yearsOfExperience = yearsOfExperience;
-    }
 
     const updatededProfile = await profile.save()
     SendSuccess(res, updatededProfile, "Profile updated successfully!")

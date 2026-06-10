@@ -9,7 +9,7 @@ router.use(requireDoctor);
 
 router.get("/",  getDoctorProfile);
 router.post("/", createDoctorProfile);
-router.post("/", updateDoctorProfileByDoctor);
+router.patch("/", updateDoctorProfileByDoctor);
 
 
 export default router;
