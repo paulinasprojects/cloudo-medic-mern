@@ -22,12 +22,12 @@ const DoctorProfileEdit = () => {
 
   useEffect(() => {
     if (data?.data) {
-      const p = data.data;
-      setAddress(p.address ?? "");
-      setPhoneNumber(p.phoneNumber ?? "");
-      setBio(p.bio ?? "");
-      setHospital(p.hospital ?? "");
-      setConsultationFee(p.consultationFee ?? 0);
+      const doctor = data.data;
+      setAddress(doctor.address ?? "");
+      setPhoneNumber(doctor.phoneNumber ?? "");
+      setBio(doctor.bio ?? "");
+      setHospital(doctor.hospital ?? "");
+      setConsultationFee(doctor.consultationFee ?? 0);
     }
   }, [data]);
 
@@ -83,47 +83,48 @@ const DoctorProfileEdit = () => {
                 disabled={isPending}
               />
             </div>
-          </div>
-          <div className="flex flex-col gap-y-2">
-            <label htmlFor="phoneNumber">Phone number</label>
-            <input
-              type="text"
-              id="phoneNumber"
-              required
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
-            />
-          </div>
-          <div className="flex flex-col gap-y-2">
-            <label htmlFor="bio">Bio</label>
-            <textarea
-              id="bio"
-              required
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              className="resize-none w-full px-4 py-1 border border-slate-700 rounded-lg text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
-            />
-          </div>
-          <div className="flex flex-col gap-y-2">
-            <label htmlFor="hospital">Hospital</label>
-            <input
-              id="hospital"
-              type="text"
-              className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
-              value={hospital}
-              onChange={(e) => setHospital(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-y-2">
-            <label htmlFor="consultationFee">Consultation Fee</label>
-            <input
-              id="consultationFee"
-              type="number"
-              className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
-              value={consultationFee}
-              onChange={(e) => setConsultationFee(e.target.value === "" ? "" : parseFloat(e.target.value))}
-            />
+
+            <div className="flex flex-col gap-y-2">
+              <label htmlFor="phoneNumber" className="text-sm font-bold text-black dark:text-white">Phone number</label>
+              <input
+                type="text"
+                id="phoneNumber"
+                required
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+              />
+            </div>
+            <div className="flex flex-col gap-y-2">
+              <label htmlFor="bio" className="text-sm font-bold text-black dark:text-white">Bio</label>
+              <textarea
+                id="bio"
+                required
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                className="resize-none w-full px-4 py-1 border border-slate-700 rounded-lg text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+              />
+            </div>
+            <div className="flex flex-col gap-y-2">
+              <label htmlFor="hospital" className="text-sm font-bold text-black dark:text-white">Hospital</label>
+              <input
+                id="hospital"
+                type="text"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                value={hospital}
+                onChange={(e) => setHospital(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-y-2">
+              <label htmlFor="consultationFee" className="text-sm font-bold text-black dark:text-white">Consultation Fee</label>
+              <input
+                id="consultationFee"
+                type="number"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                value={consultationFee}
+                onChange={(e) => setConsultationFee(e.target.value === "" ? "" : parseFloat(e.target.value))}
+              />
+            </div>
           </div>
           <button type="submit" disabled={isPending} className="px-6 py-3 rounded-full dark:bg-white dark:text-black bg-black hover:bg-black/80 dark:hover:bg-white/80 text-white  transition-colors cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed">
             {isPending ? "Submitting..." : "Submit"}
