@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useDoctorProfileFormContext } from "@/context/doctor-profile-form-context"
+import { Gender } from "@/types/types";
+import { Select, SelectContent, SelectOption, SelectTrigger } from "@/components/common/select";
 
 const DoctorPersonalInfoPage = () => {
   const { state, dispatch } = useDoctorProfileFormContext();
@@ -15,7 +17,7 @@ const DoctorPersonalInfoPage = () => {
       <h1 className="text-4xl font-bold dark:text-white text-black">Personal Information</h1>
       <div className="flex flex-col gap-y-2">
         <label
-          className="font-bold text-white"
+          className="font-bold text-black dark:text-white"
           htmlFor="address">
           Address
         </label>
@@ -33,7 +35,7 @@ const DoctorPersonalInfoPage = () => {
         />
       </div>
       <div className="flex flex-col gap-y-2">
-        <label htmlFor="dateOfBirth">Date of birth</label>
+        <label htmlFor="dateOfBirth" className="font-bold text-black dark:text-white">Date of birth</label>
         <input
           type="date"
           id="dateOfBirth"
@@ -47,21 +49,23 @@ const DoctorPersonalInfoPage = () => {
         />
       </div>
       <div className="flex flex-col gap-y-2">
-        <label htmlFor="gender">Gender</label>
-        <select
-          name="gender"
-          id="gender"
-          className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
-          value={state.personalInfo.gender} onChange={(e) => dispatch({
+        <label htmlFor="gender" className="font-bold text-black dark:text-white">Gender</label>
+        <Select
+          value={state.personalInfo.gender}
+          onValueChange={(value) => dispatch({
             type: "UPDATE_PERSONAL_INFO",
-            payload: { gender: e.target.value as "male" | "female" }
+            payload: { gender: value as Gender }
           })}>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+          <SelectTrigger placeholder="Select gender" />
+          <SelectContent>
+            {Object.values(Gender).map((gender) => (
+              <SelectOption key={gender} value={gender}>{gender}</SelectOption>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex flex-col gap-y-2">
-        <label htmlFor="phoneNumber">Phone number</label>
+        <label htmlFor="phoneNumber" className="font-bold text-black dark:text-white">Phone number</label>
         <input
           type="text"
           id="phoneNumber"
@@ -75,7 +79,7 @@ const DoctorPersonalInfoPage = () => {
         />
       </div>
       <div className="flex flex-col gap-y-2">
-        <label htmlFor="bio">Bio</label>
+        <label htmlFor="bio" className="font-bold text-black dark:text-white">Bio</label>
         <textarea
           id="bio"
           required

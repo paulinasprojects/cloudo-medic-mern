@@ -4,6 +4,7 @@ import { UserRole } from "@/types/types";
 import { useAuthStore } from "@/store/auth-store";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
+import { Select, SelectContent, SelectOption, SelectTrigger } from "../common/select";
 
 export default function SignupForm() {
   const { signup, error, isLoading, clearError } = useAuthStore();
@@ -106,20 +107,20 @@ export default function SignupForm() {
             </div>
             <div className="flex flex-col gap-2 mt-2">
               <label htmlFor="role" className="text-sm font-medium text-black dark:text-white">Are you a patient or doctor?</label>
-              <select
-                name="role"
+              <Select
                 id="role"
                 value={role}
-                onChange={(e) => setRole(e.target.value as UserRole)}
-                disabled={isLoading}
-                className="px-4 py-3 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm  placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+                onValueChange={(value) => setRole(value as UserRole)}
               >
-                {Object.values(UserRole).splice(1, 3).map((role) => (
-                  <option value={role} key={role}>
-                    {role}
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger placeholder="Are you a patient or a doctor?" />
+                <SelectContent>
+                  {Object.values(UserRole).splice(1, 3).map((role) => (
+                    <SelectOption value={role} key={role}>
+                      {role}
+                    </SelectOption>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
           <button

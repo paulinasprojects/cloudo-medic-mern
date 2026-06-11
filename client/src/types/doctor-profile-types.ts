@@ -1,16 +1,18 @@
+import { DoctorLevel, Education, Gender } from "./types";
+
 export interface DoctorProfileFormData {
   personalInfo: {
     address: string;
     dateOfBirth: string;
-    gender: "male" | "female";
+    gender: Gender | "";
     phoneNumber: string;
     bio: string;
   },
   workInfo: {
-    education: "undergraduate" | "primary" | "graduate";
+    education: Education | "";
     specialization: string;
     hospital: string;
-    doctorLevel: "intern" | "resident" | "fellow" | "attending";
+    doctorLevel: DoctorLevel | "";
     licenseNumber: string;
     consultationFee: number | string;
     yearsOfExperience: number | string;

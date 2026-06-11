@@ -4,15 +4,15 @@ export const initialFormState: DoctorProfileFormData = {
   personalInfo: {
     address:"",
     dateOfBirth: "",
-    gender: "male",
+    gender: "",
     phoneNumber: "",
     bio: "",
   },
   workInfo: {
-    education: "undergraduate",
+    education: "",
     specialization: "",
     hospital: "",
-    doctorLevel: "intern",
+    doctorLevel: "",
     licenseNumber: "",
     consultationFee: 0,
     yearsOfExperience: 0,

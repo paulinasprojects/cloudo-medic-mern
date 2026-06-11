@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { usePatientProfileFormContext } from "@/context/patient-profile-form-context"
+import { Gender } from "@/types/types";
+import { Select, SelectContent, SelectOption, SelectTrigger } from "@/components/common/select";
 
 const PatientPersonalInfoPage = () => {
   const { state, dispatch } = usePatientProfileFormContext();
@@ -59,19 +61,20 @@ const PatientPersonalInfoPage = () => {
         >
           Gender
         </label>
-        <select
-          name="gender"
-          id="gender"
-          className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+        <Select
           value={state.personalInfo.gender}
-          onChange={(e) => dispatch({
+          onValueChange={(value) => dispatch({
             type: "UPDATE_PERSONAL_INFO",
-            payload: { gender: e.target.value as "male" | "female" }
+            payload: { gender: value as Gender }
           })}
         >
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+          <SelectTrigger placeholder="Select gender" />
+          <SelectContent>
+            {Object.values(Gender).map((gender) => (
+              <SelectOption key={gender} value={gender}>{gender}</SelectOption>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex flex-col gap-y">
         <label

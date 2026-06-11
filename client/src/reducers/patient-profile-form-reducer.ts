@@ -4,12 +4,12 @@ export const initialFormState: PatientProfileFormData = {
   personalInfo: {
     address: "",
     dateOfBirth: "",
-    gender: "male",
+    gender: "",
     phoneNumber: "",
     bio: "",
   },
   medicalInfo: {
-    bloodType: "O+",
+    bloodType: "",
     allergies: "",
     emergencyContactName: "",
     emergencyContactNumber: "",

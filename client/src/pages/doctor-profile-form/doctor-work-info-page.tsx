@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useDoctorProfileFormContext } from "@/context/doctor-profile-form-context"
+import { DoctorLevel, Education } from "@/types/types";
+import { Select, SelectContent, SelectOption, SelectTrigger } from "@/components/common/select";
 
 const DoctorWorkInfoPage = () => {
   const { state, dispatch } = useDoctorProfileFormContext();
@@ -17,18 +19,21 @@ const DoctorWorkInfoPage = () => {
       </h1>
       <div className="flex flex-col gap-y-2">
         <label htmlFor="education">Education</label>
-        <select
-          name="education"
+        <Select
           id="education"
-          className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
-          value={state.workInfo.education} onChange={(e) => dispatch({
+          value={state.workInfo.education} onValueChange={(value) => dispatch({
             type: "UPDATE_WORK_INFO",
-            payload: { education: e.target.value as "undergraduate" | "primary" | "graduate" }
+            payload: { education: value as Education }
           })}>
-          <option value="undergraduate">Undergradute</option>
-          <option value="primary">Primary</option>
-          <option value="graduate">Graduate</option>
-        </select>
+          <SelectTrigger placeholder="Select education" />
+          <SelectContent>
+            {Object.values(Education).map((education) => (
+              <SelectOption key={education} value={education}>
+                {education}
+              </SelectOption>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex flex-col gap-y-2">
         <label htmlFor="specialization">Specialization</label>
@@ -58,19 +63,19 @@ const DoctorWorkInfoPage = () => {
       </div>
       <div className="flex flex-col gap-y-2">
         <label htmlFor="doctorLevel">Doctor Level</label>
-        <select
-          name="doctorLevel"
+        <Select
           id="doctorLevel"
-          className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
-          value={state.workInfo.doctorLevel} onChange={(e) => dispatch({
+          value={state.workInfo.doctorLevel} onValueChange={(value) => dispatch({
             type: "UPDATE_WORK_INFO",
-            payload: { doctorLevel: e.target.value as "intern" | "resident" | "fellow" | "attending" }
+            payload: { doctorLevel: value as DoctorLevel }
           })}>
-          <option value="intern">Intern</option>
-          <option value="resident">Resident</option>
-          <option value="fellow">Fellow</option>
-          <option value="attending">Attending</option>
-        </select>
+          <SelectTrigger placeholder="Select doctor level" />
+          <SelectContent>
+            {Object.values(DoctorLevel).map((level) => (
+              <SelectOption key={level} value={level}>{level}</SelectOption>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex flex-col gap-y-2">
         <label htmlFor="licenseNumber">License Number</label>

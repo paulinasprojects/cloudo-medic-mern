@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { usePatientProfileFormContext } from "@/context/patient-profile-form-context"
 import { BloodTypes } from "@/types/types";
+import { Select, SelectContent, SelectOption, SelectTrigger } from "@/components/common/select";
 
 const PatientMedicalInfoPage = () => {
   const { state, dispatch } = usePatientProfileFormContext();
@@ -22,20 +23,21 @@ const PatientMedicalInfoPage = () => {
           className="font-bold dark:text-white text-black">
           Blood Type
         </label>
-        <select
-          name="bloodType"
+        <Select
           id="bloodType"
-          className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
           value={state.medicalInfo.bloodType}
-          onChange={(e) => dispatch({
+          onValueChange={(value) => dispatch({
             type: "UPDATE_MEDICAL_INFO",
-            payload: { bloodType: e.target.value as BloodTypes }
+            payload: { bloodType: value as BloodTypes }
           })}
         >
-          {Object.values(BloodTypes).map((type) => (
-            <option key={type} value={type}>{type}</option>
-          ))}
-        </select>
+          <SelectTrigger placeholder="Select your blood type" />
+          <SelectContent>
+            {Object.values(BloodTypes).map((type) => (
+              <SelectOption key={type} value={type}>{type}</SelectOption>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex flex-col gap-y-2">
         <label

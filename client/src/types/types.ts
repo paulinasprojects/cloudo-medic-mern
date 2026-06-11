@@ -105,3 +105,49 @@ export enum BloodTypes {
   "AB+" = "AB+",
   "AB-" = "AB-"
 }
+
+export enum Gender {
+  "MALE" = "male",
+  "FEMALE" = "female"
+}
+
+export enum Education {
+  "UNDERGRADUATE" = "undergraduate",
+  "PRIMARY" = "primary",
+  "GRADUATE" = "graduate"
+}
+
+export enum DoctorLevel {
+  "INTERN" = "intern",
+  "RESIDENT" = "resident",
+  "FELLOW" = "fellow",
+  "ATTENDING" = "attending"
+}
+
+export interface Appointment {
+  id: string;
+  patiendId: string;
+  doctorId: string;
+  appointmentDate: string;
+  status: string;
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+  doctorProfile?: Doctor;
+  patientProfile?: Patient;
+}
+
+export interface Prescription {
+  id: string;
+  patiendId: string;
+  doctorId: string;
+  medication: string | string[];
+  dosage: string | string[] | null;
+  instructions: string;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
+  updatedAt: string;
+  doctorProfile?: Doctor;
+  patientProfile?: Patient;
+}
