@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { usePatientProfileFormContext } from "@/context/patient-profile-form-context"
 import { Gender } from "@/types/types";
 import { Select, SelectContent, SelectOption, SelectTrigger } from "@/components/common/select";
+import DatePicker from "@/components/common/date-picker";
 
 const PatientPersonalInfoPage = () => {
   const { state, dispatch } = usePatientProfileFormContext();
@@ -36,22 +37,23 @@ const PatientPersonalInfoPage = () => {
         />
       </div>
       <div className="flex flex-col gap-y-2">
-        <label
-          htmlFor="dateOfBirth"
-          className="font-bold dark:text-white text-black"
-        >
+        <label htmlFor="dateOfBirth" className="font-bold text-black dark:text-white">
           Date of birth
         </label>
-        <input
-          type="date"
-          id="dateOfBirth"
-          required
-          value={state.personalInfo.dateOfBirth}
-          onChange={(e) => dispatch({
+        <DatePicker
+          value={state.personalInfo.dateOfBirth
+            ? new Date(state.personalInfo.dateOfBirth)
+            : undefined
+          }
+          onChange={(date) => dispatch({
             type: "UPDATE_PERSONAL_INFO",
-            payload: { dateOfBirth: e.target.value }
+            payload: {
+              dateOfBirth: date
+                ? `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
+                : ""
+            }
           })}
-          className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+          placeholder="Pick a date of birth"
         />
       </div>
       <div className="flex flex-col gap-y-2">

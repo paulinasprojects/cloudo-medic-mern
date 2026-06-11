@@ -23,6 +23,16 @@
     @apply bg-[#f6f7f9] dark:bg-[#0a0a0a];
   }
 
+
+  .background {
+    @apply bg-[#f6f7f9] dark:bg-[#0a0a0a];
+  }
+
+  .custom-animate {
+    --rdp-animation_duration: 0.10s;
+    --rdp-animation_timing: ease-in;
+  }
+
   button {
     @apply cursor-pointer;
   }

@@ -1,5 +1,5 @@
 import { cn } from "@/utils/utils"
-import { CheckCircle2, CircleIcon } from "lucide-react"
+import { CheckCircle2, CircleX } from "lucide-react"
 import { useLocation } from "react-router-dom"
 
 const steps = [
@@ -22,19 +22,17 @@ export const PatientFormProgressIndicator = () => {
   const currentStepIndex = steps.findIndex((step) => step.path === location.pathname);
 
   return (
-    <section className="grid grid-cols-2 gap-4 place-items-center sm:grid-cols-3 sm:justify-items-start">
+    <section className="grid grid-cols-2  gap-4 sm:place-items-center sm:grid-cols-3 sm:justify-items-start">
       {steps.map((step, index) => (
         <div className="relative flex" key={step.label}>
-          <figure className={cn("flex flex-col items-center rounded-full p-1",
+          <figure className={cn("flex gap-2 items-center rounded-full p-1",
             index < currentStepIndex ? "text-green-500" :
-              index === currentStepIndex ? "text-red-500" : "text-slate-500")}>
-            {index < currentStepIndex ? <CheckCircle2 className="size-8" /> : <CircleIcon className="size-8" />}
-            <figcaption>{step.label}</figcaption>
+              index === currentStepIndex ? "text-red-800" : "text-slate-500")}>
+            {index < currentStepIndex ? <CheckCircle2 className="size-4" /> : <CircleX className="size-4" />}
+            <figcaption className="text-sm">{step.label}</figcaption>
           </figure>
           {index < steps.length - 1 && (
-            <div className={cn("absolute h-1 sm:w-8 bottom-4 -right-16 rounded-sm",
-              index < currentStepIndex ? "bg-reen-100 text-green-500" : index === currentStepIndex ? "bg-red-500" : "bg-slate-200 text-slate-500"
-            )} />
+            <div className={cn("absolute h-0.5 sm:w-8 bottom-3 -right-12 rounded-sm", index < currentStepIndex ? "bg-green-500 text-green-500" : index === currentStepIndex ? "bg-red-800" : "bg-slate-500 text-slate-500")} />
           )}
         </div>
       ))}
