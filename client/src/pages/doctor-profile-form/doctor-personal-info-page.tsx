@@ -28,7 +28,7 @@ const DoctorPersonalInfoPage = () => {
             type="text"
             id="address"
             placeholder="Main Street 111"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
             required
             value={state.personalInfo.address}
             onChange={(e) => dispatch({
@@ -38,10 +38,12 @@ const DoctorPersonalInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="dateOfBirth" className="font-bold text-black dark:text-white">
+          <label htmlFor="date-off-birth" className="font-bold text-black dark:text-white">
             Date of birth
           </label>
           <DatePicker
+            id="date-off-birth"
+            placeholder="Pick a date of birth"
             value={state.personalInfo.dateOfBirth
               ? new Date(state.personalInfo.dateOfBirth)
               : undefined
@@ -54,12 +56,12 @@ const DoctorPersonalInfoPage = () => {
                   : ""
               }
             })}
-            placeholder="Pick a date of birth"
           />
         </div>
         <div className="flex flex-col gap-y-2">
           <label htmlFor="gender" className="font-bold text-black dark:text-white">Gender</label>
           <Select
+            id="gender"
             value={state.personalInfo.gender}
             onValueChange={(value) => dispatch({
               type: "UPDATE_PERSONAL_INFO",
@@ -74,17 +76,17 @@ const DoctorPersonalInfoPage = () => {
           </Select>
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="phoneNumber" className="font-bold text-black dark:text-white">Phone number</label>
+          <label htmlFor="phone-number" className="font-bold text-black dark:text-white">Phone number</label>
           <input
             type="text"
-            id="phoneNumber"
+            id="phone-number"
             required
             value={state.personalInfo.phoneNumber}
             onChange={(e) => dispatch({
               type: "UPDATE_PERSONAL_INFO",
               payload: { phoneNumber: e.target.value }
             })}
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
           />
         </div>
         <div className="flex flex-col gap-y-2">
@@ -97,7 +99,7 @@ const DoctorPersonalInfoPage = () => {
               type: "UPDATE_PERSONAL_INFO",
               payload: { bio: e.target.value }
             })}
-            className="resize-none w-full px-4 py-1 border border-slate-700 rounded-lg text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="resize-none w-full px-4 py-1 border border-slate-700 rounded-lg text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
           />
         </div>
         <button

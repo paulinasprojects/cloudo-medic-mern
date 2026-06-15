@@ -34,7 +34,7 @@ export const getPatientProfile = asyncHandler(
 
 export const createPatientProfile = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { address, phoneNumber, bio, dateOfBirth, gender, bloodType, emergencyContactName, emergencyContactNumber, allergies, medicalHistory } = req.body;
+    const { address, phoneNumber, bio, dateOfBirth, gender, bloodType, emergencyContactName, emergencyContactNumber, allergies } = req.body;
     const userId = req.userId;
 
     const user = await User.findOne({
@@ -58,7 +58,6 @@ export const createPatientProfile = asyncHandler(
       emergencyContactName,
       emergencyContactNumber,
       allergies,
-      medicalHistory
     });
 
     SendSuccess(res, profile, "Profile created successfully", 201);

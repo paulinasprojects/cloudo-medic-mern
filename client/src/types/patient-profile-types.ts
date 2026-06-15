@@ -13,7 +13,6 @@ export interface PatientProfileFormData {
     emergencyContactNumber: string;
     emergencyContactName: string;
     allergies: string;
-    medicalHistory: string;
   }
 }
 

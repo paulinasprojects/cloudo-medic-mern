@@ -31,7 +31,6 @@ const PatientSubmitInfoPage = () => {
       emergencyContactNumber: state.medicalInfo.emergencyContactNumber,
       emergencyContactName: state.medicalInfo.emergencyContactName,
       allergies: state.medicalInfo.allergies,
-      medicalHistory: state.medicalInfo.medicalHistory,
     })
   }
 
@@ -100,15 +99,9 @@ const PatientSubmitInfoPage = () => {
             </p>
             <p>{state.medicalInfo.allergies}</p>
           </div>
-          <div className="flex flex-col gap-2">
-            <p>
-              Medical History
-            </p>
-            <p>{state.medicalInfo.medicalHistory}</p>
-          </div>
         </div>
       </div>
-      <button className="p-2 border border-slate-700 rounded-lg transition-colors hover:bg-slate-600 hover:text-slate-100" onClick={() => navigate("/doctor/profile/work-info")}>Back</button>
+      <button className="p-2 border border-slate-700 rounded-lg transition-colors hover:bg-slate-600 hover:text-slate-100" onClick={() => navigate("/patient/profile/medical-info")}>Back</button>
       <button className="p-2 border border-slate-700 rounded-lg transition-colors hover:bg-slate-600 hover:text-slate-100" onClick={handleSubmit} disabled={isPending}>
         {isPending ? "Submitting..." : "Submit"}
       </button>

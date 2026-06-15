@@ -19,7 +19,7 @@ const SelectOption = ({
       onClick={() => setValue(value)}
       className={cn(
         "px-3 py-2 text-sm cursor-pointer transition-colors  mx-0.5",
-        isSelected ? "text-black dark:text-black bg-white" : "text-black dark:text-black bg-white hover:bg-gray-200",
+        isSelected ? "text-black bg-white" : "text-black bg-white hover:bg-gray-200",
         className,
       )}
       {...props}

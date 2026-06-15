@@ -67,20 +67,20 @@ const PatientProfileEdit = () => {
                 type="text"
                 id="address"
                 placeholder="Main street 111"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 disabled={isPending}
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="phoneNumber" className="text-sm font-bold text-black dark:text-white">
+              <label htmlFor="phone-number" className="text-sm font-bold text-black dark:text-white">
                 Phone Number
               </label>
               <input
                 type="text"
                 id="phoneNumber"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 disabled={isPending}
@@ -92,8 +92,8 @@ const PatientProfileEdit = () => {
               </label>
               <input
                 type="text"
-                id="emergencyContactNumber"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                id="emergency-contact-number"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={emergencyContactNumber}
                 onChange={(e) => setEmergencyContactNumber(e.target.value)}
                 disabled={isPending}
@@ -105,8 +105,8 @@ const PatientProfileEdit = () => {
               </label>
               <input
                 type="text"
-                id="emergencyContactName"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                id="emergency-contact-name"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={emergencyContactName}
                 onChange={(e) => setEmergencyContactName(e.target.value)}
                 disabled={isPending}

@@ -29,8 +29,10 @@ import PatientMedicalInfoPage from "@/pages/patient-profile-form/patient-medical
 import PatientSubmitInfoPage from "@/pages/patient-profile-form/patient-submit-info-page";
 import DoctorDashboardGuard from "@/guards/doctor-dashboard-guard";
 import PatientDashboardGuard from "@/guards/patient-dashboard-guard";
-import DoctorFormStepGuard from "./guards/doctor-form-step-guard";
-import PatientFormStepGuard from "./guards/patient-form-step-guard";
+import DoctorFormStepGuard from "@/guards/doctor-form-step-guard";
+import PatientFormStepGuard from "@/guards/patient-form-step-guard";
+import DoctorGuard from "@/guards/doctor-guard";
+import PatientGuard from "@/guards/patient-guard";
 
 function App() {
   const { isAuthenticated, getUser } = useAuthStore();
@@ -61,7 +63,9 @@ function App() {
           <Route element={<DoctorProfileGuard />}>
             <Route path="/doctor/profile" element={<DoctoProfilePage />} />
           </Route>
-          <Route path="/doctor/profile/edit" element={<DoctorProfileEdit />} />
+          <Route element={<DoctorGuard />}>
+            <Route path="/doctor/profile/edit" element={<DoctorProfileEdit />} />
+          </Route>
           <Route element={<DoctorProfileGuard />}>
             <Route element={<DoctorProfileFormLayout />}>
               <Route path="/doctor/profile/personal-info" element={<DoctorPersonalInfoPage />} />
@@ -79,7 +83,9 @@ function App() {
           <Route element={<PatientProfileGuard />}>
             <Route path="/patient/profile" element={<PatientProfilePage />} />
           </Route>
-          <Route path="/patient/profile/edit" element={<PatientProfileEdit />} />
+          <Route element={<PatientGuard />}>
+            <Route path="/patient/profile/edit" element={<PatientProfileEdit />} />
+          </Route>
           <Route element={<PatientProfileGuard />}>
             <Route element={<PatientProfileFormLayout />}>
               <Route path="/patient/profile/personal-info" element={<PatientPersonalInfoPage />} />

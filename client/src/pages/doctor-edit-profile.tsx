@@ -77,7 +77,7 @@ const DoctorProfileEdit = () => {
                 type="text"
                 id="address"
                 placeholder="Main street 111"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 disabled={isPending}
@@ -85,14 +85,14 @@ const DoctorProfileEdit = () => {
             </div>
 
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="phoneNumber" className="text-sm font-bold text-black dark:text-white">Phone number</label>
+              <label htmlFor="phone-number" className="text-sm font-bold text-black dark:text-white">Phone number</label>
               <input
                 type="text"
-                id="phoneNumber"
+                id="phone-number"
                 required
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
               />
             </div>
             <div className="flex flex-col gap-y-2">
@@ -102,7 +102,7 @@ const DoctorProfileEdit = () => {
                 required
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="resize-none w-full px-4 py-1 border border-slate-700 rounded-lg text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="resize-none w-full px-4 py-1 border border-slate-700 rounded-lg text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
               />
             </div>
             <div className="flex flex-col gap-y-2">
@@ -110,17 +110,17 @@ const DoctorProfileEdit = () => {
               <input
                 id="hospital"
                 type="text"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={hospital}
                 onChange={(e) => setHospital(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="consultationFee" className="text-sm font-bold text-black dark:text-white">Consultation Fee</label>
+              <label htmlFor="consultation-fee" className="text-sm font-bold text-black dark:text-white">Consultation Fee</label>
               <input
-                id="consultationFee"
+                id="consultation-fee"
                 type="number"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={consultationFee}
                 onChange={(e) => setConsultationFee(e.target.value === "" ? "" : parseFloat(e.target.value))}
               />

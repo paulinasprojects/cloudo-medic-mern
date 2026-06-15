@@ -97,8 +97,8 @@ export interface Patient {
 }
 
 export enum BloodTypes {
-  "O+" = "O+",
-  "O-"  = "O-",
+  "0+" = "0+",
+  "0-"  = "0-",
   "A+" = "A+",
   "A-" = "A-",
   "B+"= "B+",

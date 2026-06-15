@@ -38,7 +38,6 @@ export const createPatient = async (data: {
   emergencyContactNumber: string;
   emergencyContactName: string;
   allergies: string;
-  medicalHistory: string;
 }) => {
   const response = await api.post<ApiResponse<Patient>>("/patient/profile", data);
   return response.data;

@@ -13,7 +13,6 @@ export const initialFormState: PatientProfileFormData = {
     allergies: "",
     emergencyContactName: "",
     emergencyContactNumber: "",
-    medicalHistory: "",
   }
 };
 
