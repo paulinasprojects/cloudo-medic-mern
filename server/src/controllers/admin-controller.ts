@@ -224,6 +224,16 @@ export const createDoctor = asyncHandler(
       throw new AppError("User not found", 404)
     }
 
+    const profile = await DoctorProfile.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (profile) {
+      throw new AppError("A doctor with this id already have a profile", 400);
+    }
+
     const newDoctor = await DoctorProfile.create({
       userId: userId,
       address,
@@ -367,6 +377,17 @@ export const createPatient = asyncHandler(
 
     if (!user) {
       throw new AppError("User not found", 404)
+    }
+
+
+    const profile = await PatientProfile.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (profile) {
+      throw new AppError("A patient with this id already have a profile", 400);
     }
 
     const newPatient = await PatientProfile.create({
