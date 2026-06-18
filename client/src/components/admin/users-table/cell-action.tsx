@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { User } from "@/types/types";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/common/dropdown-menu";
 import EditUserModal from "../users-page/edit-user-modal";
+import DeleteUserConfirmationModal from "../users-page/delete-user-confirmation-modal";
 
 interface Props {
   data: User;
@@ -11,6 +12,7 @@ interface Props {
 
 export function CellAction({ data }: Props) {
   const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
+  const [isDeletingModalOpen, setIsDeletingModalOpen] = useState<boolean>(false);
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
@@ -23,6 +25,14 @@ export function CellAction({ data }: Props) {
 
   function handleCloseModal() {
     setIsEditingModalOpen(false);
+  }
+
+  function handleDeleteUser() {
+    setIsDeletingModalOpen(true)
+  }
+
+  function handleCloseDeletingModal() {
+    setIsDeletingModalOpen(false);
   }
 
   return (
@@ -43,13 +53,14 @@ export function CellAction({ data }: Props) {
             <Pencil className="h-4 w-4" />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem className="focus:bg-gray-200 focus:text-black dark:focus:bg-white dark:focus:text-black cursor-pointer">
+          <DropdownMenuItem className="focus:bg-gray-200 focus:text-black dark:focus:bg-white dark:focus:text-black cursor-pointer" onClick={handleDeleteUser}>
             <Trash2 className="h-4 w-4" />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <EditUserModal data={data} isOpen={isEditingModalOpen} onClose={handleCloseModal} />
+      <DeleteUserConfirmationModal data={data} isOpen={isDeletingModalOpen} onCancel={handleCloseDeletingModal} />
     </>
   )
 }

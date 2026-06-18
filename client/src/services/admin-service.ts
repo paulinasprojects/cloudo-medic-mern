@@ -58,3 +58,8 @@ export const editUserByAdmin = async (id: string, data: {
   const response = await api.patch<ApiResponse<User>>(`/admin/users/${id}`, data);
   return response.data;
 }
+
+export const deleteUserByAdmin = async (id: string) => {
+  const response = await api.delete<ApiResponse<null>>(`/admin/users/${id}`)
+  return response.data;
+}
