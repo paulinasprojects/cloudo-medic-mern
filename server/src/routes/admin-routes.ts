@@ -39,20 +39,20 @@ router.use(requireAdmin);
 {/* Users Routes */}
 router.post("/users", registerUserByAdmin)
 router.get("/users", getAllUsers);
-router.post("/users/:id", updateUserByAdmins);
+router.patch("/users/:id", updateUserByAdmins);
 router.delete("/users/:id", deleteUserByAdmins);
 
 {/* Doctors Routes */}
 router.get("/doctors", getAllDoctors);
 router.post("/doctors", createDoctor)
-router.post("/doctors/:id", updateDoctorProfileByAdmin);
+router.patch("/doctors/:id", updateDoctorProfileByAdmin);
 router.delete("/doctors/:id", deleteDoctorProfileByAdmin);
 
 
 {/* Patients Routes */}
 router.get("/patients", getAllPatients);
 router.post("/patients", createPatient);
-router.post("/patients/:id", updatePatientProfileByAdmin);
+router.patch("/patients/:id", updatePatientProfileByAdmin);
 router.delete("/patients/:id", deletePatientProfileByAdmin);
 
 {/* Appointments Routes */}
@@ -61,7 +61,7 @@ router.get("/appointments", getAllAppointmentsByAdmins);
 router.get("/appointments/doctor/:doctorId", getAppointmentsByDoctorId);
 router.get("/appointments/patient/:patientId", getAppointmentsByPatientId);
 router.get("/appointments/:id", getAppointmentByIdByAdmins);
-router.post("/appointments/:id", updateAppointmentByAdmins);
+router.patch("/appointments/:id", updateAppointmentByAdmins);
 router.delete("/appointments/:id", deleteAppointmentByAdmins);
 
 {/* Prescriptions Routes */}
@@ -69,7 +69,7 @@ router.get("/prescriptions", getAllPrescriptionsByAdmins);
 router.get("/prescriptions/:id", getPrescriptionByIdByAdmins);
 router.get("/prescriptions/patient/:patientId", getPrescriptionsByPatientId);
 router.get("/prescriptions/doctor/:doctorId", getPrescriptionsByDoctorId);
-router.post("/prescriptions/:id", updatePrescriptionByAdmins);
+router.patch("/prescriptions/:id", updatePrescriptionByAdmins);
 router.delete("/prescriptions/:id", deletePrescriptionByAdmins);
 
 {/* Medical Tests Routes */}

@@ -1,49 +1,45 @@
-import { Select, SelectContent, SelectOption, SelectTrigger } from "@/components/common/select";
-import { registerUserByAdmin } from "@/services/admin-service";
-import { UserRole } from "@/types/types";
-import { useMutation } from "@tanstack/react-query";
-import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
 import { toast } from "sonner";
+import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { User } from "@/types/types";
+import { editUserByAdmin } from "@/services/admin-service";
 
 interface Props {
   onSuccess: () => void;
+  data: User;
 }
 
 
-export default function AddUserForm({ onSuccess }: Props) {
-  const [firstName, setFirstName] = useState<string>("")
-  const [lastName, setLastName] = useState<string>("")
-  const [email, setEmail] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
-  const [role, setRole] = useState<string | UserRole>("");
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { mutate: registerUserMutation, isPending, error } = useMutation({
-    mutationFn: registerUserByAdmin,
+
+export default function EditUserForm({ onSuccess, data }: Props) {
+  const [firstName, setFirstName] = useState(data.firstName ?? "");
+  const [lastName, setLastName] = useState(data.lastName ?? "");
+  const [email, setEmail] = useState(data.email ?? "");
+  const queryClient = useQueryClient();
+
+  const { mutate: editUserMutation, isPending, error } = useMutation({
+
+    mutationFn: (userData: {
+      email: string; firstName: string, lastName: string
+    }) => editUserByAdmin(data.id, userData),
     onSuccess: () => {
-      toast.success("User created successfully");
+      toast.success("User updated successfully");
+      queryClient.invalidateQueries({ queryKey: ["user"] })
       onSuccess();
     },
     onError: () => {
-      toast.error("Failed to create a user")
+      toast.error("Failed to update the user")
     }
   })
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    registerUserMutation({
+    editUserMutation({
       email: email,
-      password: password,
       firstName: firstName,
       lastName: lastName,
-      role: role,
     });
   }
-
-  function togglePasswordVisibility() {
-    setShowPassword((prev) => !prev)
-  };
-
 
   return (
     <div className="col-span-3 sm:col-span-3 flex flex-col gap-6 p-6">
@@ -94,60 +90,15 @@ export default function AddUserForm({ onSuccess }: Props) {
             className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="text-sm font-medium text-black dark:text-white">Password</label>
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              disabled={isPending}
-              required
-              className="w-full px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm  placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
-            />
-            <button
-              type="button"
-              onClick={togglePasswordVisibility}
-              disabled={isPending}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {showPassword ? (
-                <EyeOff className="size-5" />
-              ) : (
-                <Eye className="size-5" />
-              )}
-            </button>
-          </div>
-        </div>
-        <div className="flex flex-col gap-2 mt-2">
-          <label htmlFor="role" className="text-sm font-medium text-black dark:text-white">Patient, Doctor or Admin?</label>
-          <Select
-            id="role"
-            value={role}
-            onValueChange={(value) => setRole(value as UserRole)}
-          >
-            <SelectTrigger placeholder="Select role" />
-            <SelectContent>
-              {Object.values(UserRole).map((role) => (
-                <SelectOption value={role} key={role}>
-                  {role}
-                </SelectOption>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
         <button
           type="submit"
           disabled={isPending}
           className="px-6 py-3 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isPending ? (
-            "Creating..."
+            "Updating..."
           ) : (
-            "Create"
+            "Update"
           )}
         </button>
       </form>
