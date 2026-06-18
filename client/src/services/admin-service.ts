@@ -1,4 +1,5 @@
-import { ApiResponse, Appointment, Doctor, Doctors, Patient, Prescription, UsersTypes } from "../types/types";
+import { SignupRequest } from "@/types/auth-types";
+import { ApiResponse, Appointment, Doctor, Doctors, Patient, Prescription, User, UsersTypes } from "../types/types";
 import api from "./api";
 
 export const getAllUsers = async () => {
@@ -41,5 +42,10 @@ export const createDoctor = async (data: {
   yearsOfExperience: number;
 }) => {
   const response = await api.post<ApiResponse<Doctor>>("/admin/doctors", data);
+  return response.data;
+}
+
+export const registerUserByAdmin = async (data: SignupRequest) => {
+  const response = await api.post<ApiResponse<User>>("/admin/users", data);
   return response.data;
 }

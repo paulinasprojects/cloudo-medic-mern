@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Plus, UsersIcon } from "lucide-react";
 import { useGetAllUsers, useGetAllDoctors, useGetAllPatients } from "@/hooks/admins/admins";
 import { UsersDataTable } from "@/components/admin/users-table/users-data-table";
 import { columns } from "@/components/admin/users-table/columns";
+import AddUsersModal from "@/components/admin/users-page/add-users-modal";
 
 const AdminUsersPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { data: users, isLoading: isUsersLoading, isError: isUsersError, error: errorUsers } = useGetAllUsers();
   const { data: doctors, isLoading: isDoctorsLoading, isError: isDoctorsError, error: errorDoctors } = useGetAllDoctors();
   const { data: patients, isLoading: isPatientsLoading, isError: isPatientsError, error: errorPatients } = useGetAllPatients();
@@ -16,13 +19,21 @@ const AdminUsersPage = () => {
   if (isError) return <div>Error {error?.message}</div>
   if (!users?.data || !doctors?.data || !patients?.data) return <div>Not found</div>
 
+  function handleAddNewUser() {
+    setIsModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false);
+  }
+
 
   return (
     <div className="py-10">
       <div className="py-8 flex items-center justify-between">
         <h1 className="font-medium  text-2xl xl:text-[42px]">Users Overview</h1>
         <div className="flex gap-2 items-center">
-          <button className="inline-flex items-center gap-2 text-[16px] bg-black text-white dark:bg-white dark:text-black hover:bg-black/65 dark:hover:bg-white/90 transition-colors duration-500 max-sm:py-2 sm:py-4 px-3 rounded-full">
+          <button onClick={handleAddNewUser} className="inline-flex items-center gap-2 text-[16px] bg-black text-white dark:bg-white dark:text-black hover:bg-black/65 dark:hover:bg-white/90 transition-colors duration-500 max-sm:py-2 sm:py-4 px-3 rounded-full">
             <Plus className="size-5" />
             Add new User
           </button>
@@ -33,7 +44,7 @@ const AdminUsersPage = () => {
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-2">
               <div className="p-2.5 rounded-full bg-[#191b27]">
-                <UsersIcon className="size-6" />
+                <UsersIcon className="size-6 text-white" />
               </div>
               <span className="text-[20px]">Total Users</span>
             </div>
@@ -47,7 +58,7 @@ const AdminUsersPage = () => {
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-2">
               <div className="p-2.5 rounded-full bg-[#191b27]">
-                <UsersIcon className="size-6" />
+                <UsersIcon className="size-6 text-white" />
               </div>
               <span className="text-[20px]">Total Doctors</span>
             </div>
@@ -61,7 +72,7 @@ const AdminUsersPage = () => {
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-2">
               <div className="p-2.5 rounded-full bg-[#191b27]">
-                <UsersIcon className="size-6" />
+                <UsersIcon className="size-6 text-white" />
               </div>
               <span className="text-[20px]">Total Patients</span>
             </div>
@@ -73,6 +84,7 @@ const AdminUsersPage = () => {
         </div>
       </div>
       <UsersDataTable columns={columns} data={users.data} />
+      <AddUsersModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
   )
 }

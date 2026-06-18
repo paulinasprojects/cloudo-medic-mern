@@ -23,6 +23,25 @@ const allIncludes = [
   },
 ];
 
+export const registerUserByAdmin = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { email, password, firstName, lastName, role } = req.body;
+  
+    if (!email || !password) {
+      throw new AppError("Please provide an email and password", 400)
+    }
+
+    const user = await User.create({
+      email: email.trim().toLowerCase(),
+      password,
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      role: role,
+    });
+
+    SendSuccess(res, user.toSafeJSON(), "User registered successfuly", 201);
+  }
+)
 
 export const getAllDoctors = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

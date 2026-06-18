@@ -12,7 +12,7 @@ export default function SignupForm() {
   const [lastName, setLastName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
-  const [role, setRole] = useState<UserRole>(UserRole.PATIENT);
+  const [role, setRole] = useState<string | UserRole>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -126,7 +126,7 @@ export default function SignupForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-6 py-3 dark:bg-white dark:text-black bg-black text-white rounded-full transition-colors cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-3 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               "Signing Up"
