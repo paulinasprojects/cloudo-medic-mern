@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Plus, UsersIcon } from "lucide-react";
 import { useGetAllUsers, useGetAllDoctors, useGetAllPatients } from "@/hooks/admins/admins";
-import { UsersDataTable } from "@/components/admin/users-table/users-data-table";
-import { columns } from "@/components/admin/users-table/columns";
-import AddUsersModal from "@/components/admin/users-page/add-users-modal";
+import AddUsersModal from "@/components/admin/users-page/users-actions/add-users-modal";
+import { UsersDataTable } from "@/components/admin/users-page/users-table/users-data-table";
+import { columns } from "@/components/admin/users-page/users-table/columns";
 
 const AdminUsersPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

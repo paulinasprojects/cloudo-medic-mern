@@ -1,10 +1,10 @@
-import { Select, SelectContent, SelectOption, SelectTrigger } from "@/components/common/select";
-import { registerUserByAdmin } from "@/services/admin-service";
-import { UserRole } from "@/types/types";
 import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { UserRole } from "@/types/types";
+import { Select, SelectContent, SelectOption, SelectTrigger } from "@/components/common/select";
+import { registerUserByAdmin } from "@/services/admin-service";
 
 interface Props {
   onSuccess: () => void;

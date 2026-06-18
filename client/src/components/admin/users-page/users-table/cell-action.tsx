@@ -3,8 +3,9 @@ import { CopyIcon, Ellipsis, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { User } from "@/types/types";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/common/dropdown-menu";
-import EditUserModal from "../users-page/edit-user-modal";
-import DeleteUserConfirmationModal from "../users-page/delete-user-confirmation-modal";
+import EditUserModal from "../users-actions/edit-user-modal";
+import DeleteUserConfirmationModal from "../users-actions/delete-user-confirmation-modal";
+
 
 interface Props {
   data: User;
