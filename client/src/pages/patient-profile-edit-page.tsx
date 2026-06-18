@@ -29,7 +29,7 @@ const PatientProfileEdit = () => {
   const { mutate: updatePatientMutation, error, isPending } = useMutation({
     mutationFn: updatePatient,
     onSuccess: () => {
-      toast.success("Profile updatd successfully")
+      toast.success("Profile updated successfully")
     },
     onError: () => {
       toast.error("Failed to update your profile")
@@ -66,8 +66,9 @@ const PatientProfileEdit = () => {
               <input
                 type="text"
                 id="address"
-                placeholder="Main street 111"
+                placeholder="Main Street 111"
                 className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                required
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 disabled={isPending}
@@ -79,41 +80,47 @@ const PatientProfileEdit = () => {
               </label>
               <input
                 type="text"
-                id="phoneNumber"
+                id="phone-number"
                 className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                required
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 disabled={isPending}
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="emergencyContactNumber" className="text-sm font-bold text-black dark:text-white">
+              <label htmlFor="emergency-contact-number" className="text-sm font-bold text-black dark:text-white">
                 Emergency Contact Number
               </label>
               <input
                 type="text"
                 id="emergency-contact-number"
                 className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                required
                 value={emergencyContactNumber}
                 onChange={(e) => setEmergencyContactNumber(e.target.value)}
                 disabled={isPending}
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="emergencyContactName" className="text-sm font-bold text-black dark:text-white">
+              <label htmlFor="emergency-contact-name" className="text-sm font-bold text-black dark:text-white">
                 Emergency Contact Name
               </label>
               <input
                 type="text"
                 id="emergency-contact-name"
                 className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                required
                 value={emergencyContactName}
                 onChange={(e) => setEmergencyContactName(e.target.value)}
                 disabled={isPending}
               />
             </div>
           </div>
-          <button type="submit" disabled={isPending} className="px-6 py-3 rounded-full dark:bg-white dark:text-black bg-black hover:bg-black/80 dark:hover:bg-white/80 text-white  transition-colors cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+          <button
+            type="submit"
+            disabled={isPending}
+            className="px-6 py-3 rounded-full dark:bg-white dark:text-black bg-black hover:bg-black/80 dark:hover:bg-white/80 text-white  transition-colors cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed">
             {isPending ? "Submitting..." : "Submit"}
           </button>
         </form>

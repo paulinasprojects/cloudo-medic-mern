@@ -26,7 +26,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
     <header className=" xl:px-12.5 xl:py-8.5 py-6 px-5">
       <div className="flex items-center gap-4 justify-between">
         <AdminMobileMenu />
-        <nav className="bg-white dark:bg-[#0e121b] px-3 py-4 rounded-full lg:block hidden">
+        <nav className="bg-white dark:bg-[#0e121b] px-3 py-4 rounded-full xl:block hidden">
           <div className="flex gap-6 items-center">
             {theme === "dark" ? (
               <CloudoLogoLight width={150} height={150} />

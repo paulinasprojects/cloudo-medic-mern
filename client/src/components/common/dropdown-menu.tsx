@@ -1,6 +1,7 @@
 import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui"
 import { cn } from '@/utils/utils';
 import React from 'react';
+import { CheckIcon } from "lucide-react";
 
 function DropdownMenu({
   ...props
@@ -47,7 +48,7 @@ function DropdownMenuContent({
         sideOffset={sideOffset}
         data-slot="dropdown-menu-content"
         align={align}
-        className={cn("z-50 max-h-(--radix-dropdown-menu-content-available-height) w-(--radix-dropdown-menu-trigger-width) min-w-32 origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto bg-black p-1 text-white shadow-md ring-1 ring-black/10 duration-100 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ", className)}
+        className={cn("z-50 max-h-(--radix-dropdown-menu-content-available-height) w-(--radix-dropdown-menu-trigger-width) min-w-32 origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto bg-white dark:bg-black p-1 text-black dark:text-white shadow-md ring-1 ring-black/10 duration-100 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ", className)}
         {...props}
       />
     </DropdownMenuPrimitive.Portal>
@@ -83,6 +84,39 @@ function DropdownMenuItem({
   )
 }
 
+function DropdownMenuCheckboxItem({
+  className,
+  children,
+  checked,
+  inset,
+  ...props
+}: React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem> & {
+  inset?: boolean
+}) {
+  return (
+    <DropdownMenuPrimitive.CheckboxItem
+      data-slot="dropdown-menu-checkbox-item"
+      data-inset={inset}
+      className={cn(
+        "relative flex cursor-default items-center gap-4 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none hover:bg-slate-200 dark:hover:text-black  data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      checked={checked}
+      {...props}
+    >
+      <span
+        className="pointer-events-none absolute right-2 flex items-center justify-center"
+        data-slot="dropdown-menu-checkbox-item-indicator"
+      >
+        <DropdownMenuPrimitive.ItemIndicator>
+          <CheckIcon />
+        </DropdownMenuPrimitive.ItemIndicator>
+      </span>
+      {children}
+    </DropdownMenuPrimitive.CheckboxItem>
+  )
+}
+
 
 
 export {
@@ -91,5 +125,6 @@ export {
   DropdownMenuPortal,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem
 }

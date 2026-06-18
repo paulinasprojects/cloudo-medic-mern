@@ -76,7 +76,8 @@ const DoctorProfileEdit = () => {
               <input
                 type="text"
                 id="address"
-                placeholder="Main street 111"
+                placeholder="Main Street 111"
+                required
                 className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -93,6 +94,7 @@ const DoctorProfileEdit = () => {
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                disabled={isPending}
               />
             </div>
             <div className="flex flex-col gap-y-2">
@@ -103,6 +105,7 @@ const DoctorProfileEdit = () => {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 className="resize-none w-full px-4 py-1 border border-slate-700 rounded-lg text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                disabled={isPending}
               />
             </div>
             <div className="flex flex-col gap-y-2">
@@ -113,6 +116,7 @@ const DoctorProfileEdit = () => {
                 className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={hospital}
                 onChange={(e) => setHospital(e.target.value)}
+                disabled={isPending}
               />
             </div>
             <div className="flex flex-col gap-y-2">
@@ -123,10 +127,15 @@ const DoctorProfileEdit = () => {
                 className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
                 value={consultationFee}
                 onChange={(e) => setConsultationFee(e.target.value === "" ? "" : parseFloat(e.target.value))}
+                disabled={isPending}
               />
             </div>
           </div>
-          <button type="submit" disabled={isPending} className="px-6 py-3 rounded-full dark:bg-white dark:text-black bg-black hover:bg-black/80 dark:hover:bg-white/80 text-white  transition-colors cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+          <button
+            type="submit"
+            disabled={isPending}
+            className="px-6 py-3 rounded-full dark:bg-white dark:text-black bg-black hover:bg-black/80 dark:hover:bg-white/80 text-white  transition-colors cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             {isPending ? "Submitting..." : "Submit"}
           </button>
         </form>

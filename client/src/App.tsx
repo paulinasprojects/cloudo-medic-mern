@@ -33,6 +33,7 @@ import DoctorFormStepGuard from "@/guards/doctor-form-step-guard";
 import PatientFormStepGuard from "@/guards/patient-form-step-guard";
 import DoctorGuard from "@/guards/doctor-guard";
 import PatientGuard from "@/guards/patient-guard";
+import AdminUsersPage from "@/pages/admin-users-page";
 
 function App() {
   const { isAuthenticated, getUser } = useAuthStore();
@@ -54,6 +55,7 @@ function App() {
       <Route element={<AuthRoute />}>
         <Route element={<RoleRoute allowedRoles={["admin"]} />}>
           <Route path="/admin" element={<AdminDashboardLayout><AdminPage /></AdminDashboardLayout>} />
+          <Route path="/admin/users" element={<AdminDashboardLayout><AdminUsersPage /></AdminDashboardLayout>} />
           <Route path="/admin/doctors" element={<AdminDashboardLayout><AdminDoctorsPage /></AdminDashboardLayout>} />
         </Route>
         <Route element={<RoleRoute allowedRoles={["doctor"]} />}>
