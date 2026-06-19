@@ -5,15 +5,15 @@ export interface DoctorProfileFormData {
     userId?: string;
     address: string;
     dateOfBirth: string;
-    gender: Gender | "";
+    gender: Gender | "" | string;
     phoneNumber: string;
     bio: string;
   },
   workInfo: {
-    education: Education | "";
+    education: Education | "" | string;
     specialization: string;
     hospital: string;
-    doctorLevel: DoctorLevel | "";
+    doctorLevel: DoctorLevel | "" | string;
     licenseNumber: string;
     consultationFee: number | string;
     yearsOfExperience: number | string;

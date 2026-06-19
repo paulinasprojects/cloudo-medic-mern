@@ -256,12 +256,12 @@ export const createDoctor = asyncHandler(
 
 export const updateDoctorProfileByAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { address, phoneNumber, bio, dateOfBirth, doctorLevel, education, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
+    const { userId, address, phoneNumber, bio, dateOfBirth, doctorLevel, education, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
     const { id } = req.params;
-     const userId = req.userId;
+     const userAdmin = req.userId;
      const user = await User.findOne({
       where: {
-        id: userId
+        id: userAdmin
       }
     });
 
@@ -275,9 +275,14 @@ export const updateDoctorProfileByAdmin = asyncHandler(
         id
       },
     });
+    
 
     if (!profile) {
       throw new AppError("Doctor not found", 404);
+    }
+
+    if (userId) {
+      profile.userId = userId;
     }
 
     if (address) {
