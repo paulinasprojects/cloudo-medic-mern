@@ -82,3 +82,8 @@ export const editDoctorByAdmin = async (id: string, data: {
   const response = await api.patch<ApiResponse<Doctor>>(`/admin/doctors/${id}`, data);
   return response.data;
 }
+
+export const deleteDoctorByAdmin = async (id: string) => {
+  const response = await api.delete<ApiResponse<null>>(`/admin/doctors/${id}`)
+  return response.data;
+}

@@ -39,7 +39,7 @@ export default function EditDoctorSubmitInfoStep({
     }) => editDoctorByAdmin(doctorId, doctorData),
     onSuccess: () => {
       toast.success("Doctor updated successfully");
-      queryClient.invalidateQueries({ queryKey: ["doctors"] })
+      queryClient.invalidateQueries({ queryKey: ["doctor"] })
       onSuccess();
     },
     onError: () => {
