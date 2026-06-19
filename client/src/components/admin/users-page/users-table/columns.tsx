@@ -1,10 +1,10 @@
 import { ArrowUpDown } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
-import { UsersTypes } from "@/types/types";
+import { User } from "@/types/types";
 import { formatDate } from "@/utils/utils";
 import { CellAction } from "./cell-action";
 
-export const columns: ColumnDef<UsersTypes>[] = [
+export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "id",
     header: "Id",

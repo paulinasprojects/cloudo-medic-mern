@@ -1,11 +1,15 @@
+import { useState } from "react";
 import { Doctor01Icon, Calendar03Icon, PrescriptionsIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Plus } from "lucide-react";
 import { useGetAllAppointments, useGetAllDoctors, useGetAllPrescriptions } from "@/hooks/admins/admins";
-import { DoctorsDataTable } from "@/components/admin/doctors-table/doctors-data-table";
-import { columns } from "@/components/admin/doctors-table/columns";
+import { DoctorsDataTable } from "@/components/admin/doctors-page/doctors-table/doctors-data-table";
+import { columns } from "@/components/admin/doctors-page/doctors-table/columns";
+import AddDoctorsModal from "@/components/admin/doctors-page/doctors-actions/add-doctors-modal";
 
 const AdminDoctorsPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const { data: doctors, isLoading: isDoctorsLoading, isError: isDoctorsError, error: errorDoctors } = useGetAllDoctors();
 
   const { data: appointments, isLoading: isAppointmentsLoading, isError: isAppointmentsError, error: errorAppontments } = useGetAllAppointments();
@@ -20,12 +24,22 @@ const AdminDoctorsPage = () => {
   if (isError) return <div>Error {error?.message}</div>
   if (!doctors?.data || !appointments?.data || !prescriptions?.data) return <div>Not found</div>
 
+
+  function handleAddNewDoctor() {
+    setIsModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false);
+  }
+
+
   return (
     <div className="py-10">
       <div className="py-8 flex items-center justify-between">
         <h1 className="font-medium text-2xl xl:text-[42px]">Doctors Overview</h1>
         <div className="flex gap-2 items-center">
-          <button className="inline-flex items-center gap-2 text-[16px] bg-black text-white dark:bg-white dark:text-black hover:bg-black/65 dark:hover:bg-white/90 transition-colors duration-500 max-sm:py-2 sm:py-4 px-3 rounded-full">
+          <button onClick={handleAddNewDoctor} className="inline-flex items-center gap-2 text-[16px] bg-black text-white dark:bg-white dark:text-black hover:bg-black/65 dark:hover:bg-white/90 transition-colors duration-500 max-sm:py-2 sm:py-4 px-3 rounded-full">
             <Plus className="size-5" />
             Add new Doctor
           </button>
@@ -76,6 +90,7 @@ const AdminDoctorsPage = () => {
         </div>
       </div>
       <DoctorsDataTable columns={columns} data={doctors.data} />
+      <AddDoctorsModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div >
   )
 }

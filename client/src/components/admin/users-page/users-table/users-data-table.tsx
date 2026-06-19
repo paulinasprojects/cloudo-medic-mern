@@ -152,14 +152,14 @@ export function UsersDataTable<TData, TValue>({
           <button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="rounded-md px-2 py-2 border hover:bg-muted/50 transition-colors duration-200"
+            className="rounded-md px-2 py-2 border hover:bg-white/5 transition-colors duration-200"
           >
             <ChevronLeft className="size-3" />
           </button>
           <button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className="rounded-md px-2 py-2 border hover:bg-muted/50 transition-colors duration-200"
+            className="rounded-md px-2 py-2 border hover:bg-white/5 transition-colors duration-200"
           >
             <ChevronRight className="size-3" />
           </button>

@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useDoctorProfileFormContext } from "@/context/doctor-profile-form-context";
+import { usePatientProfileFormContext } from "@/context/patient-profile-form-context";
 
 interface Props {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ const PatientFormStepGuard = ({
   requiredStep
 }: Props) => {
 
-  const { state } = useDoctorProfileFormContext();
+  const { state } = usePatientProfileFormContext();
 
   const isPersonalInfoCompleted =
     state.personalInfo.address !== "" &&

@@ -2,6 +2,7 @@ import { DoctorProfileFormData, DoctorProfileFormAction } from "@/types/doctor-p
 
 export const initialFormState: DoctorProfileFormData = {
   personalInfo: {
+    userId: undefined,
     address:"",
     dateOfBirth: "",
     gender: "",

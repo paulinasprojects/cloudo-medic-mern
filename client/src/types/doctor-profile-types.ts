@@ -2,6 +2,7 @@ import { DoctorLevel, Education, Gender } from "./types";
 
 export interface DoctorProfileFormData {
   personalInfo: {
+    userId?: string;
     address: string;
     dateOfBirth: string;
     gender: Gender | "";
