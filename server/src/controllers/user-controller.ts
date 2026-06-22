@@ -1,8 +1,9 @@
-import { Response, Request, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { User } from "../models";
 import { generateToken } from "../utils/token-hepers";
 import { asyncHandler, SendSuccess } from "../utils/response-helpers";
 import { AppError } from "../middleware/error-handler";
+import { deleteCloudinaryImage } from "../utils/cloudinary-upload";
 
 export const registerUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -56,6 +57,67 @@ export const login = asyncHandler(
     }
 
     SendSuccess(res, authResponse, "Logged in succesfully", 200);
+  }
+)
+
+export const uploadUserImage = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+
+    if (!req.file) {
+      throw new AppError("No image file provided", 400);
+    }
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+    
+    if (user.image) {
+      await deleteCloudinaryImage(user.image)
+    }
+
+    user.image = req.file.path;
+    await user.save();
+
+    SendSuccess(res, { image: user.image }, "Image updated successfully")
+  }
+)
+
+export const deleteUserImage = asyncHandler(
+  async (req: Request, res: Response) => {
+    const userId = req.userId;
+
+    if (!req.file) {
+      throw new AppError("No image file provided", 400);
+    }
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    if (!user.image) {
+      throw new AppError("The user doesn't have an image to delete", 404)
+    }
+
+    await deleteCloudinaryImage(user.image);
+
+    user.image = null;
+    await user.save();
+
+    SendSuccess(res, null, "Image deleted successfully");
+
   }
 )
 

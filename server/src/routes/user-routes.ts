@@ -1,11 +1,14 @@
 import { Router } from "express";
-import { login, registerUser, updateUser, getUser } from "../controllers/user-controller";
+import { login, registerUser, updateUser, getUser, uploadUserImage, deleteUserImage } from "../controllers/user-controller";
 import { requireAuth } from "../middleware/auth-middleware";
+import { cloudinaryUpload } from "../utils/cloudinary-upload";
 
 const router = Router();
 
 router.post("/signup", registerUser);
 router.post("/login", login);
+router.post("/user/image", requireAuth, cloudinaryUpload.single("image"), updateUser);
+router.delete("/user/image", requireAuth, deleteUserImage);
 router.get("/user", requireAuth, getUser);
 router.post("/user", requireAuth, updateUser);
 
