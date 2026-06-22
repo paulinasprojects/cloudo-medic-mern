@@ -21,7 +21,7 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  image: string;
+  image: string | null;
   role: string;
   createdAt: string;
   updatedAt: string;

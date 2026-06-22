@@ -34,6 +34,8 @@ import PatientFormStepGuard from "@/guards/patient-form-step-guard";
 import DoctorGuard from "@/guards/doctor-guard";
 import PatientGuard from "@/guards/patient-guard";
 import AdminUsersPage from "@/pages/admin-users-page";
+import SettingsPage from "./pages/settings-page";
+import AdminPatientsPage from "./pages/admin-patients-page";
 
 function App() {
   const { isAuthenticated, getUser } = useAuthStore();
@@ -48,6 +50,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomeLayout><Homepage /></HomeLayout>} />
+      <Route path="/settings" element={<HomeLayout><SettingsPage /></HomeLayout>} />
       <Route element={<PublicRoute />}>
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -57,6 +60,7 @@ function App() {
           <Route path="/admin" element={<AdminDashboardLayout><AdminPage /></AdminDashboardLayout>} />
           <Route path="/admin/users" element={<AdminDashboardLayout><AdminUsersPage /></AdminDashboardLayout>} />
           <Route path="/admin/doctors" element={<AdminDashboardLayout><AdminDoctorsPage /></AdminDashboardLayout>} />
+          <Route path="/admin/patients" element={<AdminDashboardLayout><AdminPatientsPage /></AdminDashboardLayout>} />
         </Route>
         <Route element={<RoleRoute allowedRoles={["doctor"]} />}>
           <Route element={<DoctorDashboardGuard />}>

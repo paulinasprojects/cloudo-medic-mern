@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronRight, Moon, Sun } from "lucide-react";
+import { ChevronDown, ChevronRight, Moon, Settings, Sun } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/auth-store";
 import { User } from "@/types/types";
@@ -56,6 +56,12 @@ export default function Header({ user, isAuthenticated }: Props) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
+                  <Link to="/settings" className="flex w-full items-center justify-between">
+                    Settings
+                    <Settings />
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                   <button
                     onClick={handleLogout}
                     className="rounded-full transition-colors cursor-pointer">
@@ -90,6 +96,12 @@ export default function Header({ user, isAuthenticated }: Props) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
+                  <Link to="/settings" className="flex w-full items-center justify-between">
+                    Settings
+                    <Settings />
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                   <button
                     onClick={handleLogout}
                     className="rounded-full transition-colors cursor-pointer">
@@ -121,6 +133,12 @@ export default function Header({ user, isAuthenticated }: Props) {
                   <Link to="/doctor" className="flex w-full items-center justify-between">
                     Go to Dashboard
                     <ChevronRight />
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
+                  <Link to="/settings" className="flex w-full items-center justify-between">
+                    Settings
+                    <Settings />
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
