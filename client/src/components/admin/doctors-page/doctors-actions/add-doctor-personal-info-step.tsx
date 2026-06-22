@@ -91,7 +91,7 @@ export default function AddDoctorPersonalInfoStep({ state, dispatch, onNext }: P
             </SelectContent>
           </Select>
         </div>
-        <div className="flex flex-col gap-y">
+        <div className="flex flex-col gap-y-2">
           <label
             htmlFor="phone-number"
             className="text-sm font-bold dark:text-white text-black"

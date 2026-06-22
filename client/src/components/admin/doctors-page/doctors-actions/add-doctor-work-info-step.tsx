@@ -140,7 +140,6 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
           <label htmlFor="years-of-experience" className="font-bold text-black dark:text-white text-[12px]">
             Years of experience
           </label>
-        </div>
         <input
           id="years-of-experience"
           type="number"
@@ -151,6 +150,7 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
             payload: { yearsOfExperience: e.target.value }
           })}
         />
+        </div>
         <div className="flex *:basis-1/2 gap-4">
           <button
             type="button"

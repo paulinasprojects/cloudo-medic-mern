@@ -2,14 +2,16 @@ import { BloodTypes, Gender } from "./types";
 
 export interface PatientProfileFormData {
   personalInfo: {
+    userId?: string;
     address: string;
     dateOfBirth: string;
-    gender: Gender | "";
+    gender: Gender | "" | string;
     phoneNumber: string;
     bio: string;
   },
   medicalInfo: {
-    bloodType: BloodTypes | "";
+    bloodType: BloodTypes | "" | string;
+    medicalHistory?: string;
     emergencyContactNumber: string;
     emergencyContactName: string;
     allergies: string;

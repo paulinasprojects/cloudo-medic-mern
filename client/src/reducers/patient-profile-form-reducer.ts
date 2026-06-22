@@ -2,6 +2,7 @@ import { PatientProfileFormData, PatientProfileFormAction } from "@/types/patien
 
 export const initialFormState: PatientProfileFormData = {
   personalInfo: {
+    userId: undefined,
     address: "",
     dateOfBirth: "",
     gender: "",
@@ -11,6 +12,7 @@ export const initialFormState: PatientProfileFormData = {
   medicalInfo: {
     bloodType: "",
     allergies: "",
+    medicalHistory: "",
     emergencyContactName: "",
     emergencyContactNumber: "",
   }

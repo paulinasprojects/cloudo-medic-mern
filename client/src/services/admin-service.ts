@@ -45,6 +45,44 @@ export const createDoctor = async (data: {
   return response.data;
 }
 
+export const createPatient = async (data: {
+  userId: string;
+  address: string;
+  phoneNumber: string;
+  bio: string;
+  dateOfBirth: string;
+  gender: string;
+  bloodType: string;
+  allergies: string;
+  emergencyContactName: string;
+  emergencyContactNumber: string;
+}) => {
+  const response = await api.post<ApiResponse<Patient>>("/admin/patients", data);
+  return response.data;
+}
+
+export const editPatientByAdmin = async (id: string, data: {
+  userId: string;
+  address: string;
+  phoneNumber: string;
+  bio: string;
+  dateOfBirth: string;
+  gender: string;
+  bloodType: string;
+  allergies: string;
+  medicalHistory: string;
+  emergencyContactName: string;
+  emergencyContactNumber: string;
+}) => {
+  const response = await api.patch<ApiResponse<Patient>>(`/admin/patients/${id}`, data);
+  return response.data;
+}
+
+export const deletePatientByAdmin = async (id: string) => {
+  const response = await api.delete<ApiResponse<null>>(`/admin/patinets/${id}`)
+  return response.data;
+}
+
 export const registerUserByAdmin = async (data: SignupRequest) => {
   const response = await api.post<ApiResponse<User>>("/admin/users", data);
   return response.data;
