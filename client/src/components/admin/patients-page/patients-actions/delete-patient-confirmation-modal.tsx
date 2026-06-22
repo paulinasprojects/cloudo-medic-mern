@@ -1,34 +1,35 @@
-import { toast } from "sonner";
-import { Doctor } from "@/types/types";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteDoctorByAdmin } from "@/services/admin-service";
+import { toast } from "sonner"
+import { Patient } from "@/types/types"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { deletePatientByAdmin } from "@/services/admin-service"
+
 
 interface Props {
   isOpen: boolean;
   onCancel: () => void;
-  data: Doctor;
+  data: Patient;
 }
 
-export default function DeleteDoctorConfirmationModal({
+export default function DeletePatientConfirmationModal({
   isOpen,
   onCancel,
-  data
+  data,
 }: Props) {
+
   const queryClient = useQueryClient();
   const { mutate: handleDelete, isPending } = useMutation({
-    mutationFn: () => deleteDoctorByAdmin(data.id),
+    mutationFn: () => deletePatientByAdmin(data.id),
     onSuccess: () => {
-      toast.success("Doctor deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["doctor"] });
+      toast.success("Patient deleted successfully")
+      queryClient.invalidateQueries({ queryKey: ["patient"] });
       handleClose();
     },
     onError: () => {
-      toast.error("Failed to delete doctor")
+      toast.error("Failed to delete patient")
     }
   })
 
   if (!isOpen || !data) return null;
-
 
   function handleClose() {
     onCancel();
@@ -41,14 +42,12 @@ export default function DeleteDoctorConfirmationModal({
   }
 
 
-
-
   return (
     <div onClick={handleClickOutside} className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-black rounded-sm border border-slate-800 p-6 flex flex-col gap-4 max-w-md w-full mx-4">
-        <h2 className="text-lg font-bold dark:text-white">Delete doctor</h2>
+        <h2 className="text-lg font-bold dark:text-white">Delete patient</h2>
         <p className="text-sm text-gray-500">
-          Are you sure you want to delete{" "}
+          Are you sure you want to delete {" "}
           <span className="font-medium text-black dark:text-white">
             {data.user.firstName} {data.user.lastName}
           </span>
@@ -58,7 +57,7 @@ export default function DeleteDoctorConfirmationModal({
           <button
             onClick={handleClose}
             disabled={isPending}
-            className="px-4 py-2 rounded-full border text-sm bg-white text-black dark:bg-black dark:text-white hover:bg-black/5 dark:hover:bg-white/20 duration-400 transition-colors"
+            className="px-4 py-2 rounded-full border text-sn bg-white text-black dark:bg-black dark:text-white hover:bg-black/5 dark:hover:bg-white/20 duration-400 transition-colors"
           >
             Cancel
           </button>
