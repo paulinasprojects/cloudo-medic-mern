@@ -63,47 +63,47 @@ export default function EditPatientSubmitInfoStep({
       </h3>
       <div className="flex flex-col gap-4 text-sm text-gray-400">
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">UserId:</span>
+          <span className="text-black dark:text-white font-medium">UserId:</span>
           {state.personalInfo.userId}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Address:</span>
+          <span className="text-black dark:text-white font-medium">Address:</span>
           {state.personalInfo.address}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Bio:</span>
+          <span className="text-black dark:text-white font-medium">Bio:</span>
           {state.personalInfo.bio}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Date of Birth:</span>
+          <span className="text-black dark:text-white font-medium">Date of Birth:</span>
           {formatDate(state.personalInfo.dateOfBirth)}
         </p>
          <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Gender:</span>
+          <span className="text-black dark:text-white font-medium">Gender:</span>
           {state.personalInfo.gender}
         </p>
-         <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Phone:</span>
+         <p className="inline-flex gap-2 items-center">
+          <span className="text-black dark:text-white font-medium">Phone:</span>
           {state.personalInfo.phoneNumber}
         </p>
-         <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Blood Type:</span>
+         <p className="inline-flex gap-2 items-center ">
+          <span className="text-black dark:text-white font-medium">Blood Type:</span>
           {state.medicalInfo.bloodType}
         </p>
          <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Allergies:</span>
+          <span className="text-black dark:text-white font-medium">Allergies:</span>
           {state.medicalInfo.allergies}
         </p>
          <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Medical History:</span>
+          <span className="text-black dark:text-white font-medium">Medical History:</span>
           {state.medicalInfo.medicalHistory}
         </p>
          <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Emergency Contact Name:</span>
+          <span className="text-black dark:text-white font-medium">Emergency Contact Name:</span>
           {state.medicalInfo.emergencyContactName}
         </p>
          <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Emergency Contact Number:</span>
+          <span className="text-black dark:text-white font-medium">Emergency Contact Number:</span>
           {state.medicalInfo.emergencyContactNumber}
         </p>
       </div>
@@ -111,14 +111,14 @@ export default function EditPatientSubmitInfoStep({
         <button
           onClick={onBack}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:black duration-500 dark:hover:bg-white"
+          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
         >
           Back
         </button>
         <button
           onClick={handleSubmit}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:black duration-500 dark:hover:bg-white"
+          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
         >
           {isPending ? "Editing..." : "Edit Patient"}
         </button>

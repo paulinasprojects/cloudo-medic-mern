@@ -30,7 +30,7 @@ export default function AddPatientMedicalInfoStep({
     <div className="col-span-3 sm:cols-3 flex flex-col gap-2">
       <form  onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-y-2">
-          <label className="font-bold dark:tex-thwite text-black">
+          <label className="font-bold dark:text-white text-black">
             Blood Type
           </label>
           <Select
@@ -53,7 +53,7 @@ export default function AddPatientMedicalInfoStep({
             </SelectContent>
           </Select>
         </div>
-        <div className="fle flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="emergency-contact-number"
             className="font-bold dark:text-white text-black"
@@ -71,7 +71,7 @@ export default function AddPatientMedicalInfoStep({
             }) }  
           />
         </div>
-        <div className="fle flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="emergency-contact-name"
             className="font-bold dark:text-white text-black"
@@ -89,7 +89,7 @@ export default function AddPatientMedicalInfoStep({
             }) }  
           />
         </div>
-        <div className="fle flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="allergies"
             className="font-bold dark:text-white text-black"
@@ -107,7 +107,7 @@ export default function AddPatientMedicalInfoStep({
             })}  
           />
         </div>
-        <div className="fle flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="medical-history"
             className="font-bold dark:text-white text-black"
@@ -129,13 +129,14 @@ export default function AddPatientMedicalInfoStep({
           <button
             type="button"
             onClick={goBack}
-            className="p-2 border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
+            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
+
           >
             Back
           </button>
           <button
             type="submit"
-            className="p-2 border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
+            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
           >
             Next
           </button>

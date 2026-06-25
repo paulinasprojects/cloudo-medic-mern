@@ -22,7 +22,7 @@ export default function AddPatientPersonalInfoStep({
 
   return (
     <div className="col-span-3 sm:col-span-3 flex flex-col gap-6">
-      <form  onSubmit={handleSubmit} className="flex flex-co gap-4">
+      <form  onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="user-id" 
@@ -141,7 +141,7 @@ export default function AddPatientPersonalInfoStep({
 					/>
 				</div>
 				<button
-					className="px-6 py-3 rounded-full dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+					className="px-6 py-3 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
 					type="submit"
 				>
 					Next
