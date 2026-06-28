@@ -27,7 +27,7 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
         <div className="flex flex-col gap-y-2">
           <label
             htmlFor="education"
-            className="font-bold text-black dark:text-white text-[12px]"
+            className="label-class text-[12px]"
           >
             Education
           </label>
@@ -51,13 +51,15 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
         <div className="flex flex-col gap-y-2">
           <label
             htmlFor="specialization"
-            className="font-bold text-black dark:text-white text-[12px]"
+            className="label-class text-[12px]"
           >
             Specialization
           </label>
           <input
             id="specialization"
             type="text"
+            placeholder="Cardiology"
+            required
             className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
             value={state.specialization}
             onChange={(e) => dispatch({
@@ -67,12 +69,14 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="hospital" className="font-bold text-black dark:text-white text-[12px]">
+          <label htmlFor="hospital" className="label-class text-[12px]">
             Hospital
           </label>
           <input
+            placeholder="City Hospital"
             id="hospital"
             type="text"
+            required
             className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
             value={state.hospital}
             onChange={(e) => dispatch({
@@ -82,7 +86,7 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="" className="font-bold text-black dark:text-white text-[12px]">
+          <label htmlFor="" className="label-class text-[12px]">
             Doctor Level
           </label>
           <Select
@@ -107,12 +111,14 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
           </Select>
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="license-number" className="font-bold text-black dark:text-white text-[12px]">
+          <label htmlFor="license-number" className="label-class text-[12px]">
             License Number
           </label>
           <input
+            placeholder="004919"
             id="license-number"
             type="text"
+            required
             className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
             value={state.licenseNumber}
             onChange={(e) => dispatch({
@@ -122,12 +128,13 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="consultation-fee" className="font-bold text-black dark:text-white text-[12px]">
+          <label htmlFor="consultation-fee" className="label-class text-[12px]">
             Consultation Fee
           </label>
           <input
             id="consultation-fee"
             type="number"
+            required
             className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
             value={state.consultationFee}
             onChange={(e) => dispatch({
@@ -137,12 +144,13 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="years-of-experience" className="font-bold text-black dark:text-white text-[12px]">
+          <label htmlFor="years-of-experience" className="label-class text-[12px]">
             Years of experience
           </label>
         <input
           id="years-of-experience"
           type="number"
+          required
           className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
           value={state.yearsOfExperience}
           onChange={(e) => dispatch({

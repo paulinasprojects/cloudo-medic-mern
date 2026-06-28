@@ -64,7 +64,7 @@ export default function AddUserForm({ onSuccess }: Props) {
               onChange={(e) => setFirstName(e.target.value)}
               disabled={isPending}
               required
-              className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+              className="input-class"
             />
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function AddUserForm({ onSuccess }: Props) {
             onChange={(e) => setLastName(e.target.value)}
             disabled={isPending}
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -91,7 +91,7 @@ export default function AddUserForm({ onSuccess }: Props) {
             onChange={(e) => setEmail(e.target.value)}
             disabled={isPending}
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -105,7 +105,7 @@ export default function AddUserForm({ onSuccess }: Props) {
               onChange={(e) => setPassword(e.target.value)}
               disabled={isPending}
               required
-              className="w-full px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm  placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+              className="w-full input-class"
             />
             <button
               type="button"

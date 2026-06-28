@@ -16,11 +16,11 @@ const PatientPersonalInfoPage = () => {
   return (
     <div className="background">
       <form onSubmit={nextPage} className="flex flex-col gap-8">
-        <h1 className="text-3xl font-bold dark:text-white text-black">Personal Information</h1>
+        <h1 className="text-3xl label-class">Personal Information</h1>
         <div className="flex flex-col gap-y-2">
           <label
             htmlFor="address"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Address
           </label>
@@ -28,7 +28,7 @@ const PatientPersonalInfoPage = () => {
             type="text"
             id="address"
             placeholder="Main Street 111"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             required
             value={state.personalInfo.address}
             onChange={(e) => dispatch({
@@ -38,7 +38,7 @@ const PatientPersonalInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="date-of-birth" className="font-bold text-black dark:text-white">
+          <label htmlFor="date-of-birth" className="label-class">
             Date of birth
           </label>
           <DatePicker
@@ -61,7 +61,7 @@ const PatientPersonalInfoPage = () => {
         <div className="flex flex-col gap-y-2">
           <label
             htmlFor="gender"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Gender
           </label>
@@ -84,7 +84,7 @@ const PatientPersonalInfoPage = () => {
         <div className="flex flex-col gap-y">
           <label
             htmlFor="phone-number"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Phone number
           </label>
@@ -92,7 +92,7 @@ const PatientPersonalInfoPage = () => {
             type="text"
             id="phone-number"
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             value={state.personalInfo.phoneNumber}
             onChange={(e) => dispatch({
               type: "UPDATE_PERSONAL_INFO",

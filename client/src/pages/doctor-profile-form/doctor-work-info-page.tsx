@@ -19,7 +19,7 @@ const DoctorWorkInfoPage = () => {
           Work Information
         </h1>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="education" className="font-bold text-black dark:text-white">Education</label>
+          <label htmlFor="education" className="label-class">Education</label>
           <Select
             id="education"
             value={state.workInfo.education} onValueChange={(value) => dispatch({
@@ -37,11 +37,11 @@ const DoctorWorkInfoPage = () => {
           </Select>
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="specialization" className="font-bold text-black dark:text-white">Specialization</label>
+          <label htmlFor="specialization" className="label-class">Specialization</label>
           <input
             id="specialization"
             type="text"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             value={state.workInfo.specialization}
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",
@@ -50,11 +50,11 @@ const DoctorWorkInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="hospital" className="font-bold text-black dark:text-white">Hospital</label>
+          <label htmlFor="hospital" className="label-class">Hospital</label>
           <input
             id="hospital"
             type="text"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             value={state.workInfo.hospital}
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",
@@ -63,7 +63,7 @@ const DoctorWorkInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="doctor-level" className="font-bold text-black dark:text-white">Doctor Level</label>
+          <label htmlFor="doctor-level" className="label-class">Doctor Level</label>
           <Select
             id="doctor-level"
             value={state.workInfo.doctorLevel} onValueChange={(value) => dispatch({
@@ -79,11 +79,11 @@ const DoctorWorkInfoPage = () => {
           </Select>
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="license-number" className="font-bold text-black dark:text-white">License Number</label>
+          <label htmlFor="license-number" className="label-class">License Number</label>
           <input
             id="license-number"
             type="text"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             value={state.workInfo.licenseNumber}
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",
@@ -92,11 +92,11 @@ const DoctorWorkInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="consultation-fee" className="font-bold text-black dark:text-white">Consultation Fee</label>
+          <label htmlFor="consultation-fee" className="label-class">Consultation Fee</label>
           <input
             id="consultation-fee"
             type="number"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             value={state.workInfo.consultationFee}
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",
@@ -105,11 +105,11 @@ const DoctorWorkInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="years-of-experience" className="font-bold text-black dark:text-white">Years of experience</label>
+          <label htmlFor="years-of-experience" className="label-class">Years of experience</label>
           <input
             id="years-of-experience"
             type="number"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             value={state.workInfo.yearsOfExperience}
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",

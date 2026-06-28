@@ -60,14 +60,14 @@ const PatientProfileEdit = () => {
           )}
           <div className="flex flex-col gap-4 mt-6">
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="address" className="text-sm font-bold text-black dark:text-white">
+              <label htmlFor="address" className="label-class">
                 Address
               </label>
               <input
                 type="text"
                 id="address"
                 placeholder="Main Street 111"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
                 required
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -75,13 +75,13 @@ const PatientProfileEdit = () => {
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="phone-number" className="text-sm font-bold text-black dark:text-white">
+              <label htmlFor="phone-number" className="label-class">
                 Phone Number
               </label>
               <input
                 type="text"
                 id="phone-number"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
                 required
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -89,13 +89,13 @@ const PatientProfileEdit = () => {
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="emergency-contact-number" className="text-sm font-bold text-black dark:text-white">
+              <label htmlFor="emergency-contact-number" className="label-class">
                 Emergency Contact Number
               </label>
               <input
                 type="text"
                 id="emergency-contact-number"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
                 required
                 value={emergencyContactNumber}
                 onChange={(e) => setEmergencyContactNumber(e.target.value)}
@@ -103,13 +103,13 @@ const PatientProfileEdit = () => {
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="emergency-contact-name" className="text-sm font-bold text-black dark:text-white">
+              <label htmlFor="emergency-contact-name" className="label-class">
                 Emergency Contact Name
               </label>
               <input
                 type="text"
                 id="emergency-contact-name"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
                 required
                 value={emergencyContactName}
                 onChange={(e) => setEmergencyContactName(e.target.value)}

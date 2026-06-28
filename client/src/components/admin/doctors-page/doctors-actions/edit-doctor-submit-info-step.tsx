@@ -72,51 +72,55 @@ export default function EditDoctorSubmitInfoStep({
       </h3>
       <div className="flex flex-col gap-4 text-sm text-gray-400">
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">UserId:</span>
+          <span className="submit-class">UserId:</span>
           {state.personalInfo.userId}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Address:</span>
+          <span className="submit-class">Address:</span>
           {state.personalInfo.address}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Bio:</span>
+          <span className="submit-class">Bio:</span>
           {state.personalInfo.bio}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Date of Birth:</span>
+          <span className="submit-class">Date of Birth:</span>
           {formatDate(state.personalInfo.dateOfBirth)}
         </p>
         <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Gender:</span>
+          <span className="submit-class">Gender:</span>
           {state.personalInfo.gender}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Phone:</span>
+          <span className="submit-class">Phone:</span>
           {state.personalInfo.phoneNumber}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Hospital:</span>
+          <span className="submit-class">Hospital:</span>
           {state.workInfo.hospital}
         </p>
         <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Education:</span>
+          <span className="submit-class">Education:</span>
           {state.workInfo.education}
         </p>
         <p className="inline-flex gap-2 items-center capitalize">
-          <span className="text-white font-medium">Doc Level:</span>
+          <span className="submit-class">Doc Level:</span>
           {state.workInfo.doctorLevel}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Specialization:</span>
+          <span className="submit-class">Specialization:</span>
           {state.workInfo.specialization}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">License:</span>
+          <span className="submit-class">License:</span>
           {state.workInfo.licenseNumber}
         </p>
         <p className="inline-flex gap-2 items-center">
-          <span className="text-white font-medium">Experience:</span>
+          <span className="submit-class">Consultation Fee:</span>
+          {state.workInfo.consultationFee}
+        </p>
+        <p className="inline-flex gap-2 items-center">
+          <span className="submit-class">Experience:</span>
           {state.workInfo.yearsOfExperience} years
         </p>
       </div>

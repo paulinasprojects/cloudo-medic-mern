@@ -26,14 +26,15 @@ export default function AddPatientPersonalInfoStep({
         <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="user-id" 
-            className="text-sm font-medium dark:text-white text-black"
+            className="label-class"
           >
             User ID
           </label>
           <input 
             id="user-id"
             type="text"
-						className="px-4 py-1 border border-slate-700 rounded-full dark:text-white focus:outline-none focus:border-slate-300 transition-colors"
+            placeholder="10401041"
+						className="input-class"
             required
             value={state.userId}
             onChange={(e) => dispatch({
@@ -45,7 +46,7 @@ export default function AddPatientPersonalInfoStep({
         <div className="flex flex-col gap-y-2">
           <label 
 						htmlFor="address"
-						className="text-sm font-bold dark:text-white text-black"
+						className="label-class"
 						>
 							Address
           </label>
@@ -54,7 +55,7 @@ export default function AddPatientPersonalInfoStep({
 						type="text"
 						required
 						placeholder="Main Street 111"
-						className="px-4 py-1 border border-slate-700 rounded-full dark:text-white focus:outline-none focus:border-slate-300 transition-colors"
+						className="input-class"
 						value={state.address}
 						onChange={(e) => dispatch({
 							type: "UPDATE_PERSONAL_INFO",
@@ -63,7 +64,7 @@ export default function AddPatientPersonalInfoStep({
 					/>
         </div>
 				<div className="flex flex-col gap-y-2">
-					<label className="font-bold text-black dark:text-white">
+					<label className="label-class">
 						Date of birth
 					</label>
 					<DatePicker
@@ -83,7 +84,7 @@ export default function AddPatientPersonalInfoStep({
 					/>
 				</div>
 				<div className="flex flex-col gap-y-2">
-					<label className="text-sm font-bold dark:text-white text-black">
+					<label className="label-class">
 						Gender
 					</label>
 					<Select
@@ -106,15 +107,16 @@ export default function AddPatientPersonalInfoStep({
 				<div className="flex flex-col gap-y-2">
 					<label 
 						htmlFor="phone-number"
-						className="text-sm font-bold dark:text-white text-black"
+						className="label-class"
 					>
 						Phone number
 					</label>
 					<input 
 						type="text"
 						id="phone-number"
+            placeholder="+12339193"
 						required
-						className="px-4 py-1 border border-slate-700 rounded-full dark:text-white focus:outline-none focus:border-slate-300 transition-colors"
+						className="input-class"
 						value={state.phoneNumber}
 						onChange={(e) => dispatch({
 							type: "UPDATE_PERSONAL_INFO",
@@ -125,14 +127,14 @@ export default function AddPatientPersonalInfoStep({
 				<div className="flex flex-col gap-y-2">
 					<label 
 						htmlFor="bio" 
-						className="text-sm font-bold dark:text-white text-black"
+						className="label-class"
 					>
 						Bio
 					</label>
 					<textarea 
 						id="bio"
 						required
-						className="resize-none w-full px-4 py-1 border border-slate-700 rounded-full dark:text-white focus:outline-none focus:border-slate-300 transition-colors"
+						className="resize-none w-full input-class"
 						value={state.bio}
 						onChange={(e) => dispatch({
 							type: "UPDATE_PERSONAL_INFO",

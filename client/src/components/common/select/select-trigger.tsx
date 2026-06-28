@@ -24,7 +24,7 @@ const SelectTrigger = ({
       aria-expanded={open}
       aria-controls="select-trigger"
     >
-      <span className={cn(value ? "dark:text-white" : "text-gray-500")}>
+      <span className={cn(value ? "dark:text-white text-black" : "text-gray-500")}>
         {value ? value : (
           <span className="text-gray-500">
             {placeholder}

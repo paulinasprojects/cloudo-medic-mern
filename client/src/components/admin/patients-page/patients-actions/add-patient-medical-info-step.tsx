@@ -30,7 +30,7 @@ export default function AddPatientMedicalInfoStep({
     <div className="col-span-3 sm:cols-3 flex flex-col gap-2">
       <form  onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-y-2">
-          <label className="font-bold dark:text-white text-black">
+          <label className="label-class">
             Blood Type
           </label>
           <Select
@@ -56,14 +56,16 @@ export default function AddPatientMedicalInfoStep({
         <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="emergency-contact-number"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Emergency Contact Number
           </label>
           <input 
             type="text" 
             id="emergency-contact-number"
-            className="px-4 py-1 border border-slate-700 rounded-full dark:text-white focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
+            placeholder="+1230301"
+            required
             value={state.emergencyContactNumber}
             onChange={(e) => dispatch({
               type:"UPDATE_MEDICAL_INFO",
@@ -74,14 +76,16 @@ export default function AddPatientMedicalInfoStep({
         <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="emergency-contact-name"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Emergency Contact Name
           </label>
           <input 
             type="text" 
             id="emergency-contact-name"
-            className="px-4 py-1 border border-slate-700 rounded-full dark:text-white focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
+            placeholder="Jane Doe"
+            required
             value={state.emergencyContactName}
             onChange={(e) => dispatch({
               type:"UPDATE_MEDICAL_INFO",
@@ -92,14 +96,16 @@ export default function AddPatientMedicalInfoStep({
         <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="allergies"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Allergies
           </label>
           <input 
             type="text" 
             id="allergies"
-            className="px-4 py-1 border border-slate-700 rounded-full dark:text-white focus:outline-none focus:border-slate-300 transition-colors"
+            placeholder="mold"
+            className="input-class"
+            required
             value={state.allergies}
             onChange={(e) => dispatch({
               type:"UPDATE_MEDICAL_INFO",
@@ -110,14 +116,16 @@ export default function AddPatientMedicalInfoStep({
         <div className="flex flex-col gap-y-2">
           <label 
             htmlFor="medical-history"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Medical History
           </label>
           <input 
             type="text" 
             id="medical-history"
-            className="px-4 py-1 border border-slate-700 rounded-full dark:text-white focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
+            placeholder="bp 190/60"
+            required
             value={state.medicalHistory}
             onChange={(e) => dispatch({
               type:"UPDATE_MEDICAL_INFO",

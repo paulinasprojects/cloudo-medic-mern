@@ -50,7 +50,7 @@ const PatientMedicalInfoPage = () => {
           <input
             type="text"
             id="emergency-contact-number"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             value={state.medicalInfo.emergencyContactNumber}
             onChange={(e) => dispatch({
               type: "UPDATE_MEDICAL_INFO",
@@ -68,7 +68,7 @@ const PatientMedicalInfoPage = () => {
           <input
             type="text"
             id="emergency-contact-name"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             value={state.medicalInfo.emergencyContactName}
             onChange={(e) => dispatch({
               type: "UPDATE_MEDICAL_INFO",
@@ -86,7 +86,7 @@ const PatientMedicalInfoPage = () => {
           <input
             type="text"
             id="allergies"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             value={state.medicalInfo.allergies}
             onChange={(e) => dispatch({
               type: "UPDATE_MEDICAL_INFO",

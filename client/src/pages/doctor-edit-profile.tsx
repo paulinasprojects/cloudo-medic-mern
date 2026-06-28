@@ -70,7 +70,7 @@ const DoctorProfileEdit = () => {
           )}
           <div className="flex flex-col gap-4 mt-6">
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="address" className="text-sm font-bold text-black dark:text-white">
+              <label htmlFor="address" className="label-class">
                 Address
               </label>
               <input
@@ -78,7 +78,7 @@ const DoctorProfileEdit = () => {
                 id="address"
                 placeholder="Main Street 111"
                 required
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 disabled={isPending}
@@ -86,19 +86,19 @@ const DoctorProfileEdit = () => {
             </div>
 
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="phone-number" className="text-sm font-bold text-black dark:text-white">Phone number</label>
+              <label htmlFor="phone-number" className="label-class">Phone number</label>
               <input
                 type="text"
                 id="phone-number"
                 required
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
                 disabled={isPending}
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="bio" className="text-sm font-bold text-black dark:text-white">Bio</label>
+              <label htmlFor="bio" className="label-class">Bio</label>
               <textarea
                 id="bio"
                 required
@@ -109,22 +109,22 @@ const DoctorProfileEdit = () => {
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="hospital" className="text-sm font-bold text-black dark:text-white">Hospital</label>
+              <label htmlFor="hospital" className="label-class">Hospital</label>
               <input
                 id="hospital"
                 type="text"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
                 value={hospital}
                 onChange={(e) => setHospital(e.target.value)}
                 disabled={isPending}
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <label htmlFor="consultation-fee" className="text-sm font-bold text-black dark:text-white">Consultation Fee</label>
+              <label htmlFor="consultation-fee" className="label-class">Consultation Fee</label>
               <input
                 id="consultation-fee"
                 type="number"
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
                 value={consultationFee}
                 onChange={(e) => setConsultationFee(e.target.value === "" ? "" : parseFloat(e.target.value))}
                 disabled={isPending}

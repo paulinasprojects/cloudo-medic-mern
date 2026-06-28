@@ -20,7 +20,7 @@ const DoctorPersonalInfoPage = () => {
         <h1 className="text-4xl font-bold dark:text-white text-black">Personal Information</h1>
         <div className="flex flex-col gap-y-2">
           <label
-            className="font-bold text-black dark:text-white"
+            className="label-class"
             htmlFor="address">
             Address
           </label>
@@ -28,7 +28,7 @@ const DoctorPersonalInfoPage = () => {
             type="text"
             id="address"
             placeholder="Main Street 111"
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
             required
             value={state.personalInfo.address}
             onChange={(e) => dispatch({
@@ -38,7 +38,7 @@ const DoctorPersonalInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="date-off-birth" className="font-bold text-black dark:text-white">
+          <label htmlFor="date-off-birth" className="label-class">
             Date of birth
           </label>
           <DatePicker
@@ -59,7 +59,7 @@ const DoctorPersonalInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="gender" className="font-bold text-black dark:text-white">Gender</label>
+          <label htmlFor="gender" className="label-class">Gender</label>
           <Select
             id="gender"
             value={state.personalInfo.gender}
@@ -76,7 +76,7 @@ const DoctorPersonalInfoPage = () => {
           </Select>
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="phone-number" className="font-bold text-black dark:text-white">Phone number</label>
+          <label htmlFor="phone-number" className="label-class">Phone number</label>
           <input
             type="text"
             id="phone-number"
@@ -86,11 +86,11 @@ const DoctorPersonalInfoPage = () => {
               type: "UPDATE_PERSONAL_INFO",
               payload: { phoneNumber: e.target.value }
             })}
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="bio" className="font-bold text-black dark:text-white">Bio</label>
+          <label htmlFor="bio" className="label-class">Bio</label>
           <textarea
             id="bio"
             required
