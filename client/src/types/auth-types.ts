@@ -20,3 +20,7 @@ export interface AuthState {
   error: string | null;
   isAuthenticated: boolean;
 }
+
+export interface UserImage {
+  image: string;
+}

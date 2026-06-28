@@ -7,7 +7,7 @@ const router = Router();
 
 router.post("/signup", registerUser);
 router.post("/login", login);
-router.post("/user/image", requireAuth, cloudinaryUpload.single("image"), updateUser);
+router.post("/user/image", requireAuth, cloudinaryUpload.single("image"), uploadUserImage);
 router.delete("/user/image", requireAuth, deleteUserImage);
 router.get("/user", requireAuth, getUser);
 router.post("/user", requireAuth, updateUser);

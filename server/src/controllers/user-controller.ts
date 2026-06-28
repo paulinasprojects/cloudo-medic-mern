@@ -93,9 +93,6 @@ export const deleteUserImage = asyncHandler(
   async (req: Request, res: Response) => {
     const userId = req.userId;
 
-    if (!req.file) {
-      throw new AppError("No image file provided", 400);
-    }
 
     const user = await User.findOne({
       where: {

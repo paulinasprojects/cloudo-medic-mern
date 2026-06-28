@@ -92,6 +92,8 @@ export const editUserByAdmin = async (id: string, data: {
   firstName: string;
   lastName: string;
   email: string;
+  password: string;
+  role: string;
 }) => {
   const response = await api.patch<ApiResponse<User>>(`/admin/users/${id}`, data);
   return response.data;

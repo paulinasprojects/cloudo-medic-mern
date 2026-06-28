@@ -2,7 +2,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { useAuthStore } from "@/store/auth-store";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../common/dropdown-menu";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { ChevronDown, ChevronRight, Moon, Sun } from "lucide-react";
+import { ChevronDown, ChevronRight, Moon, Settings, Sun } from "lucide-react";
 import { cn } from "@/utils/utils";
 import AdminMobileMenu from "./admin-mobile-menu";
 import { CloudoLogoLight, CloudoLogoDark } from "../common/cloudo-logo";
@@ -70,6 +70,12 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                   <ChevronRight />
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuItem className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
+                  <Link to="/settings" className="flex w-full items-center justify-between">
+                    Settings
+                    <Settings />
+                  </Link>
+                </DropdownMenuItem>
               <DropdownMenuItem onClick={handleLogout} className="bg-white dark:bg-black dark:focus:bg-white dark:focus:text-black focus:bg-black/10 focus:text-black transition duration-300">
                 <button
                   className="rounded-full transition-colors cursor-pointer">
