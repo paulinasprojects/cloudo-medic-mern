@@ -32,7 +32,7 @@ export default function EditUserInfoForm() {
 		 )
 	} else {
 		return (
-			 <div className="grid sm:grid-cols-2 max-sm:grid-cols-1 gap-6 border-t border-gray-600 mt-3">
+			 <div className="flex flex-col gap-2">
 			<div className="mt-2.5">
 				<h2 className="text-[20px] font-medium text-black dark:text-white">Medical Information</h2>
 				<p className="text-sm text-gray-400">Edit your medical information</p>
