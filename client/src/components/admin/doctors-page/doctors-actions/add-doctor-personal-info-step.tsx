@@ -122,7 +122,7 @@ export default function AddDoctorPersonalInfoStep({ state, dispatch, onNext }: P
               type: "UPDATE_PERSONAL_INFO",
               payload: { bio: e.target.value }
             })}
-            className="resize-none w-full px-4 py-1 border border-slate-700 rounded-lg text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="resize-none w-full input-class"
           />
         </div>
         <button

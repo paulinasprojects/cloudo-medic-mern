@@ -56,19 +56,19 @@ const SettingsTabs = () => {
           <div className="inline-flex items-center gap-2 text-sm">
             <HugeiconsIcon icon={SquareLock01Icon}/>
              {user?.role === "doctor" && (
-              <div>
+              <span>
                 Work Info
-              </div>
+              </span>
               )}
              {user?.role === "patient" && (
-              <div>
+              <span>
                 Medical Info
-              </div>
+              </span>
               )}
              {user?.role === "admin" && (
-              <div>
+              <span>
                 Admin Info
-              </div>
+              </span>
               )}
           </div>
           <ChevronRight/>

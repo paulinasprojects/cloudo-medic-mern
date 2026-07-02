@@ -60,7 +60,7 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
             type="text"
             placeholder="Cardiology"
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
+            className="input-class"
             value={state.specialization}
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",
@@ -77,7 +77,7 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
             id="hospital"
             type="text"
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
+            className="input-class"
             value={state.hospital}
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",
@@ -119,7 +119,7 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
             id="license-number"
             type="text"
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
+            className="input-class"
             value={state.licenseNumber}
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",
@@ -135,7 +135,7 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
             id="consultation-fee"
             type="number"
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
+            className="input-class"
             value={state.consultationFee}
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",
@@ -151,7 +151,7 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
           id="years-of-experience"
           type="number"
           required
-          className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
+          className="input-class"
           value={state.yearsOfExperience}
           onChange={(e) => dispatch({
             type: "UPDATE_WORK_INFO",
