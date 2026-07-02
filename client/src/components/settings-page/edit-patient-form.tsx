@@ -40,7 +40,7 @@ export default function EditPatientForm() {
     <div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {error && (
-            <span>{error.message}</span>
+            <span className="text-sm text-red-500">{error.message}</span>
           )}
           <div className="flex flex-col gap-y-2">
           <label

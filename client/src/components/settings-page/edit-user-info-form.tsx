@@ -8,7 +8,7 @@ export default function EditUserInfoForm() {
 	
 	if (user?.role === "admin") {
 		 return (
-				<div className="grid sm:grid-cols-2 max-sm:grid-cols-1 gap-6 border-t border-gray-600 mt-3">
+				<div className="flex flex-col gap-2">
 			<div className="mt-2.5">
 				<h2 className="text-[20px] font-medium text-black dark:text-white">Admin Information</h2>
 				<p className="text-sm text-gray-400">Edit Admin information</p>
@@ -20,7 +20,7 @@ export default function EditUserInfoForm() {
 		 )
 	} else if (user?.role === "doctor") {
 		 return (
-			<div className="grid sm:grid-cols-2 max-sm:grid-cols-1 gap-6 border-t border-gray-600 mt-3">
+			<div className="flex flex-col gap-2">
 			<div className="mt-2.5">
 				<h2 className="text-[20px] font-medium text-black dark:text-white">Work Information</h2>
 				<p className="text-sm text-gray-400">Edit your work information</p>

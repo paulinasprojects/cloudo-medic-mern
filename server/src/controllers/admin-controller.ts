@@ -126,6 +126,35 @@ export const getAllUsers = asyncHandler(
   }
 )
 
+export const editAdminUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const {firstName, lastName} = req.body;
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+     if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    if (firstName) {
+      user.firstName = firstName
+    };
+
+    if (lastName) {
+      user.lastName = lastName
+    }
+
+     const updatedUser = await user.save();
+     
+     SendSuccess(res, updatedUser.toSafeJSON(), "User updated successfully");
+  }
+)
+
 export const updateUserByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
      const { email,  password, firstName, lastName, role } = req.body;

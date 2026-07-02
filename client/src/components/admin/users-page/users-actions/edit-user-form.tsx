@@ -60,7 +60,7 @@ export default function EditUserForm({ onSuccess, data }: Props) {
         )}
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <label htmlFor="first-name" className="text-sm font-medium text-black dark:text-white">
+            <label htmlFor="first-name" className="label-class">
               First Name
             </label>
             <input
@@ -71,11 +71,11 @@ export default function EditUserForm({ onSuccess, data }: Props) {
               onChange={(e) => setFirstName(e.target.value)}
               disabled={isPending}
               required
-              className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+              className="input-class"
             />
           </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="last-name" className="text-sm font-medium text-black dark:text-white">Last Name</label>
+          <label htmlFor="last-name" className="label-class">Last Name</label>
           <input
             type="text"
             id="last-name"
@@ -84,11 +84,11 @@ export default function EditUserForm({ onSuccess, data }: Props) {
             onChange={(e) => setLastName(e.target.value)}
             disabled={isPending}
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-sm font-medium text-black dark:text-white">Email</label>
+          <label htmlFor="email" className="label-class">Email</label>
           <input
             type="email"
             id="email"
@@ -97,11 +97,11 @@ export default function EditUserForm({ onSuccess, data }: Props) {
             onChange={(e) => setEmail(e.target.value)}
             disabled={isPending}
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+            className="input-class"
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="text-sm font-medium text-black dark:text-white">
+          <label htmlFor="password" className="label-class">
             Password
           </label>
           <div className="relative">
@@ -113,7 +113,7 @@ export default function EditUserForm({ onSuccess, data }: Props) {
               onChange={(e) => setPassword(e.target.value)}
               disabled={isPending}
               required
-              className="w-full px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm  placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+              className="w-full input-class"
             />
             <button 
               onClick={togglePasswordVisibility}
@@ -130,7 +130,7 @@ export default function EditUserForm({ onSuccess, data }: Props) {
           </div>
         </div>
         <div className="flex flex-col gap-2 mt-2">
-          <label className="text-sm font-medium text-black dark:text-white">
+          <label className="label-class">
               Role
           </label>
           <Select

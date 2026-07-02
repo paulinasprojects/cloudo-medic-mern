@@ -151,3 +151,8 @@ export interface Prescription {
   doctorProfile?: Doctor;
   patientProfile?: Patient;
 }
+
+export interface editAdminUserRequest {
+  firstName: string;
+  lastName: string;
+}

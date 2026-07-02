@@ -1,4 +1,5 @@
 import { getAllAppointments, getAllDoctors, getAllPrescriptions, getAllUsers, getAllPatients } from "@/services/admin-service";
+import { getUser } from "@/services/auth-service";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 
@@ -28,4 +29,9 @@ export const useGetAllPrescriptions = () => useQuery({
   queryKey: ["appointments"],
   queryFn: getAllPrescriptions,
   staleTime: ms("24h")
+})
+
+export const useGetAdminUser = () => useQuery({
+  queryKey: ["admin"],
+  queryFn: getUser,
 })

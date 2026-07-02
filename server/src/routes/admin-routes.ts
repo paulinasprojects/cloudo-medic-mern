@@ -4,6 +4,7 @@ import {
   registerUserByAdmin,
   getAllUsers,
   updateUserByAdmins,
+  editAdminUser,
   deleteUserByAdmins,
   getAllDoctors, 
   getAllPatients,
@@ -39,6 +40,7 @@ router.use(requireAdmin);
 {/* Users Routes */}
 router.post("/users", registerUserByAdmin)
 router.get("/users", getAllUsers);
+router.patch("/users", editAdminUser);
 router.patch("/users/:id", updateUserByAdmins);
 router.delete("/users/:id", deleteUserByAdmins);
 
