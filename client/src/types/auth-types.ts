@@ -24,3 +24,8 @@ export interface AuthState {
 export interface UserImage {
   image: string;
 }
+
+export interface EditUserRequest {
+  email?: string;
+  password?: string;
+}

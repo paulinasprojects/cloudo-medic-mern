@@ -7,6 +7,8 @@ import { UserSharingIcon, SquareLock01Icon } from "@hugeicons/core-free-icons";
 import { useAuthStore } from "@/store/auth-store";
 import { UserImageModal } from '@/components/auth/user-image-modal';
 import DeleteUserImageConfirmationModal from "@/components/auth/delete-user-image-confirmation-modal";
+import EditUserInfoForm from "./edit-user-info-form";
+import EditGeneralInfoForm from "./edit-general-info-form";
 
 const SettingsTabs = () => {
   const { user, deleteUserImage, isLoading } = useAuthStore();
@@ -28,6 +30,7 @@ const SettingsTabs = () => {
   function handleCloseDeletingUserImageModal() {
     setIsDeletingImageModalOpen(false);
   }
+
 
   async function confirmDeleteUserImage() {
     await deleteUserImage();
@@ -52,7 +55,21 @@ const SettingsTabs = () => {
         <Tabs.Trigger value="tab2"  className="bg-white text-black border border-gray-200 dark:hover:text-black hover:text-white hover:bg-black  dark:hover:bg-white/90 transition-colors duration-500 p-2 rounded-full flex justify-between md:min-w-80.25">
           <div className="inline-flex items-center gap-2 text-sm">
             <HugeiconsIcon icon={SquareLock01Icon}/>
-              Password
+             {user?.role === "doctor" && (
+              <div>
+                Work Info
+              </div>
+              )}
+             {user?.role === "patient" && (
+              <div>
+                Medical Info
+              </div>
+              )}
+             {user?.role === "admin" && (
+              <div>
+                Admin Info
+              </div>
+              )}
           </div>
           <ChevronRight/>
         </Tabs.Trigger>
@@ -71,7 +88,7 @@ const SettingsTabs = () => {
           <div className="flex  flex-col gap-2">
             <div className="flex items-center gap-2">
               <img src={user?.image ?? "/placeholder.png"} alt="" className="size-11.25 object-cover rounded-full" />
-              <button onClick={handleEditUserImage}>Upload image</button>
+              <button className="hover:underline underline-offset-4" onClick={handleEditUserImage}>Upload image</button>
                 {user?.image && (
               <button onClick={handleDeleteUserImage}>
                 <Trash2 className="text-red-500"/> 
@@ -83,12 +100,13 @@ const SettingsTabs = () => {
             </div>
           </div>  
         </div>
+          <EditGeneralInfoForm/>
         </div>
       </Tabs.Content>
       <Tabs.Content value="tab2">
-      <div>
-        {/* Password change here */}
-      </div>
+        <div>
+          <EditUserInfoForm/>
+        </div>
       </Tabs.Content>
     </Tabs.Root>
     <UserImageModal

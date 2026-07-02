@@ -20,8 +20,10 @@ export const columns: ColumnDef<Patient>[] = [
 			return (
 				<button
 					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+					className="flex items-center"
 				>
 					First Name
+					<ArrowUpDown className="ml-2 h-3 w-3"/>
 				</button>
 			)
 		}

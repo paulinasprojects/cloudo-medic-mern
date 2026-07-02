@@ -44,7 +44,8 @@ export default function AddPatientSubmitInfoStep({
       bloodType: state.medicalInfo.bloodType,
       emergencyContactNumber: state.medicalInfo.emergencyContactNumber,
       emergencyContactName: state.medicalInfo.emergencyContactName,
-      allergies: state.medicalInfo.allergies
+      allergies: state.medicalInfo.allergies,
+      medicalHistory: state.medicalInfo.medicalHistory!
     })
   }
 

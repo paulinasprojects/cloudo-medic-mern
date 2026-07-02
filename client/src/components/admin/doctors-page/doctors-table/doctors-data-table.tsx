@@ -67,7 +67,7 @@ export function DoctorsDataTable<TData, TValue>({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="ml-auto px-3 py-2 border border-black dark:border-white rounded-full">
-              Columns
+              Filter
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-full">

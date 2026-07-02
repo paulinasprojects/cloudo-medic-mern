@@ -19,7 +19,7 @@ export default function EditPatientSubmitInfoStep({
 }: Props) {
   const queryClient = useQueryClient();
 
-  const { mutate: editPatientByAdminMuttion, isPending } = useMutation({
+  const { mutate: editPatientByAdminMutation, isPending } = useMutation({
     mutationFn: (patientData: {
       userId: string;
       address: string;
@@ -37,11 +37,14 @@ export default function EditPatientSubmitInfoStep({
       toast.success("Patient updated successfully");
       queryClient.invalidateQueries({ queryKey: ["patient"]})
       onSuccess();
+    },
+    onError: () => {
+      toast.error("Failed to update the patients information");
     }
   });
 
   const handleSubmit = () => {
-    editPatientByAdminMuttion({
+    editPatientByAdminMutation({
       userId: state.personalInfo.userId!,
       address: state.personalInfo.address,
       bio: state.personalInfo.bio,

@@ -74,7 +74,6 @@ export default function EditUserForm({ onSuccess, data }: Props) {
               className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
             />
           </div>
-        </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="last-name" className="text-sm font-medium text-black dark:text-white">Last Name</label>
           <input
@@ -147,6 +146,7 @@ export default function EditUserForm({ onSuccess, data }: Props) {
                 ))}
               </SelectContent>
           </Select>
+        </div>
         </div>
         <button
           type="submit"

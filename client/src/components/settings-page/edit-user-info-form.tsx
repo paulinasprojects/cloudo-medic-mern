@@ -1,0 +1,46 @@
+import { useAuthStore } from "@/store/auth-store"
+import EditAdminForm from "./edit-admin-form";
+import EditDoctorForm from "./edit-doctor-form";
+import EditPatientForm from "./edit-patient-form";
+
+export default function EditUserInfoForm() {
+	const {user} = useAuthStore();
+	
+	if (user?.role === "admin") {
+		 return (
+				<div className="grid sm:grid-cols-2 max-sm:grid-cols-1 gap-6 border-t border-gray-600 mt-3">
+			<div className="mt-2.5">
+				<h2 className="text-[20px] font-medium text-black dark:text-white">Admin Information</h2>
+				<p className="text-sm text-gray-400">Edit Admin information</p>
+			</div>
+			<div className="mt-5">
+			 <EditAdminForm/>
+			</div>
+		</div>
+		 )
+	} else if (user?.role === "doctor") {
+		 return (
+			<div className="grid sm:grid-cols-2 max-sm:grid-cols-1 gap-6 border-t border-gray-600 mt-3">
+			<div className="mt-2.5">
+				<h2 className="text-[20px] font-medium text-black dark:text-white">Work Information</h2>
+				<p className="text-sm text-gray-400">Edit your work information</p>
+			</div>
+			<div className="mt-5">
+				<EditDoctorForm/>
+			</div>
+		</div>
+		 )
+	} else {
+		return (
+			 <div className="grid sm:grid-cols-2 max-sm:grid-cols-1 gap-6 border-t border-gray-600 mt-3">
+			<div className="mt-2.5">
+				<h2 className="text-[20px] font-medium text-black dark:text-white">Medical Information</h2>
+				<p className="text-sm text-gray-400">Edit your medical information</p>
+			</div>
+			<div className="mt-5">
+				<EditPatientForm/>
+			</div>
+		</div>
+		)
+	}
+}

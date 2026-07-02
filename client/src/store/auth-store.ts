@@ -2,12 +2,13 @@ import {create} from "zustand";
 import { AxiosError } from "axios";
 import { TOKEN_KEY } from "@/services/api";
 import { AuthState } from "@/types/auth-types";
-import { signup as signupService, login as loginService, getUser as getUserService, uploadUserImage as uploadUserImageService, deleteUserImage as deleteUserImageService } from "@/services/auth-service";
+import { signup as signupService, login as loginService, getUser as getUserService, uploadUserImage as uploadUserImageService, deleteUserImage as deleteUserImageService, editUser as editUserService } from "@/services/auth-service";
 
 interface AuthStore extends AuthState {
   signup: (email: string, password: string, role: string, firstName: string, lastName: string) => Promise<boolean>;
   login: (email: string, password: string) => Promise<void>;
   getUser: () => Promise<void>;
+  editUser: (data: {email?: string, password?: string}) => Promise<void>;
   uploadImage: (file: File) => Promise<void>;
   deleteUserImage: () => Promise<void>;
   logout: () => void;
@@ -94,6 +95,31 @@ export const useAuthStore = create<AuthStore>((set) => ({
         return;
       }
       set({ error: err.response?.data?.error, isLoading: false });
+    }
+  },
+  editUser: async (data: {
+    email?: string;
+    password?: string
+  }) => {
+    set({
+      isLoading: true
+    })
+
+    try {
+      const response = await editUserService(data);
+        if (response.data) {
+          set({
+            user: response.data,
+            isLoading:false,
+            error: null
+          })
+        }
+    } catch (error) {
+      const err = error as AxiosError<{error: string}>;
+      set({
+        error: err.response?.data?.error,
+        isLoading: false,
+      })
     }
   },
   uploadImage: async (file: File) => {

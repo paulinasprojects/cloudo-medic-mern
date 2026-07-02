@@ -27,7 +27,7 @@ export default function AddPatientMedicalInfoStep({
   }
 
   return (
-    <div className="col-span-3 sm:cols-3 flex flex-col gap-2">
+    <div className="col-span-3 sm:col-span-3 flex flex-col gap-2">
       <form  onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-y-2">
           <label className="label-class">

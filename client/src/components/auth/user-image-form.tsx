@@ -51,7 +51,7 @@ export default function UserImageForm({ onSuccess }: Props) {
     <form onSubmit={handleUpload} className="flex flex-col gap-6 m-4">
       <div
 				onClick={() => inputRef.current?.click()}
-				className="relative flex flex-col items-center justify-center gap-3 border-2 border-gray-300 rounded-xl p-8 cursor-pointer hover:border-red-500 hover:bg-red-400/14 transition-colors"
+				className="relative flex flex-col items-center justify-center gap-3 border-2 border-gray-300 rounded-xl p-8 cursor-pointer hover:border-gray-500 hover:bg-grey-400/14 transition-colors"
 			>
 				{preview ? (
 					<>

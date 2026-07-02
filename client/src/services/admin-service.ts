@@ -54,6 +54,7 @@ export const createPatient = async (data: {
   gender: string;
   bloodType: string;
   allergies: string;
+  medicalHistory: string;
   emergencyContactName: string;
   emergencyContactNumber: string;
 }) => {
