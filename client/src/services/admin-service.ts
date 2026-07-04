@@ -30,6 +30,7 @@ export const createDoctor = async (data: {
   userId: string;
   address: string;
   phoneNumber: string;
+  workPhoneNumber: string;
   bio: string;
   dateOfBirth: string;
   education: string;
@@ -68,6 +69,7 @@ export const editPatientByAdmin = async (id: string, data: {
   phoneNumber: string;
   bio: string;
   dateOfBirth: string;
+  workPhoneNumber: string;
   gender: string;
   bloodType: string;
   allergies: string;
@@ -109,6 +111,7 @@ export const editDoctorByAdmin = async (id: string, data: {
   userId: string;
   address: string;
   phoneNumber: string;
+  workPhoneNumber: string;
   bio: string;
   dateOfBirth: string;
   education: string;

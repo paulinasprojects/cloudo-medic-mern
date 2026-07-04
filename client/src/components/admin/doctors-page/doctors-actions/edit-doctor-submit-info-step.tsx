@@ -26,6 +26,7 @@ export default function EditDoctorSubmitInfoStep({
       userId: string;
       address: string;
       phoneNumber: string;
+      workPhoneNumber: string;
       bio: string;
       dateOfBirth: string;
       education: string;
@@ -55,6 +56,7 @@ export default function EditDoctorSubmitInfoStep({
       dateOfBirth: state.personalInfo.dateOfBirth,
       gender: state.personalInfo.gender,
       phoneNumber: state.personalInfo.phoneNumber,
+      workPhoneNumber: state.workInfo.workPhoneNumber,
       hospital: state.workInfo.hospital,
       education: state.workInfo.education,
       doctorLevel: state.workInfo.doctorLevel,
@@ -94,6 +96,10 @@ export default function EditDoctorSubmitInfoStep({
         <p className="inline-flex gap-2 items-center">
           <span className="submit-class">Phone:</span>
           {state.personalInfo.phoneNumber}
+        </p>
+        <p className="inline-flex gap-2 items-center">
+          <span className="submit-class">Work Phone:</span>
+          {state.workInfo.workPhoneNumber}
         </p>
         <p className="inline-flex gap-2 items-center">
           <span className="submit-class">Hospital:</span>

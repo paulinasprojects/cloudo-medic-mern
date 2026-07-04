@@ -30,7 +30,17 @@ export const columns: ColumnDef<Patient>[] = [
 	},
 	{
 		accessorKey: "user.lastName",
-		header: "Last Name"
+		 header: ({ column }) => {
+      return (
+        <button
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center"
+        >
+          Last name
+          <ArrowUpDown className="ml-2 h-3 w-3"/>
+        </button>
+      )
+    }
 	},
 	{
 		accessorKey: "bloodType",

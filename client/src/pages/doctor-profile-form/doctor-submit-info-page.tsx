@@ -27,6 +27,7 @@ const DoctorSubmitInfoPage = () => {
       dateOfBirth: state.personalInfo.dateOfBirth,
       gender: state.personalInfo.gender,
       phoneNumber: state.personalInfo.phoneNumber,
+      workPhoneNumber: state.workInfo.workPhoneNumber,
       hospital: state.workInfo.hospital,
       education: state.workInfo.education,
       doctorLevel: state.workInfo.doctorLevel,
@@ -53,6 +54,12 @@ const DoctorSubmitInfoPage = () => {
               Phone Number
             </p>
             <p>{state.personalInfo.phoneNumber}</p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <p>
+              Work Phone Number
+            </p>
+            <p>{state.workInfo.workPhoneNumber}</p>
           </div>
           <div className="flex flex-col gap-2">
             <p>

@@ -12,6 +12,7 @@ InferCreationAttributes<DoctorProfile>> {
   declare userId: ForeignKey<User["id"]>;
   declare address: string;
   declare phoneNumber: string;
+  declare workPhoneNumber: string;
   declare bio: CreationOptional<string | null>;
   declare dateOfBirth: Date;
   declare education: CreationOptional<DoctorEducation>;
@@ -59,6 +60,15 @@ DoctorProfile.init({
     validate: {
       notEmpty: {
         msg: "Phone number cannot be empty"
+      }
+    }
+  },
+  workPhoneNumber: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: "Work phone number cannot be empty"
       }
     }
   },

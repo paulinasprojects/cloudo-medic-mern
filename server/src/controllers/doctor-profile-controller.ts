@@ -35,7 +35,7 @@ export const getDoctorProfile = asyncHandler(
 
 export const createDoctorProfile = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { address, phoneNumber, bio, dateOfBirth, education, doctorLevel, gender, specialization, hospital, licenseNumber, consultationFee, yearsOfExperience } = req.body;
+    const { address, phoneNumber, workPhoneNumber, bio, dateOfBirth, education, doctorLevel, gender, specialization, hospital, licenseNumber, consultationFee, yearsOfExperience } = req.body;
     const userId = req.userId;
 
       const user = await User.findOne({
@@ -53,6 +53,7 @@ export const createDoctorProfile = asyncHandler(
       userId: userId,
       address,
       phoneNumber,
+      workPhoneNumber,
       bio,
       dateOfBirth,
       doctorLevel,
@@ -71,7 +72,7 @@ export const createDoctorProfile = asyncHandler(
 
 export const updateDoctorProfileByDoctor = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { address, phoneNumber, bio, hospital, consultationFee } = req.body;
+    const { address, phoneNumber, bio, hospital, consultationFee, workPhoneNumber } = req.body;
     const userId = req.userId;
     
     const profile = await DoctorProfile.findOne({
@@ -90,6 +91,10 @@ export const updateDoctorProfileByDoctor = asyncHandler(
 
     if (phoneNumber) {
       profile.phoneNumber = phoneNumber;
+    }
+
+    if (workPhoneNumber) {
+      profile.workPhoneNumber = workPhoneNumber;
     }
 
     if (bio) {

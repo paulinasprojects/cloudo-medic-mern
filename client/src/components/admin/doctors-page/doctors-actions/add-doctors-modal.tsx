@@ -40,7 +40,7 @@ export default function AddDoctorsModal({ isOpen, onClose }: Props) {
             <X className="size-5" />
           </button>
         </div>
-        <div className="flex items-center gap-4 px-5 py-2">
+        <div className="flex items-center gap-4 px-5">
           {STEPS.map((label, i) => (
             <div key={label} className="flex items-center gap-2">
               <span className={`text-sm ${i === step ? "text-black font-bold dark:text-white" : "text-gray-600 font-medium dark:text-white/50"}`}>
@@ -50,7 +50,7 @@ export default function AddDoctorsModal({ isOpen, onClose }: Props) {
             </div>
           ))}
         </div>
-        <div className="px-4 py-6">
+        <div className="px-4 py-3">
           {step === 0 && (
             <AddDoctorPersonalInfoStep
               state={state.personalInfo}

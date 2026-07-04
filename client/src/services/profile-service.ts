@@ -14,6 +14,7 @@ export const getPatientProfile = async () => {
 export const createDoctor = async (data: {
   address: string;
   phoneNumber: string;
+  workPhoneNumber: string;
   bio: string;
   dateOfBirth: string;
   education: string;

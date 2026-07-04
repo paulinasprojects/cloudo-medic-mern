@@ -63,6 +63,7 @@ export interface Doctor {
   userId: string;
   address: string;
   phoneNumber: string;
+  workPhoneNumber: string;
   bio: string;
   dateOfBirth: string;
   education: string;

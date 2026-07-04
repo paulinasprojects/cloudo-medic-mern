@@ -49,6 +49,26 @@ const DoctorWorkInfoPage = () => {
             })}
           />
         </div>
+       <div className="flex flex-col gap-y-2">
+          <label
+            htmlFor="work-phone-number"
+            className="label-class text-[12px]"
+          >
+            Work Phone Number
+          </label>
+          <input
+            id="work-phone-number"
+            type="text"
+            placeholder="+123141294"
+            required
+            className="input-class"
+            value={state.workInfo.workPhoneNumber}
+            onChange={(e) => dispatch({
+              type: "UPDATE_WORK_INFO",
+              payload: { workPhoneNumber: e.target.value }
+            })}
+          />
+        </div>
         <div className="flex flex-col gap-y-2">
           <label htmlFor="hospital" className="label-class">Hospital</label>
           <input
@@ -70,7 +90,7 @@ const DoctorWorkInfoPage = () => {
               type: "UPDATE_WORK_INFO",
               payload: { doctorLevel: value as DoctorLevel }
             })}>
-            <SelectTrigger placeholder="Select doctor level" />
+            <SelectTrigger placeholder="Select doctor level" className="text-[11px]" />
             <SelectContent>
               {Object.values(DoctorLevel).map((level) => (
                 <SelectOption key={level} value={level}>{level}</SelectOption>

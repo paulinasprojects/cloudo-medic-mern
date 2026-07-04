@@ -34,6 +34,7 @@ export default function AddDoctorSubmitInfoStep({ state, dispatch, onBack, onSuc
       dateOfBirth: state.personalInfo.dateOfBirth,
       gender: state.personalInfo.gender,
       phoneNumber: state.personalInfo.phoneNumber,
+      workPhoneNumber: state.workInfo.workPhoneNumber,
       hospital: state.workInfo.hospital,
       education: state.workInfo.education,
       doctorLevel: state.workInfo.doctorLevel,
@@ -75,6 +76,10 @@ export default function AddDoctorSubmitInfoStep({ state, dispatch, onBack, onSuc
           {state.personalInfo.phoneNumber}
         </p>
         <p className="inline-flex gap-2 items-center">
+          <span className="submit-class">Work Phone:</span>
+          {state.workInfo.workPhoneNumber}
+        </p>
+        <p className="inline-flex gap-2 items-center">
           <span className="submit-class">Hospital:</span>
           {state.workInfo.hospital}
         </p>
@@ -108,14 +113,14 @@ export default function AddDoctorSubmitInfoStep({ state, dispatch, onBack, onSuc
         <button
           onClick={onBack}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+          className="p-2 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Back
         </button>
         <button
           onClick={handleSubmit}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+          className="p-2 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isPending ? "Creating..." : "Create Doctor"}
         </button>

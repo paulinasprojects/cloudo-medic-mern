@@ -241,7 +241,7 @@ export const deleteUserByAdmins = asyncHandler(
 
 export const createDoctor = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { userId, address, phoneNumber, bio, dateOfBirth, gender, doctorLevel, education, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
+    const { userId, address, workPhoneNumber, phoneNumber, bio, dateOfBirth, gender, doctorLevel, education, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
     const userAdmin = req.userId;
       const user = await User.findOne({
       where: {
@@ -267,6 +267,7 @@ export const createDoctor = asyncHandler(
       userId: userId,
       address,
       phoneNumber,
+      workPhoneNumber,
       bio,
       dateOfBirth,
       doctorLevel,
@@ -285,7 +286,7 @@ export const createDoctor = asyncHandler(
 
 export const updateDoctorProfileByAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { userId, address, phoneNumber, bio, dateOfBirth, doctorLevel, education, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
+    const { userId, address, phoneNumber, workPhoneNumber,  bio, dateOfBirth, doctorLevel, education, licenseNumber, specialization, hospital, consultationFee, yearsOfExperience } = req.body;
     const { id } = req.params;
      const userAdmin = req.userId;
      const user = await User.findOne({
@@ -320,6 +321,10 @@ export const updateDoctorProfileByAdmin = asyncHandler(
 
     if (phoneNumber) {
       profile.phoneNumber = phoneNumber;
+    }
+
+    if (workPhoneNumber) {
+      profile.workPhoneNumber = workPhoneNumber;
     }
 
     if (bio) {

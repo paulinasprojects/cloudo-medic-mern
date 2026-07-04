@@ -13,6 +13,7 @@ export interface DoctorProfileFormData {
     education: Education | "" | string;
     specialization: string;
     hospital: string;
+    workPhoneNumber: string;
     doctorLevel: DoctorLevel | "" | string;
     licenseNumber: string;
     consultationFee: number | string;

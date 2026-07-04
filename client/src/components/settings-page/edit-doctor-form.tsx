@@ -8,6 +8,7 @@ export default function EditDoctorForm() {
   const { data: doctor } = useGetDoctorProfile();
   const [address, setAddress] = useState<string>(doctor?.data?.address ?? "");
   const [phoneNumber, setPhoneNumber] = useState<string>(doctor?.data?.phoneNumber ?? "")
+  const [workPhoneNumber, setWorkPhoneNumber] = useState<string>(doctor?.data?.workPhoneNumber ?? "")
   const [bio, setBio] = useState<string>(doctor?.data?.bio ?? "")
   const [hospital, setHospital] = useState<string>(doctor?.data?.hospital ?? "")
   const [consultationFee, setConsultationFee] = useState<number | string>(doctor?.data?.consultationFee ?? "");
@@ -19,6 +20,7 @@ export default function EditDoctorForm() {
       bio: string,
       hospital: string;
       consultationFee: number;
+      workPhoneNumber: string;
     }) => EditDoctorByDoctor(doctorData),
      onSuccess: () => {
       toast.success("Work information updated successfully");
@@ -33,6 +35,7 @@ export default function EditDoctorForm() {
     editDoctorByDoctorMutation({
       address,
       phoneNumber,
+      workPhoneNumber,
       bio,
       hospital,
       consultationFee: Number(consultationFee)
@@ -79,6 +82,23 @@ export default function EditDoctorForm() {
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
+         <div className="flex flex-col gap-y-2">
+          <label
+            htmlFor="work-phone-number"
+            className="label-class"
+          >
+           Work Phone Number
+          </label>
+          <input
+            type="text"
+            id="work-phone-number"
+            placeholder="+123456780"
+            required
+            className="input-class"
+            value={workPhoneNumber}
+            onChange={(e) => setWorkPhoneNumber(e.target.value)}
+          />
+        </div>
         <div className="flex flex-col gap-y-2">
           <label htmlFor="bio" className="label-class">Bio</label>
           <textarea
@@ -90,7 +110,7 @@ export default function EditDoctorForm() {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="hospital" className="label-class text-[12px]">
+          <label htmlFor="hospital" className="label-class">
             Hospital
           </label>
           <input
@@ -104,7 +124,7 @@ export default function EditDoctorForm() {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="consultation-fee" className="label-class text-[12px]">
+          <label htmlFor="consultation-fee" className="label-class">
             Consultation Fee
           </label>
           <input

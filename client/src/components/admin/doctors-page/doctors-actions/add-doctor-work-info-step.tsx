@@ -23,7 +23,7 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
 
   return (
     <div className="col-span-3 sm:col-span-3 flex flex-col gap-2">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-y-2">
           <label
             htmlFor="education"
@@ -65,6 +65,26 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
             onChange={(e) => dispatch({
               type: "UPDATE_WORK_INFO",
               payload: { specialization: e.target.value }
+            })}
+          />
+        </div>
+        <div className="flex flex-col gap-y-2">
+          <label
+            htmlFor="work-phone-number"
+            className="label-class text-[12px]"
+          >
+            Work Phone Number
+          </label>
+          <input
+            id="work-phone-number"
+            type="text"
+            placeholder="+123141294"
+            required
+            className="input-class"
+            value={state.workPhoneNumber}
+            onChange={(e) => dispatch({
+              type: "UPDATE_WORK_INFO",
+              payload: { workPhoneNumber: e.target.value }
             })}
           />
         </div>
@@ -163,13 +183,13 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
           <button
             type="button"
             onClick={goBack}
-            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+            className="p-2 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Back
           </button>
           <button
             type="submit"
-            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+            className="p-2 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Next
           </button>

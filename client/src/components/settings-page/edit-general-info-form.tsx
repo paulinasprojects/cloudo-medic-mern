@@ -42,7 +42,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
             <span className="mt-5 text-red-500 text-sm">{error}</span>
           )}
            <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-sm font-medium">Email</label>
+          <label htmlFor="email" className="label-class">Email</label>
           <input
             type="email"
             id="email"
@@ -54,7 +54,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="text-sm font-medium">New Password</label>
+          <label htmlFor="password" className="label-class">New Password</label>
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}

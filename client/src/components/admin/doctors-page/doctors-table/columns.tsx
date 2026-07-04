@@ -1,9 +1,9 @@
-import { Doctors } from "@/types/types";
+import { Doctor,} from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
 import { ArrowUpDown } from "lucide-react";
 
-export const columns: ColumnDef<Doctors>[] = [
+export const columns: ColumnDef<Doctor>[] = [
   {
     accessorKey: "userId",
     header: "User Id",
@@ -16,11 +16,31 @@ export const columns: ColumnDef<Doctors>[] = [
   },
   {
     accessorKey: "user.firstName",
-    header: "First name"
+    header: ({column}) => {
+      return (
+        <button
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center"
+        >
+          First name
+          <ArrowUpDown className="ml-2 h-3 w-3"/>
+        </button>
+      )
+    }
   },
   {
     accessorKey: "user.lastName",
-    header: "Last name"
+    header: ({ column }) => {
+      return (
+        <button
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="flex items-center"
+        >
+          Last name
+          <ArrowUpDown className="ml-2 h-3 w-3"/>
+        </button>
+      )
+    }
   },
   {
     accessorKey: "education",
@@ -43,6 +63,10 @@ export const columns: ColumnDef<Doctors>[] = [
   {
     accessorKey: "specialization",
     header: "Specialization"
+  },
+  {
+    accessorKey: "workPhoneNumber",
+    header: "Work Phone"
   },
   {
     accessorKey: "hospital",

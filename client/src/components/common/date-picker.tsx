@@ -52,7 +52,7 @@ const DatePicker = ({
         onClick={() => setOpen((prev) => !prev)}
         className={cn("px-4 py-1 w-full flex justify-between items-center text-left border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors", disabled && "opacity-50 cursor-not-allowed")}
       >
-        <span className={value ? "dark:text-white text-sm" : "text-gray-400 text-sm"}>
+        <span className={value ? "dark:text-white text-sm" : "text-gray-400 text-[11px]"}>
           {formattedDate || placeholder}
         </span>
         <Calendar className="size-4" />

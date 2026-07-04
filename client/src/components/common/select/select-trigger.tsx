@@ -26,7 +26,7 @@ const SelectTrigger = ({
     >
       <span className={cn(value ? "dark:text-white text-black" : "text-gray-500")}>
         {value ? value : (
-          <span className="text-gray-500">
+          <span className="text-gray-500 text-[11px]">
             {placeholder}
           </span>
         )}
