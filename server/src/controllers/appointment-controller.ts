@@ -94,6 +94,317 @@ export const getAllAppointmentsByPatients = asyncHandler(
   }
 )
 
+export const getAllCompletedAppointmentsByDoctors = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const doctorProfile = await DoctorProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!doctorProfile) {
+      throw new AppError("Doctor not found", 404)
+    }
+
+    const completedAppointments = await Appointment.findAll({
+      where: {
+        doctorId: doctorProfile.id,
+        status: AppointmentStatus.COMPLETED
+      },
+      include: appointmentIncludes,
+      order: [["appointmentDate", "ASC"]]
+    });
+
+    return SendSuccess(res, completedAppointments, "Completed appoitnemnts retrieved successfully")
+  }
+)
+
+export const getAllCompletedAppointmentsByPatients = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const patientProfile = await PatientProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!patientProfile) {
+      throw new AppError('Patient not found', 404)
+    }
+
+    const completedAppointments = await Appointment.findAll({
+      where: {
+        patientId: patientProfile.id,
+        status: AppointmentStatus.COMPLETED
+      },
+      include: appointmentIncludes,
+      order: [["appointmentDate", "ASC"]]
+    });
+
+    return SendSuccess(res, completedAppointments, "Completed appointments retrieved successfully")
+  }
+)
+
+export const getAllScheduledAppointmentsByDoctors = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+    
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const doctorProfile = await DoctorProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!doctorProfile) {
+      throw new AppError("Doctor not found", 404)
+    }
+
+    const scheduledAppointments = await Appointment.findAll({
+      where: {
+        doctorId: doctorProfile.id,
+        status: AppointmentStatus.SCHEDULED
+      },
+      include: appointmentIncludes,
+      order: [["appointmentDate", "ASC"]]
+    });
+
+    return SendSuccess(res, scheduledAppointments, "Scheduled appointments retrived successfully")
+  }
+)
+
+export const getAllScheduledAppointmentsByPatients = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const patientProfile = await PatientProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!patientProfile) {
+      throw new AppError("Patient not found", 404)
+    }
+
+    const scheduledAppointments = await Appointment.findAll({
+      where: {
+        patientId: patientProfile.id,
+        status: AppointmentStatus.SCHEDULED
+      },
+      include: appointmentIncludes,
+      order: [["appointmentDate", "ASC"]]
+    });
+
+    return SendSuccess(res, scheduledAppointments, "Scheduled appointments retieved successfully")
+  }
+)
+
+export const getScheduledAppointmentByIdByDoctors = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+    
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const appointment = await Appointment.findOne({
+      where: {
+        id,
+        status: AppointmentStatus.SCHEDULED
+      },
+      include: appointmentIncludes
+    });
+
+    if (!appointment) {
+      throw new AppError("Appointment not found", 404)
+    }
+
+    const doctorProfile = await DoctorProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!doctorProfile || appointment.doctorId !== doctorProfile.id) {
+      throw new AppError("You do not have access to this test", 403)
+    }
+
+    return SendSuccess(res, appointment, "Scheduled appoitnment retrieved successfully")
+  }
+)
+
+export const getScheduledAppointmentByIdByPatients = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const appointment = await Appointment.findOne({
+      where: {
+        id,
+        status: AppointmentStatus.SCHEDULED
+      },
+      include: appointmentIncludes
+    });
+
+    if (!appointment) {
+      throw new AppError("Appointment not found", 404)
+    };
+
+    const patientProfile = await PatientProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!patientProfile || appointment.patientId !== patientProfile.id) {
+      throw new AppError("You do not have access to this appointment", 403)
+    }
+
+    return SendSuccess(res, appointment, "Appointment retrieved successfully")
+  }
+)
+
+export const getCompletedAppointmentByIdByDoctors = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const appointment = await Appointment.findOne({
+      where: {
+        id,
+        status: AppointmentStatus.COMPLETED
+      },
+      include: appointmentIncludes,
+    });
+
+    if (!appointment) {
+      throw new AppError("Appointment not found", 404)
+    }
+
+    const doctorProfile = await DoctorProfile.findOne({
+      where: {
+        userId
+      }
+    });
+    
+    if (!doctorProfile || appointment.doctorId !== doctorProfile.id) {
+      throw new AppError("You do not have access to this appointment", 403)
+    }
+
+    return SendSuccess(res, appointment, "Completed appointment retrieved successfully")
+  }
+)
+
+export const getCompletedAppointmentByIdByPatients = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+    
+    const appointment = await Appointment.findOne({
+      where: {
+        id,
+        status: AppointmentStatus.COMPLETED
+      },
+      include: appointmentIncludes
+    });
+
+    if (!appointment) {
+      throw new AppError("Appointment not found", 404)
+    }
+
+    const patientProfile = await PatientProfile.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (!patientProfile || appointment.patientId !== patientProfile.id) {
+      throw new AppError("You do not have access to this appointment", 403)
+    }
+
+    return SendSuccess(res, appointment, "Completed appointment retrieved successfully")
+   }
+)
+
 
 export const getAppointmentByIdByDoctor = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

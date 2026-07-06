@@ -32,6 +32,6 @@ router.get("/patient/completed/:id", requireAuth, requirePatient, getCompletedTe
 router.get("/:id", requireAuth, requireDoctor, getMedicalTestByIdByDoctors);
 router.get("/:id", requireAuth, requirePatient, getMedicalTestByIdByPatients);
 router.post("/", requireAuth, requireDoctor, createMedicalTestByDoctors);
-router.post("/:id", requireAuth, requireDoctor, updateMedicalTestByDoctors);
+router.patch("/:id", requireAuth, requireDoctor, updateMedicalTestByDoctors);
 
 export default router;

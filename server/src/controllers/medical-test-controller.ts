@@ -227,7 +227,7 @@ export const getScheduledTestByIdByPatients = asyncHandler(
     const medicalTest = await MedicalTest.findOne({
       where: {
         id,
-        status: MedicalTestStatus.COMPLETED
+        status: MedicalTestStatus.SCHEDULED
       },
       include: testsIncludes,
     });
