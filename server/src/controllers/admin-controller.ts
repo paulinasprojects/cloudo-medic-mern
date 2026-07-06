@@ -8,7 +8,8 @@ import DoctorProfile from "../models/DoctorProfile";
 import PatientProfile from "../models/PatientProfile";
 import MedicalTest from "../models/MedicalTest";
 import User from "../models/User";
-import { AppointmentStatus, MedicalTestStatus } from "../types";
+import Vaccine from "../models/Vaccine";
+import { AppointmentStatus, MedicalTestStatus, VaccineStatus } from "../types";
 
 const allIncludes = [
   {
@@ -1079,5 +1080,109 @@ export const deleteMedicalTestByAdmins = asyncHandler(
 
     await medicalTest.destroy();
     SendSuccess(res, null, "Medical test deleted successfully!")
+  }
+)
+
+export const getAllVaccinesTestsByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+  
+      const allVaccines = await Vaccine.findAll({
+        include: allIncludes,
+        order: [["vaccinationDate", "ASC"]]
+      });
+      return SendSuccess(res, allVaccines, "All vaccines retrieved successfully")
+  }
+)
+
+export const getAllScheduledVaccinesByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+    
+      const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+
+    const scheduledVaccines = await Vaccine.findAll({
+      where: {
+        status: VaccineStatus.SCHEDULED
+      },
+      include: allIncludes,
+      order: [["vaccinationDate", "ASC"]]
+    });
+      
+      SendSuccess(res, scheduledVaccines, "Scheduled vaccines retrieved successfully")
+  }
+)
+
+export const getAllCompletedVaccinesByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.userId;
+    
+      const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    };
+
+    const completedVaccines = await Vaccine.findAll({
+      where: {
+        status: VaccineStatus.COMPLETED
+      },
+      include: allIncludes,
+      order: [["vaccinationDate", "ASC"]]
+    });
+      
+      SendSuccess(res, completedVaccines, "Completed vaccines retrieved successfully")
+  }
+)
+
+export const deleteVaccineByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const vaccine = await Vaccine.findOne({
+      where: {
+        id
+      }
+    });
+
+    if (!vaccine) {
+      throw new AppError("Vaccine not found", 404)
+    };
+
+    await vaccine.destroy();
+    SendSuccess(res, null, "Vaccine deleted successfully!")
   }
 )

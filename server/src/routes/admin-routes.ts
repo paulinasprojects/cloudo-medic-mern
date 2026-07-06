@@ -29,7 +29,11 @@ import {
   getAllMedicalTestsByAdmins,
   getAllCompletedTestsByAdmins,
   getAllScheduledTestsByAdmins,
-  deleteMedicalTestByAdmins
+  deleteMedicalTestByAdmins,
+  getAllVaccinesTestsByAdmins,
+  getAllScheduledVaccinesByAdmins,
+  getAllCompletedVaccinesByAdmins,
+  deleteVaccineByAdmins,
 } from "../controllers/admin-controller";
 
 const router = Router();
@@ -79,5 +83,11 @@ router.get("/medicaltests",  getAllMedicalTestsByAdmins);
 router.get("/medicaltests/scheduled",  getAllScheduledTestsByAdmins);
 router.get("/medicaltests/completed",  getAllCompletedTestsByAdmins);
 router.delete("/medicaltests/:id",  deleteMedicalTestByAdmins);
+
+{/* Vaccine Routes */}
+router.get("/vaccines", getAllVaccinesTestsByAdmins);
+router.get("/vaccines/scheduled", getAllScheduledVaccinesByAdmins);
+router.get("/vaccines/completed", getAllCompletedVaccinesByAdmins);
+router.get("/vaccines/:id", deleteVaccineByAdmins);
 
 export default router;
