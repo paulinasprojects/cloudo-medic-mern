@@ -72,3 +72,9 @@ export enum Urine {
   PROTEIN = "protein",
   BLOOD = "blood",
 }
+
+export enum VaccineStatus {
+  SCHEDULED = "scheduled",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled"
+}

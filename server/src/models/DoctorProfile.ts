@@ -5,6 +5,7 @@ import Appointment from "./Appointment";
 import Prescription from "./Prescription";
 import MedicalTest from "./MedicalTest";
 import { DoctorEducation, DoctorLevel } from "../types";
+import Vaccine from "./Vaccine";
 
 export class DoctorProfile extends Model<InferAttributes<DoctorProfile>,
 InferCreationAttributes<DoctorProfile>> {
@@ -29,6 +30,7 @@ InferCreationAttributes<DoctorProfile>> {
   declare appointents?: NonAttribute<Appointment[]>
   declare prescriptions?: NonAttribute<Prescription[]>
   declare medicalTests?: NonAttribute<MedicalTest[]>
+  declare vaccines?: NonAttribute<Vaccine[]>
 }
 
 DoctorProfile.init({

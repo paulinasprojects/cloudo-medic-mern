@@ -11,6 +11,7 @@ import appointmentRoutes from "./routes/appointment-routes";
 import prescriptionsRoutes from "./routes/prescription-routes";
 import adminRoutes from "./routes/admin-routes";
 import medicalTestsRoutes from "./routes/medical-test-routes";
+import vaccinesRoutes from "./routes/vaccine-routes";
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use("/api/appointments", appointmentRoutes);
 app.use("/api/prescriptions", prescriptionsRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/medicaltests", medicalTestsRoutes);
+app.use("/api/vaccines", vaccinesRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
