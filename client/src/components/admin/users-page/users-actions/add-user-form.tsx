@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
@@ -49,11 +50,15 @@ export default function AddUserForm({ onSuccess }: Props) {
     <div className="col-span-3 sm:col-span-3 flex flex-col gap-6 p-6">
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {error && (
-          <span className="text-red-500">{error.message}</span>
+          <span className="text-red-500">
+             {axios.isAxiosError(error)
+                ? error.response?.data?.error ?? error.message
+                : error.message}
+          </span>
         )}
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <label htmlFor="first-name" className="text-sm font-medium text-black dark:text-white">
+            <label htmlFor="first-name" className="label-class">
               First Name
             </label>
             <input
@@ -69,7 +74,7 @@ export default function AddUserForm({ onSuccess }: Props) {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="last-name" className="text-sm font-medium text-black dark:text-white">Last Name</label>
+          <label htmlFor="last-name" className="label-class">Last Name</label>
           <input
             type="text"
             id="last-name"
@@ -82,7 +87,7 @@ export default function AddUserForm({ onSuccess }: Props) {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-sm font-medium text-black dark:text-white">Email</label>
+          <label htmlFor="email" className="label-class">Email</label>
           <input
             type="email"
             id="email"
@@ -95,7 +100,7 @@ export default function AddUserForm({ onSuccess }: Props) {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="text-sm font-medium text-black dark:text-white">Password</label>
+          <label htmlFor="password" className="label-class">Password</label>
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
@@ -122,7 +127,7 @@ export default function AddUserForm({ onSuccess }: Props) {
           </div>
         </div>
         <div className="flex flex-col gap-2 mt-2">
-          <label htmlFor="role" className="text-sm font-medium text-black dark:text-white">Patient, Doctor or Admin?</label>
+          <label htmlFor="role" className="label-class">Patient, Doctor or Admin?</label>
           <Select
             id="role"
             value={role}

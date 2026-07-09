@@ -23,7 +23,8 @@ import {
   getAllPrescriptionsByAdmins, 
   getPrescriptionsByPatientId, 
   getPrescriptionsByDoctorId, 
-  getPrescriptionByIdByAdmins, 
+  getPrescriptionByIdByAdmins,
+  createPrescription,
   updatePrescriptionByAdmins, 
   deletePrescriptionByAdmins,
   getAllMedicalTestsByAdmins,
@@ -74,6 +75,7 @@ router.delete("/appointments/:id", deleteAppointmentByAdmins);
 
 {/* Prescriptions Routes */}
 router.get("/prescriptions", getAllPrescriptionsByAdmins);
+router.post("/prescriptions", createPrescription);
 router.get("/prescriptions/:id", getPrescriptionByIdByAdmins);
 router.get("/prescriptions/patient/:patientId", getPrescriptionsByPatientId);
 router.get("/prescriptions/doctor/:doctorId", getPrescriptionsByDoctorId);

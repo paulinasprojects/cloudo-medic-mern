@@ -1,6 +1,7 @@
 import { useGetAdminUser } from "@/hooks/admins/admins"
 import { editAdminUser } from "@/services/admin-service"
 import { useMutation } from "@tanstack/react-query"
+import axios from "axios"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -33,7 +34,11 @@ export default function EditAdminForm() {
     <div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {error && (
-          <span className="text-sm text-red-500">{error.message}</span>
+          <span className="text-sm text-red-500">
+             {axios.isAxiosError(error)
+                ? error.response?.data?.error ?? error.message
+                : error.message}
+          </span>
         )}
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">

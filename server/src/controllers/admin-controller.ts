@@ -900,6 +900,67 @@ export const getPrescriptionByIdByAdmins = asyncHandler(
   }
 )
 
+export const createPrescription = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { doctorId, patientId, medication, dosage, instructions, startDate, endDate } = req.body;
+    
+    if (!doctorId || !patientId || !startDate || !endDate) {
+      throw new AppError("Please provide a doctor, patient,start date and end date to create an appointment", 400);
+    }
+
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const doctor = await DoctorProfile.findOne({
+      where: {
+        id: doctorId
+      }
+    });
+
+    if (!doctor) {
+      throw new AppError("Doctor not found", 404)
+    }
+
+    const patient = await PatientProfile.findOne({
+      where: {
+        id: patientId
+      }
+    });
+
+    if (!patient) {
+      throw new AppError("Patient not found", 404)
+    }
+
+    const date = startDate ? new Date(startDate) : new Date();
+    const today = new Date();
+
+    if (date < today) {
+      throw new AppError("Cannot create a prescriptions for a past date", 400)
+    };
+
+    const newPrescriptions = await Prescription.create({
+      doctorId,
+      patientId,
+      startDate: date,
+      endDate,
+      instructions: instructions.trim(),
+      medication,
+      dosage: dosage ?? null,
+    });
+
+    return SendSuccess(res, newPrescriptions, "Prescription created successfully")
+  }
+)
+
 export const updatePrescriptionByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { medication, dosage, instructions, endDate } = req.body;

@@ -264,7 +264,7 @@ export const createPrescription = asyncHandler(
     const { patientId, medication, dosage, instructions, startDate, endDate } = req.body;
     const userId = req.userId;
 
-    if (!patientId && !startDate && !endDate) {
+    if (!patientId || !startDate || !endDate) {
       throw new AppError("Please provide a patient,start date and end date to create an appointment", 400);
     }
 

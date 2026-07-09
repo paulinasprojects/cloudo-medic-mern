@@ -4,6 +4,7 @@ import { toast } from "sonner";
 // import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getDoctorProfile, updateDoctor } from "@/services/profile-service";
+import axios from "axios";
 
 const DoctorProfileEdit = () => {
 
@@ -66,7 +67,11 @@ const DoctorProfileEdit = () => {
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {error && (
-            <p className="text-red-500">{error.message}</p>
+            <span className="text-red-500">
+               {axios.isAxiosError(error)
+                ? error.response?.data?.error ?? error.message
+                : error.message}
+            </span>
           )}
           <div className="flex flex-col gap-4 mt-6">
             <div className="flex flex-col gap-y-2">

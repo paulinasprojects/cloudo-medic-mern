@@ -136,3 +136,16 @@ export const editAdminUser = async (data: editAdminUserRequest) => {
   const response = await api.patch<ApiResponse<User>>("/admin/users", data);
   return response.data;
 }
+
+export const createPrescription = async (data: {
+  patientId: string;
+  doctorId: string;
+  medication: string | string[];
+  dosage: string | string[] | null;
+  instructions: string;
+  startDate: string;
+  endDate: string;
+}) => {
+  const response = await api.post<ApiResponse<Prescription>>("/admin/prescriptions", data);
+  return response.data;
+}

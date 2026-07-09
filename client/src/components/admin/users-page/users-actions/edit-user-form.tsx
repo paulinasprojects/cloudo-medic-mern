@@ -1,3 +1,4 @@
+import axios from "axios";
 import { toast } from "sonner";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -56,7 +57,11 @@ export default function EditUserForm({ onSuccess, data }: Props) {
     <div className="col-span-3 sm:col-span-3 flex flex-col gap-6 p-6">
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {error && (
-          <span className="text-red-500">{error.message}</span>
+          <span className="text-red-500">
+             {axios.isAxiosError(error)
+              ? error.response?.data?.error ?? error.message
+              : error.message}
+          </span>
         )}
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">

@@ -3,6 +3,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { useGetDoctorProfile } from "@/hooks/doctors/doctors"
 import { EditDoctorByDoctor } from "@/services/doctor-service"
+import axios from "axios"
 
 export default function EditDoctorForm() {
   const { data: doctor } = useGetDoctorProfile();
@@ -46,7 +47,11 @@ export default function EditDoctorForm() {
     <div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {error && (
-          <span className="text-sm text-red-500">{error.message}</span>
+          <span className="text-sm text-red-500">
+             {axios.isAxiosError(error)
+              ? error.response?.data?.error ?? error.message
+              : error.message}
+          </span>
         )}
            <div className="flex flex-col gap-y-2">
           <label

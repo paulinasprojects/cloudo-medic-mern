@@ -1,6 +1,7 @@
 import { useGetPatientProfile } from "@/hooks/patients/patients";
 import { EditPatientByPatient } from "@/services/patient-service";
 import { useMutation } from "@tanstack/react-query"
+import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -40,7 +41,11 @@ export default function EditPatientForm() {
     <div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {error && (
-            <span className="text-sm text-red-500">{error.message}</span>
+            <span className="text-sm text-red-500">
+               {axios.isAxiosError(error)
+                  ? error.response?.data?.error ?? error.message
+                  : error.message}
+            </span>
           )}
           <div className="flex flex-col gap-y-2">
           <label
