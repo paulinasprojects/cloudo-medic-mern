@@ -29,10 +29,12 @@ import {
   getAllMedicalTestsByAdmins,
   getAllCompletedTestsByAdmins,
   getAllScheduledTestsByAdmins,
+  updateMedicalTestByAdmins,
   deleteMedicalTestByAdmins,
-  getAllVaccinesTestsByAdmins,
+  getAllVaccinesByAdmins,
   getAllScheduledVaccinesByAdmins,
   getAllCompletedVaccinesByAdmins,
+  updateVaccineByAdmins,
   deleteVaccineByAdmins,
 } from "../controllers/admin-controller";
 
@@ -82,12 +84,14 @@ router.delete("/prescriptions/:id", deletePrescriptionByAdmins);
 router.get("/medicaltests",  getAllMedicalTestsByAdmins);
 router.get("/medicaltests/scheduled",  getAllScheduledTestsByAdmins);
 router.get("/medicaltests/completed",  getAllCompletedTestsByAdmins);
+router.patch("/medicaltests/:id",  updateMedicalTestByAdmins);
 router.delete("/medicaltests/:id",  deleteMedicalTestByAdmins);
 
 {/* Vaccine Routes */}
-router.get("/vaccines", getAllVaccinesTestsByAdmins);
+router.get("/vaccines", getAllVaccinesByAdmins);
 router.get("/vaccines/scheduled", getAllScheduledVaccinesByAdmins);
 router.get("/vaccines/completed", getAllCompletedVaccinesByAdmins);
-router.get("/vaccines/:id", deleteVaccineByAdmins);
+router.patch("/vaccines/:id", updateVaccineByAdmins);
+router.delete("/vaccines/:id", deleteVaccineByAdmins);
 
 export default router;

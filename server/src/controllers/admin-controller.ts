@@ -902,7 +902,7 @@ export const getPrescriptionByIdByAdmins = asyncHandler(
 
 export const updatePrescriptionByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { dosage, instructions, endDate } = req.body;
+    const { medication, dosage, instructions, endDate } = req.body;
     const { id } = req.params;
     const userId = req.userId;
     
@@ -938,6 +938,10 @@ export const updatePrescriptionByAdmins = asyncHandler(
 
     if (dosage !== undefined) {
       prescription.dosage = dosage;
+    }
+
+    if (medication !== undefined) {
+      prescription.medication = medication
     }
 
     if (instructions !== undefined) {
@@ -1053,6 +1057,75 @@ export const getAllCompletedTestsByAdmins = asyncHandler(
   }
 )
 
+export const updateMedicalTestByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { date, notes, status, bloodTests, biochemistryTests, imagingTests, urineTests } = req.body;
+    const { id } = req.params;
+    const userId = req.userId;
+
+
+  const user = await User.findOne({
+    where: {
+      id: userId
+    }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const medicalTest = await MedicalTest.findOne({
+      where: {
+        id
+      }
+    });
+
+    if (!medicalTest) {
+      throw new AppError("Medical test not found", 404)
+    }
+
+    
+    if (status !== undefined) {
+      medicalTest.status = status;
+    }
+
+    if (notes !== undefined) {
+      medicalTest.notes = notes
+    };
+
+     const testDate = date ? new Date(date) : new Date();
+     const today = new Date();
+
+     if (testDate < today) {
+      throw new AppError("Cannot update a medical test for a past date", 400)
+     };
+
+     if (date !== undefined) {
+      medicalTest.date = testDate
+     }
+
+     if (bloodTests !== undefined) {
+      medicalTest.bloodTests = bloodTests;
+     }
+
+     if (biochemistryTests !== undefined) {
+      medicalTest.biochemistryTests = biochemistryTests;
+     }
+
+     if (imagingTests !== undefined) {
+      medicalTest.imagingTests = imagingTests;
+     }
+
+     if (urineTests !== undefined) {
+      medicalTest.urineTests = urineTests;
+     }
+
+     const updatedMedicalTest = await medicalTest.save();
+
+     SendSuccess(res, updatedMedicalTest, "Medical test updated successfully")
+  }
+)
+
 export const deleteMedicalTestByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
@@ -1083,7 +1156,7 @@ export const deleteMedicalTestByAdmins = asyncHandler(
   }
 )
 
-export const getAllVaccinesTestsByAdmins = asyncHandler(
+export const getAllVaccinesByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.userId;
 
@@ -1154,6 +1227,55 @@ export const getAllCompletedVaccinesByAdmins = asyncHandler(
     });
       
       SendSuccess(res, completedVaccines, "Completed vaccines retrieved successfully")
+  }
+)
+
+export const updateVaccineByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { vaccinationName, vaccinationDate, notes, status } = req.body;
+    const { id } = req.params;
+    const userId = req.userId;
+    
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const vaccine = await Vaccine.findOne({
+      where: {
+        id
+      }
+    });
+
+    if (!vaccine) {
+      throw new AppError("Prescription not found", 404)
+    }
+
+
+    if (vaccinationName !== undefined) {
+      vaccine.vaccinationName = vaccinationName;
+    }
+
+    if (vaccinationDate !== undefined) {
+      vaccine.vaccinationDate = vaccinationDate
+    }
+
+    if (notes !== undefined) {
+      vaccine.notes = notes;
+    }
+
+    if (status !== undefined) {
+      vaccine.status = status;
+    }
+
+    const updatedVaccine = await vaccine.save();
+
+    SendSuccess(res, updatedVaccine, "Prescription updated successfully")
   }
 )
 

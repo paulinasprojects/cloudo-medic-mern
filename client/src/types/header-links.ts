@@ -1,4 +1,4 @@
-import { DashboardBrowsingIcon, User02Icon, Doctor01Icon, PatientIcon, Invoice01Icon, Settings02Icon } from "@hugeicons/core-free-icons" 
+import { DashboardBrowsingIcon, User02Icon, Doctor01Icon, PatientIcon, VaccineIcon, PrescriptionIcon, Appointment02Icon, TestTube01Icon } from "@hugeicons/core-free-icons" 
  export const links = [
     {
       title: "Dashboard",
@@ -21,13 +21,23 @@ import { DashboardBrowsingIcon, User02Icon, Doctor01Icon, PatientIcon, Invoice01
       icon: PatientIcon,
     },
     {
-      title: "Analytics",
-      href: "/admin/analytics",
-      icon: Invoice01Icon,
+      title: "Prescriptions",
+      href: "/admin/prescriptions",
+      icon: PrescriptionIcon,
     },
     {
-      title: "Settings",
-      href: "/admin/settings",
-      icon: Settings02Icon,
+      title: "Appointments",
+      href: "/admin/appointments",
+      icon: Appointment02Icon,
+    },
+    {
+      title: "Tests",
+      href: "/admin/tests",
+      icon: TestTube01Icon,
+    },
+    {
+      title: "Vaccines",
+      href: "/admin/vaccines",
+      icon: VaccineIcon,
     },
   ]

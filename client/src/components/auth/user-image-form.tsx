@@ -55,7 +55,7 @@ export default function UserImageForm({ onSuccess }: Props) {
 			>
 				{preview ? (
 					<>
-						<img src={preview} alt="preview image" className="w-full max-h-64 object-cover rounded-lg" />
+						<img src={preview} alt="preview image" className="w-full max-h-122.5 object-cover rounded-lg" />
 						<button
 							type="button"
 							onClick={(e) => { e.stopPropagation(); handleRemove() }}

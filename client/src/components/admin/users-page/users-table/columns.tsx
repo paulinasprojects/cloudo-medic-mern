@@ -45,6 +45,7 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "email",
+    size: 210,
     header: ({ column }) => {
       return (
         <button
@@ -73,6 +74,7 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "createdAt",
+    size: 270,
     header: ({ column }) => {
       return (
         <button

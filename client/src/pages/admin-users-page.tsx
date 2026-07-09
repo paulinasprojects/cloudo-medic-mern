@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Plus, UsersIcon } from "lucide-react";
+import { Plus } from "lucide-react";
+import { Doctor01Icon, PatientIcon, UserMultiple02Icon } from "@hugeicons/core-free-icons";
 import { useGetAllUsers, useGetAllDoctors, useGetAllPatients } from "@/hooks/admins/admins";
 import AddUsersModal from "@/components/admin/users-page/users-actions/add-users-modal";
 import { UsersDataTable } from "@/components/admin/users-page/users-table/users-data-table";
 import { columns } from "@/components/admin/users-page/users-table/columns";
+import AdminDashboardCard from "@/components/admin/admin-dashboard-card"
+
 
 const AdminUsersPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -40,48 +43,24 @@ const AdminUsersPage = () => {
         </div>
       </div>
       <div className="pb-8 grid grid-cols-1 sm:grid-cols-3 gap-x-5 gap-y-5">
-        <div className="dark:bg-[#0e121b] bg-white px-4 py-6 rounded-3xl">
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-full bg-[#191b27]">
-                <UsersIcon className="size-6 text-white" />
-              </div>
-              <span className="text-[20px]">Total Users</span>
-            </div>
-            <span className="text-[26px]">{users.data.length}</span>
-          </div>
-          <div className="pt-10">
-            <span className="text-center">Stay informed with real-time data of total users</span>
-          </div>
-        </div>
-        <div className="dark:bg-[#0e121b] bg-white px-4 py-6 rounded-3xl">
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-full bg-[#191b27]">
-                <UsersIcon className="size-6 text-white" />
-              </div>
-              <span className="text-[20px]">Total Doctors</span>
-            </div>
-            <span className="text-[26px]">{doctors.data.length}</span>
-          </div>
-          <div className="pt-10">
-            <span className="text-center">Stay informed with real-time data of total doctors.</span>
-          </div>
-        </div>
-        <div className="dark:bg-[#0e121b] bg-white px-4 py-6 rounded-3xl">
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-full bg-[#191b27]">
-                <UsersIcon className="size-6 text-white" />
-              </div>
-              <span className="text-[20px]">Total Patients</span>
-            </div>
-            <span className="text-[26px]">{patients.data.length}</span>
-          </div>
-          <div className="pt-10">
-            <span className="text-center">Stay informed with real-time data of total patients</span>
-          </div>
-        </div>
+        <AdminDashboardCard
+					title="Total Users"
+					data={users.data.length}
+					description="Stay informed real-time data of total users"
+					icon={UserMultiple02Icon}
+				/>
+        <AdminDashboardCard
+					title="Total Doctors"
+					data={doctors.data.length}
+					description="Stay informed real-time data of total doctors"
+					icon={Doctor01Icon}
+				/>
+       	<AdminDashboardCard
+					title="Total Patients"
+					data={patients.data.length}
+					description="Stay informed real-time data of total patients"
+					icon={PatientIcon}
+				/>
       </div>
       <UsersDataTable columns={columns} data={users.data} />
       <AddUsersModal isOpen={isModalOpen} onClose={handleCloseModal} />

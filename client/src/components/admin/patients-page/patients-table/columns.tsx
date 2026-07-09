@@ -7,7 +7,7 @@ export const columns: ColumnDef<Patient>[] = [
   {
     accessorKey: "userId",
     header: "User Id",
-    size: 80,
+    size: 190,
     cell: ({ row }) => (
         <div className="line-clamp-1">
         {row.original.userId}
@@ -63,6 +63,7 @@ export const columns: ColumnDef<Patient>[] = [
 	{
 		accessorKey: "medicalHistory",
 		header: "Medical History",
+		size: 190,
 		cell: ({row}) => (
 			<div className="line-clamp-1">
 				{row.original.medicalHistory}

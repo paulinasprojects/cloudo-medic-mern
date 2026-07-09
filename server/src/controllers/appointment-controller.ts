@@ -275,10 +275,10 @@ export const getScheduledAppointmentByIdByDoctors = asyncHandler(
     });
 
     if (!doctorProfile || appointment.doctorId !== doctorProfile.id) {
-      throw new AppError("You do not have access to this test", 403)
+      throw new AppError("You do not have access to this appointment", 403)
     }
 
-    return SendSuccess(res, appointment, "Scheduled appoitnment retrieved successfully")
+    return SendSuccess(res, appointment, "Scheduled appointment retrieved successfully")
   }
 )
 
@@ -319,7 +319,7 @@ export const getScheduledAppointmentByIdByPatients = asyncHandler(
       throw new AppError("You do not have access to this appointment", 403)
     }
 
-    return SendSuccess(res, appointment, "Appointment retrieved successfully")
+    return SendSuccess(res, appointment, "Scheduled appointment retrieved successfully")
   }
 )
 

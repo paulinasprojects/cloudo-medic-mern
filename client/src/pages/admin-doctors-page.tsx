@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Doctor01Icon, Calendar03Icon, PrescriptionsIcon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { Doctor01Icon, PrescriptionIcon, Appointment02Icon } from "@hugeicons/core-free-icons";
 import { Plus } from "lucide-react";
 import { useGetAllAppointments, useGetAllDoctors, useGetAllPrescriptions } from "@/hooks/admins/admins";
 import { DoctorsDataTable } from "@/components/admin/doctors-page/doctors-table/doctors-data-table";
 import { columns } from "@/components/admin/doctors-page/doctors-table/columns";
 import AddDoctorsModal from "@/components/admin/doctors-page/doctors-actions/add-doctors-modal";
+import AdminDashboardCard from "@/components/admin/admin-dashboard-card"
+
 
 const AdminDoctorsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -46,48 +47,24 @@ const AdminDoctorsPage = () => {
         </div>
       </div>
       <div className="pb-8 grid grid-cols-1 sm:grid-cols-3 gap-x-5 gap-y-5">
-        <div className="dark:bg-[#0e121b] bg-white px-4 py-6 rounded-3xl">
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-full bg-[#191b27]">
-                <HugeiconsIcon icon={Doctor01Icon} className="size-6 text-white" />
-              </div>
-              <span>Total Doctors</span>
-            </div>
-            <span className="text-[26px]">{doctors.data.length}</span>
-          </div>
-          <div className="pt-10">
-            <span className="text-center">Stay informed with real-time data of total doctors.</span>
-          </div>
-        </div>
-        <div className="dark:bg-[#0e121b] bg-white px-4 py-6 rounded-3xl">
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-full bg-[#191b27]">
-                <HugeiconsIcon icon={Calendar03Icon} className="size-6 text-white" />
-              </div>
-              <span>Total Appointments</span>
-            </div>
-            <span className="text-[26px]">{appointments.data.length}</span>
-          </div>
-          <div className="pt-10">
-            <span className="text-center">Stay informed with real-time data of total appointments.</span>
-          </div>
-        </div>
-        <div className="dark:bg-[#0e121b] bg-white px-4 py-6 rounded-3xl">
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-full bg-[#191b27]">
-                <HugeiconsIcon icon={PrescriptionsIcon} className="size-6 text-white" />
-              </div>
-              <span>Total Prescriptions</span>
-            </div>
-            <span className="text-[26px]">{prescriptions.data.length}</span>
-          </div>
-          <div className="pt-10">
-            <span className="text-center">Stay informed with real-time data of total prescriptions.</span>
-          </div>
-        </div>
+       <AdminDashboardCard
+					title="Total Doctors"
+					data={doctors.data.length}
+					description="Stay informed real-time data of total doctors"
+					icon={Doctor01Icon}
+				/>
+         <AdminDashboardCard
+					title="Total Appointments"
+					data={appointments.data.length}
+					description="Stay informed real-time data of total appointments"
+					icon={Appointment02Icon}
+				/>
+         <AdminDashboardCard
+					title="Total Prescriptions"
+					data={prescriptions.data.length}
+					description="Stay informed real-time data of total prescriptions"
+					icon={PrescriptionIcon}
+				/>
       </div>
       <DoctorsDataTable columns={columns} data={doctors.data} />
       <AddDoctorsModal isOpen={isModalOpen} onClose={handleCloseModal} />
