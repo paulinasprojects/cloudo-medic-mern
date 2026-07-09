@@ -36,6 +36,7 @@ import PatientGuard from "@/guards/patient-guard";
 import AdminUsersPage from "@/pages/admin-users-page";
 import SettingsPage from "./pages/settings-page";
 import AdminPatientsPage from "./pages/admin-patients-page";
+import AdminPrescriptionsPage from "./pages/admin-prescriptions-page";
 
 function App() {
   const { isAuthenticated, getUser } = useAuthStore();
@@ -61,6 +62,7 @@ function App() {
           <Route path="/admin/users" element={<AdminDashboardLayout><AdminUsersPage /></AdminDashboardLayout>} />
           <Route path="/admin/doctors" element={<AdminDashboardLayout><AdminDoctorsPage /></AdminDashboardLayout>} />
           <Route path="/admin/patients" element={<AdminDashboardLayout><AdminPatientsPage /></AdminDashboardLayout>} />
+          <Route path="/admin/prescriptions" element={<AdminDashboardLayout><AdminPrescriptionsPage /></AdminDashboardLayout>} />
         </Route>
         <Route element={<RoleRoute allowedRoles={["doctor"]} />}>
           <Route element={<DoctorDashboardGuard />}>
