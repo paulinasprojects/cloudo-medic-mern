@@ -127,7 +127,7 @@ export enum DoctorLevel {
 
 export interface Appointment {
   id: string;
-  patiendId: string;
+  patientId: string;
   doctorId: string;
   appointmentDate: string;
   status: string;
@@ -140,7 +140,7 @@ export interface Appointment {
 
 export interface Prescription {
   id: string;
-  patiendId: string;
+  patientId: string;
   doctorId: string;
   medication: string | string[];
   dosage: string | string[] | null;

@@ -26,7 +26,7 @@ export const useGetAllAppointments = () => useQuery({
 })
 
 export const useGetAllPrescriptions = () => useQuery({
-  queryKey: ["appointments"],
+  queryKey: ["prescriptions"],
   queryFn: getAllPrescriptions,
   staleTime: ms("24h")
 })
