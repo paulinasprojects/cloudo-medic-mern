@@ -149,3 +149,13 @@ export const createPrescription = async (data: {
   const response = await api.post<ApiResponse<Prescription>>("/admin/prescriptions", data);
   return response.data;
 }
+
+export const editPrescriptionByAdmins = async (id: string, data: {
+  medication: string | string[];
+  dosage: string | string[] | null;
+  instructions: string;
+  endDate: string;
+}) => {
+  const response = await api.patch<ApiResponse<Prescription>>(`/admin/prescriptions/${id}`, data);
+  return response.data;
+}

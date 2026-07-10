@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useState } from "react"
 import { Plus } from "lucide-react"
 import { Appointment02Icon, PatientIcon, PrescriptionIcon } from "@hugeicons/core-free-icons"
@@ -20,7 +21,7 @@ const AdminPatientsPage = () => {
 	const error = errorPatients || errorAppontments || errorPrescriptions;
 
 	if (isLoading) return <div>Loading...</div>
-	if (isError) return <div>Error: {error?.message}</div>
+	if (isError) return <div>Error: {axios.isAxiosError(error) ? error.response?.data?.error ?? error.message: error?.message}</div>
 	if (!patients?.data || !appointments?.data || !prescriptions?.data) return <div>Not found</div>;
 
 

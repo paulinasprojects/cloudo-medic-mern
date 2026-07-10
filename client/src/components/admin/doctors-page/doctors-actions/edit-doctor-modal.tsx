@@ -30,6 +30,7 @@ function buildInitialState(data: Doctor): DoctorProfileFormData {
       specialization: data.specialization,
       hospital: data.hospital,
       doctorLevel: data.doctorLevel,
+      workPhoneNumber: data.workPhoneNumber,
       consultationFee: data.consultationFee,
       licenseNumber: data.licenseNumber,
       yearsOfExperience: data.yearsOfExperience

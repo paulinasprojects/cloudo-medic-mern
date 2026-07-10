@@ -12,6 +12,7 @@ export const initialFormState: DoctorProfileFormData = {
   workInfo: {
     education: "",
     specialization: "",
+    workPhoneNumber: "",
     hospital: "",
     doctorLevel: "",
     licenseNumber: "",
