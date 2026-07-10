@@ -4,6 +4,7 @@ import { Prescription } from "@/types/types";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/common/dropdown-menu";
 import { CopyIcon, Ellipsis, Pencil, Trash2 } from "lucide-react";
 import EditPrescriptionModal from "../prescriptions-actions/edit-prescription-modal";
+import DeletePrescriptionConfirmationModal from "../prescriptions-actions/delete-prescription-confirmation-modal";
 
 interface Props {
   data: Prescription
@@ -11,6 +12,8 @@ interface Props {
 
 export default function CellAction({ data }: Props) {
   const [ isEditingModalOpen, setIsEditingModalOpen ] = useState<boolean>(false);
+  const [isDeletingModalOpen, setIsDeletingModalOpen] = useState<boolean>(false);
+  
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
     toast.success("Prescriptions id copied to clipboard")
@@ -22,6 +25,14 @@ export default function CellAction({ data }: Props) {
 
   function handleCloseModal() {
     setIsEditingModalOpen(false);
+  }
+
+  function handleDeletePrescription() {
+    setIsDeletingModalOpen(true)
+  }
+
+  function handleCloseDeletingModal() {
+    setIsDeletingModalOpen(false);
   }
   
   return (
@@ -42,13 +53,18 @@ export default function CellAction({ data }: Props) {
             <Pencil className="h-4 w-4"/>
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem className="focus:bg-gray-200 focus:text-black dark:focus:bg-white dark:focus:text-black cursor-pointer">
+          <DropdownMenuItem className="focus:bg-gray-200 focus:text-black dark:focus:bg-white dark:focus:text-black cursor-pointer" onClick={handleDeletePrescription}>
             <Trash2 className="h-4 w-4"/>
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <EditPrescriptionModal data={data} isOpen={isEditingModalOpen} onClose={handleCloseModal}/>
+      <DeletePrescriptionConfirmationModal
+        data={data}
+        isOpen={isDeletingModalOpen}
+        onCancel={handleCloseDeletingModal}
+      />
     </>
   )
 }

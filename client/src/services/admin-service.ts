@@ -159,3 +159,7 @@ export const editPrescriptionByAdmins = async (id: string, data: {
   const response = await api.patch<ApiResponse<Prescription>>(`/admin/prescriptions/${id}`, data);
   return response.data;
 }
+export const deletePrescriptionByAdmins = async (id: string) => {
+  const response = await api.delete<ApiResponse<null>>(`/admin/prescriptions/${id}`);
+  return response.data;
+}
