@@ -131,6 +131,7 @@ export default function AddPrescriptionForm({ onSuccess }: Props) {
               Start Date
             </label>
             <DatePicker
+              classNameTwo="-top-48"
               placeholder="Pick a start date"
               value={startDate ? new Date(startDate) : undefined}
               onChange={(date) => setStartDate(date
@@ -143,6 +144,7 @@ export default function AddPrescriptionForm({ onSuccess }: Props) {
               End Date
             </label>
             <DatePicker
+              classNameTwo="-top-48"
               placeholder="Pick a end date"
               value={endDate ? new Date(endDate) : undefined}
               onChange={(date) => setEndDate(date

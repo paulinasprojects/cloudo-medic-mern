@@ -11,6 +11,7 @@ interface DatePickerProps {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
+  classNameTwo?:string;
   id?: string;
 }
 
@@ -20,7 +21,8 @@ const DatePicker = ({
   onChange,
   placeholder = "Pick a date",
   disabled = false,
-  className
+  className,
+  classNameTwo
 }: DatePickerProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -58,7 +60,7 @@ const DatePicker = ({
         <Calendar className="size-4" />
       </button>
       {open && (
-        <div className="absolute z-50 left-0 top-full bg-gray-900 border border-gray-700 rounded-md shadow-lg">
+        <div className={cn("absolute z-50 left-0 top-full bg-gray-900 border border-gray-700 rounded-md shadow-lg", classNameTwo)}>
           <DayPicker
             animate
             id={id}

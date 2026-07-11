@@ -149,6 +149,7 @@ export default function EditPresctiptionForm({data, onSuccess}: Props) {
               End Date
             </label>
             <DatePicker
+              classNameTwo="-top-48"
               placeholder="Pick a end date"
               value={endDate ? new Date(endDate) : undefined}
               onChange={(date) => setEndDate(date
