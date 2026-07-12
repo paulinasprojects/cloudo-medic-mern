@@ -18,6 +18,7 @@ import {
   getAppointmentsByDoctorId, 
   getAppointmentsByPatientId, 
   getAppointmentByIdByAdmins, 
+  createAppointment,
   updateAppointmentByAdmins, 
   deleteAppointmentByAdmins, 
   getAllPrescriptionsByAdmins, 
@@ -67,6 +68,7 @@ router.delete("/patients/:id", deletePatientProfileByAdmin);
 {/* Appointments Routes */}
 
 router.get("/appointments", getAllAppointmentsByAdmins);
+router.post("/appointments", createAppointment);
 router.get("/appointments/doctor/:doctorId", getAppointmentsByDoctorId);
 router.get("/appointments/patient/:patientId", getAppointmentsByPatientId);
 router.get("/appointments/:id", getAppointmentByIdByAdmins);

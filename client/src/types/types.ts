@@ -157,3 +157,9 @@ export interface editAdminUserRequest {
   firstName: string;
   lastName: string;
 }
+
+export enum AppointmentStatus {
+  SCHEDULED = "scheduled",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled"
+}

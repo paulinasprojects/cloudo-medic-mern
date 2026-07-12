@@ -687,6 +687,77 @@ export const getAppointmentByIdByAdmins = asyncHandler(
   }
 )
 
+export const createAppointment = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const {doctorId, patientId, appointmentDate, notes, status } = req.body;
+
+    if (!patientId || !doctorId || !appointmentDate || !notes || !status || !appointmentDate) {
+      throw new AppError("Please provide a doctor, patient, appointment date, notes and status", 400);
+    }
+
+      const userId = req.userId; 
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+     if (!user) {
+      throw new AppError("User not found", 404);
+      } 
+
+    const doctor = await DoctorProfile.findOne({
+      where: {
+        id: doctorId
+      }
+    });
+
+    if (!doctor) {
+      throw new AppError("Doctor not found", 404)
+    }
+
+    const patient = await PatientProfile.findOne({
+      where: {
+        id: patientId
+      }
+    });
+
+    if (!patient) {
+      throw new AppError("Patient not found", 404)
+    }
+
+    const conflictingDate = await Appointment.findOne({
+      where: {
+        doctorId: doctor.id,
+        appointmentDate,
+        status: AppointmentStatus.SCHEDULED
+      }
+    });
+
+    if (conflictingDate) {
+      throw new AppError("This time slot is already booked. Please choose a different date", 409)
+    }
+
+    const date = appointmentDate ? new Date(appointmentDate) : new Date();
+    const today = new Date();
+
+    if (date < today) {
+      throw new AppError("Cannot create an appointment for a past date", 400)
+    }
+
+    const appointment = await Appointment.create({
+      doctorId,
+      patientId,
+      appointmentDate: date,
+      notes: notes ?? null,
+      status: status
+    });
+
+    SendSuccess(res, appointment, "Appointment created successfully!", 201);
+  }
+)
+
 export const updateAppointmentByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { appointmentDate, notes, status } = req.body;

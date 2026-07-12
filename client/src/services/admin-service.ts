@@ -163,3 +163,14 @@ export const deletePrescriptionByAdmins = async (id: string) => {
   const response = await api.delete<ApiResponse<null>>(`/admin/prescriptions/${id}`);
   return response.data;
 }
+
+export const createAppointment = async (data: {
+  patientId: string;
+  doctorId: string;
+  appointmentDate: string;
+  status: string;
+  notes: string;
+}) => {
+  const response = await api.post<ApiResponse<Appointment>>("/admin/appointments", data);
+  return response.data;
+}

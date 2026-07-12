@@ -118,7 +118,6 @@ export default function AddPrescriptionForm({ onSuccess }: Props) {
             </label>
             <textarea 
               id="instructions" 
-              placeholder="500mg" 
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
               disabled={isPending}
