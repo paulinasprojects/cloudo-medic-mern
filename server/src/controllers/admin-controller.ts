@@ -813,7 +813,7 @@ export const updateAppointmentByAdmins = asyncHandler(
 )
 
 export const deleteAppointmentByAdmins = asyncHandler(
-  async (res: Response, req: Request, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     const userId = req.userId;
 

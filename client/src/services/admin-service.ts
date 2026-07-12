@@ -184,3 +184,8 @@ export const editAppointmentByAdmins = async (id: string, data: {
   const response = await api.patch<ApiResponse<Appointment>>(`/admin/appointments/${id}`, data);
   return response.data;
 }
+
+export const deleteAppointmentByAdmins = async (id: string) => {
+  const response = await api.delete<ApiResponse<null>>(`/admin/appointments/${id}`);
+  return response.data;
+}

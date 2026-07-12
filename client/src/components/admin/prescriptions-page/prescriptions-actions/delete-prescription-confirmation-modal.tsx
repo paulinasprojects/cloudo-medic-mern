@@ -19,7 +19,7 @@ export default function DeletePrescriptionConfirmationModal({
   const { mutate: handleDeletePrescription, isPending } = useMutation({
     mutationFn: () => deletePrescriptionByAdmins(data.id),
     onSuccess: () => {
-      toast.success("Prescription delete successfully");
+      toast.success("Prescription deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["prescription"] })
       handleClose()
     },
