@@ -16,7 +16,7 @@ export default function CellAction({ data }: Props) {
   
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Prescriptions id copied to clipboard")
+    toast.success("Prescription id copied to clipboard")
   }
 
   function handleEditPrescription() {

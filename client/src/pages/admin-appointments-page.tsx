@@ -3,7 +3,8 @@ import { Appointment02Icon, PatientIcon, PrescriptionIcon } from "@hugeicons/cor
 import { useGetAllAppointments, useGetAllPatients, useGetAllPrescriptions } from "@/hooks/admins/admins"
 import AdminDashboardCard from "@/components/admin/admin-dashboard-card"
 import { Plus } from "lucide-react";
-
+import AppointmentsDataTable from "@/components/admin/appointments-page/appointments-table/appointments-data-table";
+import {columns} from "@/components/admin/appointments-page/appointments-table/columns";
 
 const AdminAppointmentsPage = () => {
   const { data: patients, isLoading: isPatientsLoading, isError: isPatientsError, error: errorPatients } = useGetAllPatients();
@@ -50,6 +51,7 @@ const AdminAppointmentsPage = () => {
           description="Stay infromed real-time data of total prescriptions"
         />
       </div>
+      <AppointmentsDataTable columns={columns} data={appointments.data}/>
     </div>
   )
 }
