@@ -159,6 +159,7 @@ export const editPrescriptionByAdmins = async (id: string, data: {
   const response = await api.patch<ApiResponse<Prescription>>(`/admin/prescriptions/${id}`, data);
   return response.data;
 }
+
 export const deletePrescriptionByAdmins = async (id: string) => {
   const response = await api.delete<ApiResponse<null>>(`/admin/prescriptions/${id}`);
   return response.data;
@@ -172,5 +173,14 @@ export const createAppointment = async (data: {
   notes: string;
 }) => {
   const response = await api.post<ApiResponse<Appointment>>("/admin/appointments", data);
+  return response.data;
+}
+
+export const editAppointmentByAdmins = async (id: string, data: {
+  appointmentDate: string;
+  status: string;
+  notes: string;
+}) => {
+  const response = await api.patch<ApiResponse<Appointment>>(`/admin/appointments/${id}`, data);
   return response.data;
 }
