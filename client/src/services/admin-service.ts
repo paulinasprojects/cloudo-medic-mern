@@ -216,3 +216,8 @@ export const editVaccineByAdmins = async (id: string, data: {
   const response = await api.patch<ApiResponse<Vaccine>>(`/admin/vaccines/${id}`, data);
   return response.data;
 }
+
+export const deleteVaccineByAdmins = async (id: string) => {
+  const response = await api.delete<ApiResponse<null>>(`/admin/vaccines/${id}`);
+  return response.data;
+}

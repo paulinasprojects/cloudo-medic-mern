@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { Vaccine } from "@/types/types";
 import { toast } from "sonner";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/common/dropdown-menu";
 import { CopyIcon, Ellipsis, Pencil, Trash2 } from "lucide-react";
 import EditVaccineModal from "../vaccines-actions/edit-vaccine-modal";
-import { useState } from "react";
+import DeleteVaccineConfirmationModal from "../vaccines-actions/delete-vaccine-confirmation-modal";
 
 interface Props {
   data: Vaccine
@@ -11,7 +12,8 @@ interface Props {
 
 export default function CellAction({data}: Props) {
   const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
- 
+  const [isDeletingModalOpen, setIsDeletingModalOpen] = useState<boolean>(false);
+
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
     toast.success("Vaccine id copied to the clipboard");
@@ -23,6 +25,14 @@ export default function CellAction({data}: Props) {
 
   function handleCloseModal() {
     setIsEditingModalOpen(false)
+  }
+
+  function handleDeleteVaccine(){
+    setIsDeletingModalOpen(true)
+  }
+
+  function handleCloseDeletingModal() {
+    setIsDeletingModalOpen(false)
   }
  
   return (
@@ -46,7 +56,7 @@ export default function CellAction({data}: Props) {
             <Pencil className="h-4 w-4"/>
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem className="focus:bg-gray-200 focus:text-black dark:focus:bg-white dark:focus:text-black cursor-pointer">
+          <DropdownMenuItem className="focus:bg-gray-200 focus:text-black dark:focus:bg-white dark:focus:text-black cursor-pointer" onClick={handleDeleteVaccine}>
             <Trash2 className="h-4 w-4"/>
             Delete
           </DropdownMenuItem>
@@ -56,6 +66,11 @@ export default function CellAction({data}: Props) {
       data={data}
       isOpen={isEditingModalOpen}
       onClose={handleCloseModal}
+    />
+    <DeleteVaccineConfirmationModal
+      data={data}
+      isOpen={isDeletingModalOpen}
+      onCancel={handleCloseDeletingModal}
     />
   </>
  )
