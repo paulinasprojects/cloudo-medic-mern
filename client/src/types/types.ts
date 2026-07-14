@@ -183,3 +183,56 @@ export enum VaccineStatus {
   COMPLETED = "completed",
   CANCELLED = "cancelled"
 }
+
+export interface MedicalTests {
+  id: string;
+  patientId: string;
+  doctorId: string;
+  date: string;
+  bloodTests: string[];
+  biochemistryTests: string[];
+  imagingTests: string[];
+  urineTests: string[];
+  status: string;
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+  doctorProfile?: Doctor;
+  patientProfile?: Patient;
+}
+
+export enum BloodTest {
+  CBC = "cbc",
+  BMP = "bmp",
+  RBC = "rbc",
+  HCT = "hct",
+  WBC = "wbc",
+  LDL = "ldl",
+  HDL = "hdl",
+  VITAMIND = "vitamind",
+  TSH = "tsh",
+}
+
+export enum Biochemistry {
+  GLUCOSE = "glucose",
+  CREAT = "creat",
+  ASAT = "asat",
+  ALAT = "alat",
+  EGFR = "egfr"
+}
+
+export enum ImagingTest {
+  CTSCAN = "ctscan",
+  CTA = "cta",
+  MRI = "mri",
+  PET = "pet",
+  MAMMOGRAPHY = "mammography",
+  ECHOCARDIOGRAM = "echocardiogram", 
+}
+
+export enum Urine {
+  URINE = "urine",
+  GLUCOSE = "glucose",
+  PROTEIN = "protein",
+  BLOOD = "blood",
+}
