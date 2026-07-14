@@ -17,58 +17,56 @@ import { Table, TableCell, TableBody, TableHead, TableHeader, TableRow } from "@
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/common/dropdown-menu";
 
 
-interface AppointmentsTableProps<TData, TValue> {
+interface VaccinesTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[],
   data: TData[]
 }
 
-export default function AppointmentsDataTable<TData, TValue>({
+export default function VaccinesDataTable<TData, TValue>({
   columns,
   data
-}: AppointmentsTableProps<TData, TValue>) {
-    const [sorting, setSorting] = useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+}: VaccinesTableProps<TData, TValue>) {
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
-    
-    // eslint-disable-next-line react-hooks/incompatible-library
-    const table = useReactTable({
-      data,
-      columns,
-      getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-      onSortingChange: setSorting,
-      getSortedRowModel: getSortedRowModel(),
-      onColumnFiltersChange: setColumnFilters,
-      getFilteredRowModel: getFilteredRowModel(),
-      onColumnVisibilityChange: setColumnVisibility,
-      state: {
-        sorting,
-        columnFilters,
-        columnVisibility
-      },
-      columnResizeMode: "onChange",
-      defaultColumn: {
-        minSize: 60,
-        maxSize: 380,
-        size: 150,
-      }
-    })
+   // eslint-disable-next-line react-hooks/incompatible-library
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+    },
+    columnResizeMode: "onChange",
+    defaultColumn: {
+      minSize: 60,
+      maxSize: 380,
+      size: 150,
+    }
+  });
 
-
-   return (
+  return (
     <div>
       <div className="flex items-center py-4">
         <input 
           type="text"
-          placeholder="Find by status"
-          value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("status")?.setFilterValue(event.target.value)}
-          className="max-w-sm px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
-         />
-         <DropdownMenu>
+          placeholder="Find by vaccination name"
+          value={(table.getColumn("vaccinationName")?.getFilterValue() as string) ?? ""}
+          onChange={(event) => table.getColumn("vaccinationName")?.setFilterValue(event.target.value)}
+          className="max-w-sm px-4 py-1 border border-r-slate-700 rounded-full text-black dark:text-white placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors" 
+        />
+        <DropdownMenu>
           <DropdownMenuTrigger asChild>
-          <button className="ml-auto px-3 py-2 border border-black dark:border-white rounded-full">
+            <button className="ml-auto px-3 py-2 border border-black dark:border-white rounded-full">
               Filter
             </button>
           </DropdownMenuTrigger>
@@ -78,7 +76,7 @@ export default function AppointmentsDataTable<TData, TValue>({
             .filter((column) => column.getCanHide()
             ).map((column) => {
               return (
-                <DropdownMenuCheckboxItem 
+                <DropdownMenuCheckboxItem
                   key={column.id}
                   className="capitalize"
                   checked={column.getIsVisible()}
@@ -89,18 +87,18 @@ export default function AppointmentsDataTable<TData, TValue>({
               )
             })}
           </DropdownMenuContent>
-         </DropdownMenu>
+        </DropdownMenu>
       </div>
       <div className="overflow-hidden rounded-md border px-4 py-2">
-        <Table style={{width: table.getCenterTotalSize()}}>
+        <Table style={{ width: table.getCenterTotalSize() }}>
           <TableHeader>
             {table.getHeaderGroups().map((group) => (
               <TableRow key={group.id}>
                 {group.headers.map((header) => {
                   return (
                     <TableHead 
-                      key={header.id}
-                      style={{width: header.getSize()}}
+                      key={header.id} 
+                      style={{width: header.getSize()}} 
                       className="relative"
                     >
                       {header.isPlaceholder ? null : flexRender(
@@ -136,7 +134,7 @@ export default function AppointmentsDataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && "select"}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
@@ -177,4 +175,5 @@ export default function AppointmentsDataTable<TData, TValue>({
       </div>
     </div>
   )
+
 }

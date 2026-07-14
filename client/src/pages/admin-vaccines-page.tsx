@@ -5,6 +5,8 @@ import { Appointment02Icon, VaccineIcon, PrescriptionIcon } from "@hugeicons/cor
 import { useGetAllAppointments, useGetAllPrescriptions, useGetAllVaccines } from "@/hooks/admins/admins"
 import AdminDashboardCard from "@/components/admin/admin-dashboard-card"
 import AddVaccineModal from "@/components/admin/vaccines-page/vaccines-actions/add-vaccine-modal"
+import VaccinesDataTable from "@/components/admin/vaccines-page/vaccines-table/vaccines-data-table"
+import { columns } from "@/components/admin/vaccines-page/vaccines-table/columns"
 
 const AdminVaccinesPage = () => {
   const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
@@ -60,6 +62,7 @@ const AdminVaccinesPage = () => {
           icon={PrescriptionIcon}
         />
       </div>
+      <VaccinesDataTable columns={columns} data={vaccines.data}/>
       <AddVaccineModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
