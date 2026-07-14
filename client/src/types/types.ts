@@ -177,3 +177,9 @@ export interface Vaccine {
   doctorProfile?: Doctor;
   patientProfile?: Patient;
 }
+
+export enum VaccineStatus {
+  SCHEDULED = "scheduled",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled"
+}

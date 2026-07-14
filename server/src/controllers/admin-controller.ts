@@ -727,10 +727,23 @@ export const createAppointment = asyncHandler(
       throw new AppError("Patient not found", 404)
     }
 
+    const date = new Date(appointmentDate);
+    
+    if (isNaN(date.getTime())) {
+      throw new AppError("Invalid appointment date", 400);
+    }
+
+    const today = new Date();
+
+    if (date < today) {
+      throw new AppError("Cannot create an appointment for a past date", 400)
+    }
+
+
     const conflictingDate = await Appointment.findOne({
       where: {
         doctorId: doctor.id,
-        appointmentDate,
+        appointmentDate: date,
         status: AppointmentStatus.SCHEDULED
       }
     });
@@ -738,14 +751,7 @@ export const createAppointment = asyncHandler(
     if (conflictingDate) {
       throw new AppError("This time slot is already booked. Please choose a different date", 409)
     }
-
-    const date = appointmentDate ? new Date(appointmentDate) : new Date();
-    const today = new Date();
-
-    if (date < today) {
-      throw new AppError("Cannot create an appointment for a past date", 400)
-    }
-
+    
     const appointment = await Appointment.create({
       doctorId,
       patientId,
@@ -1359,6 +1365,83 @@ export const getAllCompletedVaccinesByAdmins = asyncHandler(
     });
       
       SendSuccess(res, completedVaccines, "Completed vaccines retrieved successfully")
+  }
+)
+
+export const createVaccine = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const {doctorId, patientId, vaccinationName, vaccinationDate, notes, status} = req.body;
+   
+    if (!doctorId || !patientId || !vaccinationName || !vaccinationDate || !notes || !status) {
+      throw new AppError("Please provide a doctor, patient, vaccination name, vaccination date, notes and status", 400)
+    }
+
+    const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const doctor = await DoctorProfile.findOne({
+      where: {
+        id: doctorId
+      }
+    });
+
+    if (!doctor) {
+      throw new AppError("Doctor not found", 404)
+    }
+
+    const patient = await PatientProfile.findOne({
+      where: {
+        id: patientId
+      }
+    });
+
+    if (!patient) {
+      throw new AppError("Patient not found", 404)
+    }
+
+    const date = new Date(vaccinationDate);
+    
+    if (isNaN(date.getTime())) {
+      throw new AppError("Invalid vaccination date", 400);
+    }
+
+    const today = new Date();
+
+    if (date < today) {
+      throw new AppError("Cannot create a vaccine for a past date", 400)
+    }
+
+    const conflictingDate = await Vaccine.findOne({
+      where: {
+        doctorId: doctor.id,
+        vaccinationDate: date,
+        status: VaccineStatus.SCHEDULED
+      }
+    });
+
+    if (conflictingDate) {
+      throw new AppError("This time slot is already booked. Please choose a different date", 409)
+    }
+
+    const vaccine = await Vaccine.create({
+      doctorId,
+      patientId,
+      vaccinationName,
+      vaccinationDate: date,
+      notes: notes ?? null,
+      status: status
+    });
+
+    SendSuccess(res, vaccine, "Vaccine created successfully", 201);
   }
 )
 

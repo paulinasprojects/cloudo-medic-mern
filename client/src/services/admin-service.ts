@@ -194,3 +194,15 @@ export const getAllVaccinesByAdmins = async () => {
   const response = await api.get<ApiResponse<Vaccine[]>>("/admin/vaccines");
   return response.data;
 }
+
+export const createVaccine = async (data: {
+  patientId: string;
+  doctorId: string;
+  vaccinationName: string;
+  vaccinationDate: string;
+  status: string;
+  notes: string;
+}) => {
+  const response = await api.post<ApiResponse<Vaccine>>("/admin/vaccines", data);
+  return response.data;
+}
