@@ -206,3 +206,13 @@ export const createVaccine = async (data: {
   const response = await api.post<ApiResponse<Vaccine>>("/admin/vaccines", data);
   return response.data;
 }
+
+export const editVaccineByAdmins = async (id: string, data: {
+  vaccinationName: string;
+  vaccinationDate: string;
+  status: string;
+  notes: string;
+}) => {
+  const response = await api.patch<ApiResponse<Vaccine>>(`/admin/vaccines/${id}`, data);
+  return response.data;
+}
