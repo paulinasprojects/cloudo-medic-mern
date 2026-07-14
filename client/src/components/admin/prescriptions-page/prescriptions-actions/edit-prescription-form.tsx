@@ -123,7 +123,7 @@ export default function EditPresctiptionForm({data, onSuccess}: Props) {
             </label>
             <textarea 
               id="instructions" 
-              placeholder="500mg" 
+              placeholder="Take one tablet before bed" 
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
               disabled={isPending}

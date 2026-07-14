@@ -163,3 +163,17 @@ export enum AppointmentStatus {
   COMPLETED = "completed",
   CANCELLED = "cancelled"
 }
+
+export interface Vaccine {
+  id: string;
+  patientId: string;
+  doctorId: string;
+  vaccinationName: string;
+  vaccinationDate: string;
+  status: string;
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+  doctorProfile?: Doctor;
+  patientProfile?: Patient;
+}

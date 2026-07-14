@@ -55,7 +55,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex items-center gap-3 px-2 sm:py-3 max-sm:py-2 bg-white dark:bg-[#0e121b] rounded-full data-[state=open]:rounded-none data-[state=open]:rounded-tl-md data-[state=open]:rounded-tr-md">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="profile image" className="w-10 h-10 rounded-full object-cover" />
+                <img src={user?.image ?? "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="profile image" className="w-10 h-10 rounded-full object-cover" />
                 <div className="flex flex-col items-start">
                   <span className="text-black dark:text-white capitalize text-[16px] font-mono font-bold">{user?.firstName} {" "} {user?.lastName} </span>
                   <span className="text-[12px] text-black dark:text-white">{user?.email}</span>

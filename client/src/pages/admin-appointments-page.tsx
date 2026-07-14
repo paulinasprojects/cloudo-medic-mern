@@ -42,7 +42,7 @@ const AdminAppointmentsPage = () => {
           </button>
         </div>
       </div>
-      <div className="pb-8 grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-5">
+      <div className="pb-8 grid grid-cols-1 sm:grid-cols-3 gap-x-5 gap-y-5">
         <AdminDashboardCard
           title="Total Patients"
           data={patients.data.length}

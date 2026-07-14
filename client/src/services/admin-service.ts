@@ -1,5 +1,5 @@
 import { SignupRequest } from "@/types/auth-types";
-import { ApiResponse, Appointment, Doctor,Patient, Prescription, User, editAdminUserRequest } from "../types/types";
+import { ApiResponse, Appointment, Doctor,Patient, Prescription, User, Vaccine, editAdminUserRequest } from "../types/types";
 import api from "./api";
 
 export const getAllUsers = async () => {
@@ -187,5 +187,10 @@ export const editAppointmentByAdmins = async (id: string, data: {
 
 export const deleteAppointmentByAdmins = async (id: string) => {
   const response = await api.delete<ApiResponse<null>>(`/admin/appointments/${id}`);
+  return response.data;
+}
+
+export const getAllVaccinesByAdmins = async () => {
+  const response = await api.get<ApiResponse<Vaccine[]>>("/admin/vaccines");
   return response.data;
 }
