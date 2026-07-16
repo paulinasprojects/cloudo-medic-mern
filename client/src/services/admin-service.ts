@@ -255,3 +255,8 @@ export const editMedicalTestByAdmins = async (id: string, data: {
   const response = await api.patch<ApiResponse<MedicalTests>>(`/admin/medicaltests/${id}`, data);
   return response.data;
 }
+
+export const deleteMedicalTestByAdmins = async (id: string) => {
+  const response = await api.delete<ApiResponse<null>>(`/admin/medicaltests/${id}`);
+  return response.data;
+}

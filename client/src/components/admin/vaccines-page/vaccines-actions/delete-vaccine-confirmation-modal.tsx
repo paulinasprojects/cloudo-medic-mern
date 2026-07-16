@@ -17,10 +17,10 @@ export default function DeleteVaccineConfirmationModal({
 }: Props) {
 
   const queryClient = useQueryClient();
-  const { mutate: handleDeleteVaccine, isPending, error } = useMutation({
+  const { mutate: handleDeleteVaccine, isPending } = useMutation({
     mutationFn: () => deleteVaccineByAdmins(data.id),
     onSuccess: () => {
-      toast.error("Vaccine deleted successfully")
+      toast.success("Vaccine deleted successfully")
       queryClient.invalidateQueries({ queryKey: ["vaccine"] })
       handleClose()
     },
@@ -39,14 +39,6 @@ export default function DeleteVaccineConfirmationModal({
     if (e.target === e.currentTarget) {
       handleClose();
     }
-  }
-
-  if (error) {
-    <span>
-      {axios.isAxiosError(error)
-        ? error.response?.data?.error ?? error.message
-        : error.message}
-    </span>
   }
 
   return (
