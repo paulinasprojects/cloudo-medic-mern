@@ -5,6 +5,8 @@ import { Appointment02Icon, PrescriptionIcon, TestTube01Icon } from "@hugeicons/
 import { useGetAllAppointments, useGetAllPrescriptions, useGetAllTests } from "@/hooks/admins/admins"
 import AdminDashboardCard from "@/components/admin/admin-dashboard-card"
 import AddMedicalTestModal from "@/components/admin/medical-tests-page/medical-tests-actions/add-medical-test-modal"
+import MedicalTestsDataTable from "@/components/admin/medical-tests-page/medical-tests-table/medical-tests-data-table"
+import { columns } from "@/components/admin/medical-tests-page/medical-tests-table/columns"
 
 const AdminTestsPage = () => {
   const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
@@ -62,6 +64,7 @@ const AdminTestsPage = () => {
           icon={PrescriptionIcon}
         />
       </div>
+      <MedicalTestsDataTable columns={columns} data={tests.data}/>
       <AddMedicalTestModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
