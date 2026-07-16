@@ -239,6 +239,19 @@ export const createMedicalTest = async (data: {
   status: string;
   notes: string;
 }) => {
-  const response = await api.post<ApiResponse<Vaccine>>("/admin/medicaltests", data);
+  const response = await api.post<ApiResponse<MedicalTests>>("/admin/medicaltests", data);
+  return response.data;
+}
+
+export const editMedicalTestByAdmins = async (id: string, data: {
+  date: string;
+  bloodTests?: string[];
+  biochemistryTests?: string[];
+  imagingTests?: string[];
+  urineTests?: string[];
+  status: string;
+  notes: string;
+}) => {
+  const response = await api.patch<ApiResponse<MedicalTests>>(`/admin/medicaltests/${id}`, data);
   return response.data;
 }
