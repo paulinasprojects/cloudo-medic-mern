@@ -226,3 +226,19 @@ export const getAllMedicalTestsByAdmins = async () => {
   const response = await api.get<ApiResponse<MedicalTests[]>>("/admin/medicaltests");
   return response.data;
 }
+
+
+export const createMedicalTest = async (data: {
+  patientId: string;
+  doctorId: string;
+  date: string;
+  bloodTests?: string[];
+  biochemistryTests?: string[];
+  imagingTests?: string[];
+  urineTests?: string[];
+  status: string;
+  notes: string;
+}) => {
+  const response = await api.post<ApiResponse<Vaccine>>("/admin/medicaltests", data);
+  return response.data;
+}

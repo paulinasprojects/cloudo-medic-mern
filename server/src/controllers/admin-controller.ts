@@ -1195,6 +1195,70 @@ export const getAllCompletedTestsByAdmins = asyncHandler(
   }
 )
 
+export const createMedicalTestByAdmins = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { doctorId, patientId, date, notes, status,  bloodTests, biochemistryTests, imagingTests, urineTests } = req.body;
+    
+      if (!doctorId || !patientId || !date ) {
+        throw new AppError("Please provide a doctor, patient", 400)
+      }
+
+      const userId = req.userId;
+
+    const user = await User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404)
+    }
+
+    const doctor = await DoctorProfile.findOne({
+      where: {
+        id: doctorId
+      }
+    });
+
+    if (!doctor) {
+      throw new AppError("Doctor not found", 404)
+    }
+
+    const patient = await PatientProfile.findOne({
+      where: {
+        id: patientId
+      }
+    });
+
+    if (!patient) {
+      throw new AppError("Patient not found", 404)
+    }
+
+    const testDate = date ? new Date(date) : new Date();
+     const today = new Date();
+
+     if (testDate < today) {
+      throw new AppError("Cannot create a medical test for a past date", 400)
+     };
+    
+    const medicalTest = await MedicalTest.create({
+      doctorId,
+      patientId,
+      status,
+      date: testDate,
+      notes: notes ?? null,
+      biochemistryTests: biochemistryTests ?? null,
+      bloodTests: bloodTests ?? null,
+      imagingTests: imagingTests ?? null,
+      urineTests: urineTests ?? null
+    });
+
+    SendSuccess(res, medicalTest, "Medical test creted successfully", 201)
+
+  }
+)
+
 export const updateMedicalTestByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { date, notes, status, bloodTests, biochemistryTests, imagingTests, urineTests } = req.body;
@@ -1468,7 +1532,7 @@ export const updateVaccineByAdmins = asyncHandler(
     });
 
     if (!vaccine) {
-      throw new AppError("Prescription not found", 404)
+      throw new AppError("Vaccine not found", 404)
     }
 
 
@@ -1490,7 +1554,7 @@ export const updateVaccineByAdmins = asyncHandler(
 
     const updatedVaccine = await vaccine.save();
 
-    SendSuccess(res, updatedVaccine, "Prescription updated successfully")
+    SendSuccess(res, updatedVaccine, "Vaccine updated successfully")
   }
 )
 

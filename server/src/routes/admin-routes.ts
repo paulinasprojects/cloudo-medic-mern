@@ -31,6 +31,7 @@ import {
   getAllMedicalTestsByAdmins,
   getAllCompletedTestsByAdmins,
   getAllScheduledTestsByAdmins,
+  createMedicalTestByAdmins,
   updateMedicalTestByAdmins,
   deleteMedicalTestByAdmins,
   getAllVaccinesByAdmins,
@@ -87,6 +88,7 @@ router.delete("/prescriptions/:id", deletePrescriptionByAdmins);
 
 {/* Medical Tests Routes */}
 router.get("/medicaltests",  getAllMedicalTestsByAdmins);
+router.post("/medicaltests",  createMedicalTestByAdmins);
 router.get("/medicaltests/scheduled",  getAllScheduledTestsByAdmins);
 router.get("/medicaltests/completed",  getAllCompletedTestsByAdmins);
 router.patch("/medicaltests/:id",  updateMedicalTestByAdmins);

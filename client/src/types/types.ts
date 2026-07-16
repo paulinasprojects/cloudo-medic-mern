@@ -189,10 +189,10 @@ export interface MedicalTests {
   patientId: string;
   doctorId: string;
   date: string;
-  bloodTests: string[];
-  biochemistryTests: string[];
-  imagingTests: string[];
-  urineTests: string[];
+  bloodTests?: string[];
+  biochemistryTests?: string[];
+  imagingTests?: string[];
+  urineTests?: string[];
   status: string;
   notes: string;
   createdAt: string;
@@ -235,4 +235,12 @@ export enum Urine {
   GLUCOSE = "glucose",
   PROTEIN = "protein",
   BLOOD = "blood",
+}
+
+
+export enum MedicalTestStatus {
+  SCHEDULED = "scheduled",
+  PENDING = "pending",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled"
 }
