@@ -66,9 +66,9 @@ export default function UserImageForm({ onSuccess }: Props) {
 					</>
 				) : (
 					<>
-						<UploadCloud className="size-10 text-black dark:text-white"/>
+						<UploadCloud className="size-10 text-foreground"/>
 						<div className="text-center">
-							<p className="text-sm font-medium text-black dark:text-white">
+							<p className="text-sm font-medium text-foreground">
 								Click to upload an image
 							</p>
 							<p className="text-xs text-gray-900 dark:text-gray-50 mt-1">JPEG, JPG, PNG or WEBP - max 5MB</p>
@@ -84,8 +84,8 @@ export default function UserImageForm({ onSuccess }: Props) {
 				/>
 			</div>
 			{image && (
-				<div className="flex items-center gap-2 text-sm text-black dark:text-white">
-					<ImageIcon className="size-4 text-black dark:text-white"/>
+				<div className="flex items-center gap-2 text-sm text-foreground">
+					<ImageIcon className="size-4 text-foreground"/>
 					<span className="truncate">{image.name}</span>
 					<span>({(image.size / 1024 / 1024).toFixed(2)} MB)</span>
 				</div>
@@ -96,7 +96,7 @@ export default function UserImageForm({ onSuccess }: Props) {
 			<button 
 				type="submit"
 				disabled={isLoading}
-				className="inline-flex items-center justify-center gap-2 py-3 bg-black text-white dark:bg-white dark:text-black hover:bg-black/60 dark:hover:bg-white/60 disabled:opacity-50 disabled:cursor-not-allowed rounded-sm font-medium transition-colors duration-500"
+				className="add-button justify-center"
 			>
 				{isLoading ? (
 					<>

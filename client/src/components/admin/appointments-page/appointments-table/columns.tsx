@@ -61,7 +61,20 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status"
+    header: "Status",
+     cell: ({row}) => (
+      <div>
+        {row.original.status == "scheduled" && (
+          <span className="text-white bg-blue-500 rounded-full p-1.5">{row.original.status}</span>
+        )}
+        {row.original.status == "completed" && (
+          <span className="text-white bg-green-500 rounded-full p-1.5">{row.original.status}</span>
+        )}
+        {row.original.status == "cancelled" && (
+          <span className="text-white bg-red-500 rounded-full p-1.5">{row.original.status}</span>
+        )}
+      </div>
+    )
   },
   {
     accessorKey: "appointmentDate",

@@ -15,7 +15,7 @@ export default function AddAppointmentForm({ onSuccess }: Props) {
   const [patientId, setPatientId] = useState<string>("");
   const [doctorId, setDoctorId] = useState<string>("");
   const [appointmentDate, setAppointmentDate] = useState<string>("");
-  const [status, setStatus] = useState<AppointmentStatus | string>("")
+  const [status, setStatus] = useState<string>("")
   const [notes, setNotes] = useState<string>("")
 
   const { mutate: createAppointmentMutation, isPending, error } = useMutation({
@@ -82,7 +82,7 @@ export default function AddAppointmentForm({ onSuccess }: Props) {
             />
           </div>
            <div className="flex flex-col gap-2">
-            <label htmlFor="start-date" className="label-class">
+            <label className="label-class">
               Appointment Date
             </label>
             <DatePicker
@@ -114,19 +114,19 @@ export default function AddAppointmentForm({ onSuccess }: Props) {
             </label>
           <Select
             value={status}
-            onValueChange={(value) => setStatus(value as AppointmentStatus)}
+            onValueChange={(value) => setStatus(value)}
           >
             <SelectTrigger placeholder="Select status" />
             <SelectContent>
-              {Object.values(AppointmentStatus).map((status) => (
-                <SelectOption key={status} value={status}>{status}</SelectOption>
+              {AppointmentStatus.map((status) => (
+                <SelectOption key={status.id} value={status.value}>{status.placeholder}</SelectOption>
               ))}
             </SelectContent>
           </Select>
         </div>
         </div>
          <button
-          className="px-6 py-3 rounded-full dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="create-button"
           type="submit">
           Create
         </button>

@@ -136,7 +136,7 @@ export default function EditDoctorForm() {
             id="consultation-fee"
             type="number"
             required
-            className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
+            className="input-class"
             value={consultationFee}
             onChange={(e) => setConsultationFee(e.target.value)}
           />
@@ -145,7 +145,7 @@ export default function EditDoctorForm() {
          <button
           type="submit"
           disabled={isPending}
-          className="w-fit px-6 py-3 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="edit-button"
         >
           {isPending ? (
             "Editing..."

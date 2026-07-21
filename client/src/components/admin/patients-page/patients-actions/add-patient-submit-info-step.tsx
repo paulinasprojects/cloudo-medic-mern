@@ -1,3 +1,4 @@
+import axios from "axios";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PatientProfileFormAction, PatientProfileFormData } from "@/types/patient-profile-types"
@@ -20,7 +21,7 @@ export default function AddPatientSubmitInfoStep({
 }: Props) {
   const queryClient = useQueryClient();
 
-  const { mutate: createPatientByAdmin, isPending } = useMutation({
+  const { mutate: createPatientByAdmin, isPending, error } = useMutation({
     mutationFn: createPatient,
     onSuccess: () => {
       toast.success("Patient created successfully")
@@ -51,6 +52,13 @@ export default function AddPatientSubmitInfoStep({
 
   return (
     <div className="flex flex-col gap-6">
+       {error && (
+          <span className="text-red-500">
+            {axios.isAxiosError(error)
+            ? error.response?.data?.error ?? error.message
+            : error.message}
+          </span>
+        )}
       <h3 className="font-semibold text-black dark:text-white">
         Review Information
       </h3>
@@ -104,14 +112,14 @@ export default function AddPatientSubmitInfoStep({
         <button
           onClick={onBack}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
+          className="create-button"
         >
           Back
         </button>
         <button
           onClick={handleSubmit}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
+          className="create-button"
         >
           {isPending ? "Creating..." : "Create Patient"}
         </button>

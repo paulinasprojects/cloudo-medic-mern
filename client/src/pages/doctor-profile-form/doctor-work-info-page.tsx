@@ -19,10 +19,10 @@ const DoctorWorkInfoPage = () => {
           Work Information
         </h1>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="education" className="label-class">Education</label>
+          <label className="label-class">Education</label>
           <Select
-            id="education"
-            value={state.workInfo.education} onValueChange={(value) => dispatch({
+            value={state.workInfo.education} 
+            onValueChange={(value) => dispatch({
               type: "UPDATE_WORK_INFO",
               payload: { education: value as Education }
             })}>
@@ -83,10 +83,10 @@ const DoctorWorkInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="doctor-level" className="label-class">Doctor Level</label>
+          <label className="label-class">Doctor Level</label>
           <Select
-            id="doctor-level"
-            value={state.workInfo.doctorLevel} onValueChange={(value) => dispatch({
+            value={state.workInfo.doctorLevel} 
+            onValueChange={(value) => dispatch({
               type: "UPDATE_WORK_INFO",
               payload: { doctorLevel: value as DoctorLevel }
             })}>
@@ -139,14 +139,14 @@ const DoctorWorkInfoPage = () => {
         </div>
         <div className="flex *:basis-1/2 gap-4">
           <button
-            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+            className="add-work-medical-button"
             onClick={() => navigate("/doctor/profile/personal-info")}
             type="button"
           >
             Back
           </button>
           <button
-            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+            className="add-work-medical-button"
             type="submit">
             Next
           </button>

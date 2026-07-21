@@ -61,7 +61,7 @@ const LoginForm = () => {
           )}
           <div className="flex flex-col gap-4 mt-6">
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-medium text-black dark:text-white">Email</label>
+              <label htmlFor="email" className="label-class">Email</label>
               <input
                 type="email"
                 id="email"
@@ -69,11 +69,11 @@ const LoginForm = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="password" className="text-sm font-medium text-black dark:text-white ">Password</label>
+              <label htmlFor="password" className="label-class ">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -82,7 +82,7 @@ const LoginForm = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="w-full px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm  placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+                  className="w-full input-class"
                 />
                 <button
                   type="button"
@@ -102,7 +102,7 @@ const LoginForm = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-6 py-3 rounded-full dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="create-button"
           >
             {isLoading ? (
               "Signing In"
@@ -113,7 +113,7 @@ const LoginForm = () => {
         </form>
         <p className="text-center text-gray-400 mt-5 text-sm font-normal">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-[12px] text-black dark:text-white transition-colors">
+          <Link to="/signup" className="text-[14px] text-foreground transition-colors">
             Sign Up
           </Link>
         </p>

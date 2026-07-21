@@ -69,7 +69,6 @@ export const editPatientByAdmin = async (id: string, data: {
   phoneNumber: string;
   bio: string;
   dateOfBirth: string;
-  workPhoneNumber: string;
   gender: string;
   bloodType: string;
   allergies: string;
@@ -82,7 +81,7 @@ export const editPatientByAdmin = async (id: string, data: {
 }
 
 export const deletePatientByAdmin = async (id: string) => {
-  const response = await api.delete<ApiResponse<null>>(`/admin/patinets/${id}`)
+  const response = await api.delete<ApiResponse<null>>(`/admin/patients/${id}`)
   return response.data;
 }
 

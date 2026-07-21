@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Vaccine } from "@/types/types";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

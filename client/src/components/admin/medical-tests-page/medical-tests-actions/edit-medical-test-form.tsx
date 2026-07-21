@@ -23,7 +23,7 @@ export default function EditMedicalTestForm({ onSuccess, data }: Props) {
   const [biochemistryTests, setBiochemistryTests] = useState<string[]>(data.biochemistryTests ?? []);
   const [imagingTests, setImagingTests] = useState<string[]>(data.imagingTests ?? []);
   const [urineTests, setUrineTests] = useState<string[]>(data.urineTests ?? []);
-  const [status, setStatus] = useState<MedicalTestStatus | string>(data.status ?? "");
+  const [status, setStatus] = useState<string>(data.status ?? "");
   const [notes, setNotes] = useState<string>(data.notes ?? "");
   const queryClient = useQueryClient();
 
@@ -64,7 +64,7 @@ export default function EditMedicalTestForm({ onSuccess, data }: Props) {
 
 
   return (
-    <div className="col-span-3 sm:col-span-3 flex flex-col gap-6 px-6">
+    <div className="col-span-3 sm:col-span-3 flex flex-col gap-6 px-6 py-6">
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {error && (
           <span className="text-red-500">
@@ -73,7 +73,8 @@ export default function EditMedicalTestForm({ onSuccess, data }: Props) {
             : error.message}
           </span>
         )}
-        <div className="flex flex-col gap-5">
+        <div className="grid md:grid-cols-2 max-sm:grid-cols-1 md:gap-10 max-sm:gap-2">
+          <div className="flex flex-col md:gap-6 max-sm:gap-4">
           <div className="flex flex-col gap-2">
              <label htmlFor="doctor-id" className="label-class">
               Doctor Id
@@ -103,7 +104,7 @@ export default function EditMedicalTestForm({ onSuccess, data }: Props) {
             />
           </div>
            <div className="flex flex-col gap-2">
-            <label htmlFor="date" className="label-class">
+          <label className="label-class">
               Date
             </label>
             <DatePicker
@@ -114,95 +115,22 @@ export default function EditMedicalTestForm({ onSuccess, data }: Props) {
               : "")}
             />
           </div>
-           <div className="flex flex-col gap-2">
-            <label htmlFor="blood-tests">Blood Tests</label>
-            <MultiSelect 
-              values={bloodTests} 
-              onValuesChange={(value) => setBloodTests(value)}
-              >
-                <MultiSelectTrigger placeholder="Select blood tests"/>
-                <MultiSelectContent>
-                  {Object.values(BloodTest).map((test) => (
-                    <MultiSelectOption
-                      key={test}
-                      value={test}
-                    >
-                      {test}
-                    </MultiSelectOption>
-                  ))}
-                </MultiSelectContent>
-              </MultiSelect>
-          </div>
-           <div className="flex flex-col gap-2">
-            <MultiSelect 
-              values={biochemistryTests} 
-              onValuesChange={(value) => setBiochemistryTests(value)}
-              >
-                <MultiSelectTrigger placeholder="Select biochemistry tests"/>
-                <MultiSelectContent>
-                  {Object.values(Biochemistry).map((test) => (
-                    <MultiSelectOption
-                      key={test}
-                      value={test}
-                    >
-                      {test}
-                    </MultiSelectOption>
-                  ))}
-                </MultiSelectContent>
-            </MultiSelect>
-          </div>
-          <div className="flex flex-col gap-2">
-            <MultiSelect 
-              values={imagingTests} 
-              onValuesChange={(value) => setImagingTests(value)}
-              >
-                <MultiSelectTrigger placeholder="Select imaging tests"/>
-                <MultiSelectContent>
-                  {Object.values(ImagingTest).map((test) => (
-                    <MultiSelectOption
-                      key={test}
-                      value={test}
-                    >
-                      {test}
-                    </MultiSelectOption>
-                  ))}
-                </MultiSelectContent>
-              </MultiSelect>
-            </div>
-             <div className="flex flex-col gap-2">
-              <MultiSelect 
-                values={urineTests} 
-                onValuesChange={(value) => setUrineTests(value)}
-                >
-                  <MultiSelectTrigger placeholder="Select urine tests"/>
-                  <MultiSelectContent>
-                    {Object.values(Urine).map((test) => (
-                      <MultiSelectOption
-                        key={test}
-                        value={test}
-                      >
-                        {test}
-                      </MultiSelectOption>
-                    ))}
-                  </MultiSelectContent>
-                </MultiSelect>
-            </div>
-             <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2">
               <label className="label-class">
                 Status
               </label>
               <Select
                 value={status}
-                onValueChange={(value) => setStatus(value as MedicalTestStatus)}
+                onValueChange={(value) => setStatus(value)}
               >
                 <SelectTrigger placeholder="Select status"/>
                 <SelectContent>
-                  {Object.values(MedicalTestStatus).map((status) => (
+                  {MedicalTestStatus.map((status) => (
                     <SelectOption
-                      key={status}
-                      value={status}
+                      key={status.id}
+                      value={status.value}
                     >
-                      {status}
+                      {status.placeholder}
                     </SelectOption>
                   ))}
                 </SelectContent>
@@ -218,14 +146,93 @@ export default function EditMedicalTestForm({ onSuccess, data }: Props) {
               onChange={(e) => setNotes(e.target.value)}
               disabled={isPending}
               required
-              className="resize-none w-full py-4 input-class"
+              className="w-full py-4 input-class"
             />
+          </div>
+          </div>
+          <div className="flex flex-col md:gap-6 max-sm:gap-4">
+           <div className="flex flex-col gap-2">
+            <label className="label-class">Blood Tests</label>
+            <MultiSelect 
+              values={bloodTests} 
+              onValuesChange={(value) => setBloodTests(value)}
+              >
+                <MultiSelectTrigger placeholder="Select blood tests"/>
+                <MultiSelectContent>
+                  {BloodTest.map((test) => (
+                    <MultiSelectOption
+                      key={test.id}
+                      value={test.value}
+                    >
+                      {test.placeholder}
+                    </MultiSelectOption>
+                  ))}
+                </MultiSelectContent>
+              </MultiSelect>
+          </div>
+           <div className="flex flex-col gap-2">
+            <label className="label-class">Biochemistry Tests</label>
+            <MultiSelect 
+              values={biochemistryTests} 
+              onValuesChange={(value) => setBiochemistryTests(value)}
+              >
+                <MultiSelectTrigger placeholder="Select biochemistry tests"/>
+                <MultiSelectContent>
+                  {Biochemistry.map((test) => (
+                    <MultiSelectOption
+                      key={test.id}
+                      value={test.value}
+                    >
+                      {test.placeholder}
+                    </MultiSelectOption>
+                  ))}
+                </MultiSelectContent>
+            </MultiSelect>
+          </div>
+          <div className="flex flex-col gap-2">
+            <label className="label-class">Imaging Tests</label>
+            <MultiSelect 
+              values={imagingTests} 
+              onValuesChange={(value) => setImagingTests(value)}
+              >
+                <MultiSelectTrigger placeholder="Select imaging tests"/>
+                <MultiSelectContent>
+                  {ImagingTest.map((test) => (
+                    <MultiSelectOption
+                      key={test.id}
+                      value={test.value}
+                    >
+                      {test.placeholder}
+                    </MultiSelectOption>
+                  ))}
+                </MultiSelectContent>
+              </MultiSelect>
+            </div>
+             <div className="flex flex-col gap-2">
+              <label className="label-class">Urine Tests</label>
+              <MultiSelect 
+                values={urineTests} 
+                onValuesChange={(value) => setUrineTests(value)}
+                >
+                  <MultiSelectTrigger placeholder="Select urine tests"/>
+                  <MultiSelectContent>
+                    {Urine.map((test) => (
+                      <MultiSelectOption
+                        key={test.id}
+                        value={test.value}
+                      >
+                        {test.placeholder}
+                      </MultiSelectOption>
+                    ))}
+                  </MultiSelectContent>
+                </MultiSelect>
+            </div>
           </div>
         </div>
          <button
           type="submit"
           disabled={isPending}
-          className="px-6 py-3 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-3 bg-foreground text-background hover:bg-foreground/65 dark:hover:bg-foreground/90  rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isPending ? (
             "Updating..."

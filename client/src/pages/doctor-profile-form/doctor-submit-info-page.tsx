@@ -1,18 +1,21 @@
+import axios from "axios";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom"
 import { useDoctorProfileFormContext } from "@/context/doctor-profile-form-context"
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createDoctor } from "@/services/profile-service";
 
 const DoctorSubmitInfoPage = () => {
   const { state, dispatch } = useDoctorProfileFormContext();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const { mutate: createDoctorMutation, isPending, isError, error } = useMutation({
+  const { mutate: createDoctorMutation, isPending, error } = useMutation({
     mutationFn: createDoctor,
     onSuccess: () => {
       toast.success("Profile created successfully");
       dispatch({ type: "RESET_FORM" });
+      queryClient.invalidateQueries({ queryKey: ["doctorProfile"] });
       navigate("/doctor")
     },
     onError: () => {
@@ -40,9 +43,16 @@ const DoctorSubmitInfoPage = () => {
 
   return (
     <section className="flex flex-col gap-8">
+       {error && (
+          <span className="text-red-500">
+            {axios.isAxiosError(error)
+            ? error.response?.data?.error ?? error.message
+            : error.message}
+          </span>
+        )}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">Personal Information</h2>
-        <div className="grid gap-2 sm:grid-cols-2">
+        <div className="grid gap-2 grid-cols-2">
           <div className="flex flex-col gap-2">
             <p>
               Address
@@ -84,7 +94,7 @@ const DoctorSubmitInfoPage = () => {
       </div>
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">Work Information</h2>
-        <div className="grid gap-2 sm:grid-cols-2">
+        <div className="grid gap-2 grid-cols-2">
           <div className="flex flex-col gap-2">
             <p>
               Education
@@ -95,7 +105,7 @@ const DoctorSubmitInfoPage = () => {
             <p>
               Consultation Fee
             </p>
-            <p>{state.workInfo.consultationFee}</p>
+            <p>${state.workInfo.consultationFee}</p>
           </div>
           <div className="flex flex-col gap-2">
             <p>
@@ -130,16 +140,10 @@ const DoctorSubmitInfoPage = () => {
         </div>
       </div>
 
-      <button className="p-2 border border-slate-700 rounded-lg transition-colors hover:bg-slate-600 hover:text-slate-100" onClick={() => navigate("/doctor/profile/work-info")}>Back</button>
-      <button className="p-2 border border-slate-700 rounded-lg transition-colors hover:bg-slate-600 hover:text-slate-100" onClick={handleSubmit} disabled={isPending}>
+      <button className="submit-info-button" onClick={() => navigate("/doctor/profile/work-info")}>Back</button>
+      <button className="submit-info-button" onClick={handleSubmit} disabled={isPending}>
         {isPending ? "Submitting..." : "Submit"}
       </button>
-
-      {isError && (
-        <p className="text-red-500">
-          {error instanceof Error ? error.message : "Something went wrong"}
-        </p>
-      )}
     </section>
   )
 }

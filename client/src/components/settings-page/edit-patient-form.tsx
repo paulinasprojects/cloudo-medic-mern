@@ -119,7 +119,7 @@ export default function EditPatientForm() {
          <button
           type="submit"
           disabled={isPending}
-          className="w-fit px-6 py-3 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="edit-button"
         >
           {isPending ? (
             "Editing..."

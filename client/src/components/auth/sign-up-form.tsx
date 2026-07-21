@@ -35,7 +35,7 @@ export default function SignupForm() {
 
   return (
     <section className="w-full mx-auto px-4 py-4 sm:px-4">
-      <div className="border border-[#e8e8e8] rounded-3xl p-10">
+      <div className="border border-[#e8e8e8] rounded-xl p-10">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {error && (
             <span className="text-red-500 text-sm">
@@ -44,7 +44,7 @@ export default function SignupForm() {
           )}
           <div className="flex flex-col gap-4 mt-6">
             <div className="flex flex-col gap-2">
-              <label htmlFor="first-name" className="text-sm font-medium text-black dark:text-white">First Name</label>
+              <label htmlFor="first-name" className="label-class">First Name</label>
               <input
                 type="text"
                 id="first-name"
@@ -52,11 +52,11 @@ export default function SignupForm() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 disabled={isLoading}
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="last-name" className="text-sm font-medium text-black dark:text-white">Last Name</label>
+              <label htmlFor="last-name" className="label-class">Last Name</label>
               <input
                 type="text"
                 id="last-name"
@@ -64,11 +64,11 @@ export default function SignupForm() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 disabled={isLoading}
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-medium text-black dark:text-white">Email</label>
+              <label htmlFor="email" className="label-class">Email</label>
               <input
                 type="email"
                 id="email"
@@ -76,11 +76,11 @@ export default function SignupForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
-                className="px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white  placeholder:text-sm placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+                className="input-class"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="password" className="text-sm font-medium text-black dark:text-white">Password</label>
+              <label htmlFor="password" className="label-class">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -89,7 +89,7 @@ export default function SignupForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="w-full px-4 py-1 border border-slate-700 rounded-full text-black dark:text-white placeholder:text-sm  placeholder:text-black dark:placeholder:text-white focus:outline-none focus:border-slate-300 transition-colors"
+                  className="w-full input-class"
                 />
                 <button
                   type="button"
@@ -106,7 +106,7 @@ export default function SignupForm() {
               </div>
             </div>
             <div className="flex flex-col gap-2 mt-2">
-              <label htmlFor="role" className="text-sm font-medium text-black dark:text-white">Are you a patient or doctor?</label>
+              <label className="label-class">Are you a patient or doctor?</label>
               <Select
                 id="role"
                 value={role}
@@ -126,7 +126,7 @@ export default function SignupForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-6 py-3 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="create-button"
           >
             {isLoading ? (
               "Signing Up"
@@ -137,7 +137,7 @@ export default function SignupForm() {
         </form>
         <p className="text-center text-gray-400 mt-5 text-sm font-normal">
           Already have an account?{" "}
-          <Link to="/login" className="text-[12px] text-black dark:text-white  transition-colors">
+          <Link to="/login" className="text-[14px] text-foreground  transition-colors">
             Sign in
           </Link>
         </p>

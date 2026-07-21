@@ -9,11 +9,12 @@ const PatientProfileGuard = () => {
     queryKey: ["patientProfile"],
     queryFn: getPatientProfile,
     retry: false,
+    staleTime: 1000 * 60 * 5,
   });
 
   useEffect(() => {
     if (data?.data) {
-      navigate("/patient/profile/edit", { replace: true })
+    navigate("/patient", { replace: true })
     }
   }, [data, navigate])
 

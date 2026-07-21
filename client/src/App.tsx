@@ -20,8 +20,6 @@ import DoctorPersonalInfoPage from "@/pages/doctor-profile-form/doctor-personal-
 import DoctorWorkInfoPage from "@/pages/doctor-profile-form/doctor-work-info-page";
 import DoctorSubmitInfoPage from "@/pages/doctor-profile-form/doctor-submit-info-page";
 import DoctorProfileGuard from "@/guards/doctor-profile-guard";
-import DoctorProfileEdit from "@/pages/doctor-edit-profile";
-import PatientProfileEdit from "@/pages/patient-profile-edit-page";
 import PatientProfileGuard from "@/guards/patient-profile-guard";
 import { PatientProfileFormLayout } from "@/components/patient/patient-profile-form-layout";
 import PatientPersonalInfoPage from "@/pages/patient-profile-form/patient-personal-info-page";
@@ -31,8 +29,6 @@ import DoctorDashboardGuard from "@/guards/doctor-dashboard-guard";
 import PatientDashboardGuard from "@/guards/patient-dashboard-guard";
 import DoctorFormStepGuard from "@/guards/doctor-form-step-guard";
 import PatientFormStepGuard from "@/guards/patient-form-step-guard";
-import DoctorGuard from "@/guards/doctor-guard";
-import PatientGuard from "@/guards/patient-guard";
 import AdminUsersPage from "@/pages/admin-users-page";
 import SettingsPage from "./pages/settings-page";
 import AdminPatientsPage from "./pages/admin-patients-page";
@@ -74,12 +70,7 @@ function App() {
           <Route element={<DoctorDashboardGuard />}>
             <Route path="/doctor" element={<DoctorPage />} />
           </Route>
-          <Route element={<DoctorProfileGuard />}>
             <Route path="/doctor/profile" element={<DoctoProfilePage />} />
-          </Route>
-          <Route element={<DoctorGuard />}>
-            <Route path="/doctor/profile/edit" element={<DoctorProfileEdit />} />
-          </Route>
           <Route element={<DoctorProfileGuard />}>
             <Route element={<DoctorProfileFormLayout />}>
               <Route path="/doctor/profile/personal-info" element={<DoctorPersonalInfoPage />} />
@@ -94,12 +85,7 @@ function App() {
           <Route element={<PatientDashboardGuard />}>
             <Route path="/patient" element={<PatientPage />} />
           </Route>
-          <Route element={<PatientProfileGuard />}>
             <Route path="/patient/profile" element={<PatientProfilePage />} />
-          </Route>
-          <Route element={<PatientGuard />}>
-            <Route path="/patient/profile/edit" element={<PatientProfileEdit />} />
-          </Route>
           <Route element={<PatientProfileGuard />}>
             <Route element={<PatientProfileFormLayout />}>
               <Route path="/patient/profile/personal-info" element={<PatientPersonalInfoPage />} />

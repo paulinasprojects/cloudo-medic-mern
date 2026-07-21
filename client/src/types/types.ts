@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 export interface ApiResponse<T> {
   success: boolean;
   data?: T;
@@ -158,11 +159,24 @@ export interface editAdminUserRequest {
   lastName: string;
 }
 
-export enum AppointmentStatus {
-  SCHEDULED = "scheduled",
-  COMPLETED = "completed",
-  CANCELLED = "cancelled"
-}
+
+export const AppointmentStatus = [
+  {
+    id: uuidv4(),
+    value: "scheduled",
+    placeholder: "SCHEDULED"
+  },
+  {
+    id: uuidv4(),
+    value: "completed",
+    placeholder: "COMPLETED"
+  },
+  {
+    id: uuidv4(),
+    value: "cancelled",
+    placeholder: "CANCELLED"
+  },
+]
 
 export interface Vaccine {
   id: string;
@@ -176,12 +190,6 @@ export interface Vaccine {
   updatedAt: string;
   doctorProfile?: Doctor;
   patientProfile?: Patient;
-}
-
-export enum VaccineStatus {
-  SCHEDULED = "scheduled",
-  COMPLETED = "completed",
-  CANCELLED = "cancelled"
 }
 
 export interface MedicalTests {
@@ -201,46 +209,179 @@ export interface MedicalTests {
   patientProfile?: Patient;
 }
 
-export enum BloodTest {
-  CBC = "cbc",
-  BMP = "bmp",
-  RBC = "rbc",
-  HCT = "hct",
-  WBC = "wbc",
-  LDL = "ldl",
-  HDL = "hdl",
-  VITAMIND = "vitamind",
-  TSH = "tsh",
-}
 
-export enum Biochemistry {
-  GLUCOSE = "glucose",
-  CREAT = "creat",
-  ASAT = "asat",
-  ALAT = "alat",
-  EGFR = "egfr"
-}
+export const BloodTest = [
+  {
+    id: uuidv4(),
+    value: "cbc",
+    placeholder: "CBC",
+  },
+  {
+    id: uuidv4(),
+    value: "bmp",
+    placeholder: "BMP",
+  },
+  {
+    id: uuidv4(),
+    value: "rbc",
+    placeholder: "RBC",
+  },
+  {
+    id: uuidv4(),
+    value: "hct",
+    placeholder: "HCT",
+  },
+  {
+    id: uuidv4(),
+    value: "wbc",
+    placeholder: "WBC",
+  },
+  {
+    id: uuidv4(),
+    value: "ldl",
+    placeholder: "LDL",
+  },
+  {
+    id: uuidv4(),
+    value: "hdl",
+    placeholder: "HDL",
+  },
+  {
+    id: uuidv4(),
+    value: "vitamind",
+    placeholder: "VITAMIN D",
+  },
+  {
+    id: uuidv4(),
+    value: "tsh",
+    placeholder: "TSH",
+  },
+]
 
-export enum ImagingTest {
-  CTSCAN = "ctscan",
-  CTA = "cta",
-  MRI = "mri",
-  PET = "pet",
-  MAMMOGRAPHY = "mammography",
-  ECHOCARDIOGRAM = "echocardiogram", 
-}
 
-export enum Urine {
-  URINE = "urine",
-  GLUCOSE = "glucose",
-  PROTEIN = "protein",
-  BLOOD = "blood",
-}
+export const Biochemistry = [
+  {
+    id: uuidv4(),
+    value: "glucose",
+    placeholder: "GLUCOSE"
+  },
+  {
+    id: uuidv4(),
+    value: "creat",
+    placeholder: "CREAT"
+  },
+  {
+    id: uuidv4(),
+    value: "asat",
+    placeholder: "ASAT"
+  },
+  {
+    id: uuidv4(),
+    value: "alat",
+    placeholder: "ALAT"
+  },
+  {
+    id: uuidv4(),
+    value: "egfr",
+    placeholder: "EGFR"
+  },
+]
 
 
-export enum MedicalTestStatus {
-  SCHEDULED = "scheduled",
-  PENDING = "pending",
-  COMPLETED = "completed",
-  CANCELLED = "cancelled"
-}
+export const Urine = [
+  {
+    id: uuidv4(),
+    value: "urine",
+    placeholder: "URINE"
+  },
+  {
+    id: uuidv4(),
+    value: "glucose",
+    placeholder: "GLUCOSE"
+  },
+  {
+    id: uuidv4(),
+    value: "protein",
+    placeholder: "PROTEIN"
+  },
+  {
+    id: uuidv4(),
+    value: "blood",
+    placeholder: "BLOOD"
+  },
+]
+
+
+export const MedicalTestStatus = [
+  {
+    id: uuidv4(),
+    value: "scheduled",
+    placeholder: "SCHEDULED"
+  },
+  {
+    id: uuidv4(),
+    value: "pending",
+    placeholder: "PENDING"
+  },
+  {
+    id: uuidv4(),
+    value: "completed",
+    placeholder: "COMPLETED"
+  },
+  {
+    id: uuidv4(),
+    value: "cancelled",
+    placeholder: "CANCELLED"
+  },
+]
+
+export const ImagingTest = [
+  {
+    id: uuidv4(),
+    value: "ctscan",
+    placeholder: "CTSCAN"
+  },
+  {
+    id: uuidv4(),
+    value: "cta",
+    placeholder: "CTA"
+  },
+  {
+    id: uuidv4(),
+    value: "mri",
+    placeholder: "MRI"
+  },
+  {
+    id: uuidv4(),
+    value: "pet",
+    placeholder: "PET"
+  },
+  {
+    id: uuidv4(),
+    value: "mammography",
+    placeholder: "MAMMOGRAPHY"
+  },
+  {
+    id: uuidv4(),
+    value: "echocardiogram",
+    placeholder: "ECHOCARDIOGRAM"
+  },
+]
+
+export const VaccineStatus = [
+  {
+    id: uuidv4(),
+    value: "scheduled",
+    placeholder: "SCHEDULED"
+  },
+  {
+    id: uuidv4(),
+    value: "completed",
+    placeholder: "COMPLETED"
+  },
+  {
+    id: uuidv4(),
+    value: "cancelled",
+    placeholder: "CANCELLED"
+  },
+]

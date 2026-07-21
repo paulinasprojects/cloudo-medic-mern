@@ -20,7 +20,7 @@ export default function EditVaccineForm({
   const [doctorId, setDoctorId] = useState<string>(data.doctorId ?? "");
   const [vaccinationName, setVaccinationName] = useState<string>(data.vaccinationName ?? "");
   const [vaccinationDate, setVaccinationDate] = useState<string>(data.vaccinationDate ?? "");
-  const [status, setStatus] = useState<VaccineStatus | string>(data.status ?? "")
+  const [status, setStatus] = useState<string>(data.status ?? "")
   const [notes, setNotes] = useState<string>(data.notes ?? "")
   const queryClient = useQueryClient();
 
@@ -108,7 +108,7 @@ export default function EditVaccineForm({
            />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="vaccination-date" className="label-class">
+          <label className="label-class">
             Vaccination Date
           </label>
           <DatePicker
@@ -125,16 +125,16 @@ export default function EditVaccineForm({
           </label>
           <Select
             value={status}
-            onValueChange={(value) => setStatus(value as VaccineStatus)}
+            onValueChange={(value) => setStatus(value)}
           >
             <SelectTrigger placeholder="Select status"/>
             <SelectContent>
-              {Object.values(VaccineStatus).map((status) => (
+              {VaccineStatus.map((status) => (
                 <SelectOption
-                  key={status}
-                  value={status}
+                  key={status.id}
+                  value={status.value}
                 >
-                  {status}
+                  {status.placeholder}
                 </SelectOption>
               ))}
             </SelectContent>

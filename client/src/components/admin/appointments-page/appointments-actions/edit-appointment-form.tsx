@@ -19,7 +19,7 @@ export default function EditAppointmentForm({
   const [patientId, setPatientId] = useState<string>(data.patientId ?? "");
   const [doctorId, setDoctorId] = useState<string>(data.doctorId ?? "");
   const [appointmentDate, setAppointmentDate] = useState<string>(data.appointmentDate ?? "");
-  const [status, setStatus] = useState<AppointmentStatus | string>(data.status ?? "")
+  const [status, setStatus] = useState< string>(data.status ?? "")
   const [notes, setNotes] = useState<string>(data.notes ?? "")
   const queryClient = useQueryClient();
 
@@ -90,7 +90,7 @@ export default function EditAppointmentForm({
             />
           </div>
            <div className="flex flex-col gap-2">
-            <label htmlFor="start-date" className="label-class">
+            <label className="label-class">
               Appointment Date
             </label>
             <DatePicker
@@ -122,12 +122,12 @@ export default function EditAppointmentForm({
             </label>
           <Select
             value={status}
-            onValueChange={(value) => setStatus(value as AppointmentStatus)}
+            onValueChange={(value) => setStatus(value)}
           >
             <SelectTrigger placeholder="Select status" />
             <SelectContent>
-              {Object.values(AppointmentStatus).map((status) => (
-                <SelectOption key={status} value={status}>{status}</SelectOption>
+              {AppointmentStatus.map((status) => (
+                <SelectOption key={status.id} value={status.value}>{status.placeholder}</SelectOption>
               ))}
             </SelectContent>
           </Select>
@@ -136,7 +136,7 @@ export default function EditAppointmentForm({
           <button
           type="submit"
           disabled={isPending}
-          className="px-6 py-3 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-3 bg-foreground text-background hover:bg-foreground/65 dark:hover:bg-foreground/90  rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isPending ? (
             "Updating..."

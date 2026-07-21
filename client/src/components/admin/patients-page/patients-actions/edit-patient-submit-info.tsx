@@ -1,3 +1,4 @@
+import axios from "axios";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { formatDate } from "@/utils/utils";
@@ -19,7 +20,7 @@ export default function EditPatientSubmitInfoStep({
 }: Props) {
   const queryClient = useQueryClient();
 
-  const { mutate: editPatientByAdminMutation, isPending } = useMutation({
+  const { mutate: editPatientByAdminMutation, isPending, error } = useMutation({
     mutationFn: (patientData: {
       userId: string;
       address: string;
@@ -61,6 +62,13 @@ export default function EditPatientSubmitInfoStep({
 
   return (
     <div className="flex flex-col gap-6">
+      {error && (
+          <span className="text-red-500">
+            {axios.isAxiosError(error)
+            ? error.response?.data?.error ?? error.message
+            : error.message}
+          </span>
+        )}
       <h3 className="font-semibold text-black dark:text-white">
         Review Information
       </h3>
@@ -114,15 +122,15 @@ export default function EditPatientSubmitInfoStep({
         <button
           onClick={onBack}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
-        >
+          className="create-button"        
+          >
           Back
         </button>
         <button
           onClick={handleSubmit}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
-        >
+          className="create-button"        
+          >
           {isPending ? "Editing..." : "Edit Patient"}
         </button>
       </div>

@@ -17,7 +17,7 @@ export default function AddVaccineForm({ onSuccess }: Props) {
   const [doctorId, setDoctorId] = useState<string>("");
   const [vaccinationName, setVaccinationName] = useState<string>("");
   const [vaccinationDate, setVaccinationDate] = useState<string>("");
-  const [status, setStatus] = useState<VaccineStatus | string>("");
+  const [status, setStatus] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
 
   const { mutate: createVaccineMutation, isPending, error } = useMutation({
@@ -101,7 +101,7 @@ export default function AddVaccineForm({ onSuccess }: Props) {
            />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="vaccination-date" className="label-class">
+          <label className="label-class">
             Vaccination Date
           </label>
           <DatePicker
@@ -118,16 +118,16 @@ export default function AddVaccineForm({ onSuccess }: Props) {
           </label>
           <Select
             value={status}
-            onValueChange={(value) => setStatus(value as VaccineStatus)}
+            onValueChange={(value) => setStatus(value)}
           >
             <SelectTrigger placeholder="Select status"/>
             <SelectContent>
-              {Object.values(VaccineStatus).map((status) => (
+              {VaccineStatus.map((status) => (
                 <SelectOption
-                  key={status}
-                  value={status}
+                  key={status.id}
+                  value={status.value}
                 >
-                  {status}
+                  {status.placeholder}
                 </SelectOption>
               ))}
             </SelectContent>
@@ -148,7 +148,7 @@ export default function AddVaccineForm({ onSuccess }: Props) {
           </div>
       </div>
        <button
-          className="px-6 py-3 rounded-full dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="create-button"
           type="submit">
           Create
         </button>

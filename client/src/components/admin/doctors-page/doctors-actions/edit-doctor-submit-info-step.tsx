@@ -135,14 +135,14 @@ export default function EditDoctorSubmitInfoStep({
         <button
           onClick={onBack}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+          className="create-button"        
         >
           Back
         </button>
         <button
           onClick={handleSubmit}
           disabled={isPending}
-          className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+          className="create-button"        
         >
           {isPending ? "Editing..." : "Edit Doctor"}
         </button>

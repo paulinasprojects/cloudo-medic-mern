@@ -37,7 +37,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
   return (
     <div className="mt-5">
 			<div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {error && (
             <span className="mt-5 text-red-500 text-sm">{error}</span>
           )}
@@ -83,7 +83,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           <button 
             disabled={isLoading} 
             type="submit" 
-            className="w-fit px-6 py-3 rounded-full dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-fit create-button"
           >
             {isLoading ? (
               "Saving..."

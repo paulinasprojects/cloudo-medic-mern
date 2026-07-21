@@ -36,7 +36,7 @@ const AdminVaccinesPage = () => {
       <div className="py-8 flex items-center justify-between">
         <h1 className="font-medium text-2xl xl:text-[42px]">Vaccines Overview</h1>
         <div className="flex gap-2 items-center">
-          <button onClick={handleAddNewVaccine} className="inline-flex items-center gap-2 text-[16px] bg-black text-white dark:bg-white dark:text-black hover:bg-black/65 dark:hover:bg-white/90 transition-colors max-sm:py-2 sm:py-4 px-3 rounded-full">
+          <button onClick={handleAddNewVaccine} className="add-button">
             <Plus className="size-5"/>
             Add New Vaccine
           </button>

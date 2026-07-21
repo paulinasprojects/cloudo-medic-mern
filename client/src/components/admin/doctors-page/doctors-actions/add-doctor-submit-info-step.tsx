@@ -1,3 +1,4 @@
+import axios from "axios";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { DoctorProfileFormAction, DoctorProfileFormData } from "@/types/doctor-profile-types";
@@ -13,7 +14,7 @@ interface Props {
 export default function AddDoctorSubmitInfoStep({ state, dispatch, onBack, onSuccess }: Props) {
   const queryClient = useQueryClient();
 
-  const { mutate: createDoctorByAdmin, isPending } = useMutation({
+  const { mutate: createDoctorByAdmin, isPending, error } = useMutation({
     mutationFn: createDoctor,
     onSuccess: () => {
       toast.success("Doctor created successfully");
@@ -47,6 +48,13 @@ export default function AddDoctorSubmitInfoStep({ state, dispatch, onBack, onSuc
 
   return (
     <div className="flex flex-col gap-6">
+      {error && (
+          <span className="text-red-500">
+            {axios.isAxiosError(error)
+            ? error.response?.data?.error ?? error.message
+            : error.message}
+          </span>
+        )}
       <h3 className="font-semibold text-black dark:text-white">
         Review Information
       </h3>
@@ -113,14 +121,14 @@ export default function AddDoctorSubmitInfoStep({ state, dispatch, onBack, onSuc
         <button
           onClick={onBack}
           disabled={isPending}
-          className="p-2 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="create-button"        
         >
           Back
         </button>
         <button
           onClick={handleSubmit}
           disabled={isPending}
-          className="p-2 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="create-button"        
         >
           {isPending ? "Creating..." : "Create Doctor"}
         </button>

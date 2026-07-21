@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Menu01FreeIcons, } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Link, useLocation } from "react-router-dom";
@@ -10,10 +11,11 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 const AdminMobileMenu = () => {
   const { pathname } = useLocation();
   const { theme } = useTheme();
+    const [open, setOpen] = useState(false);
 
   return (
     <div className="xl:hidden block">
-      <Sheet>
+      <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <HugeiconsIcon icon={Menu01FreeIcons} className="text-black dark:text-white cursor-pointer" width={25} height={25} />
         </SheetTrigger>
@@ -32,7 +34,10 @@ const AdminMobileMenu = () => {
           <ul className="flex flex-col items-center gap-12">
             {links.map((link) => (
               <li key={link.href} >
-                <Link to={link.href} className={cn(
+                <Link 
+                  to={link.href} 
+                  onClick={() => setOpen(false)}
+                  className={cn(
                   "text-gray-400 hover:text-black dark:hover:text-white duration-300 transition flex items-center gap-4",
                   pathname === link.href && "text-black dark:text-white dark:hover:text-gray-500"
                 )}>

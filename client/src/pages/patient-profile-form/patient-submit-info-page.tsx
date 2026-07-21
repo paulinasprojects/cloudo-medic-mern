@@ -1,19 +1,22 @@
+import axios from "axios"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
 import { usePatientProfileFormContext } from "@/context/patient-profile-form-context"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createPatient } from "@/services/profile-service"
 
 const PatientSubmitInfoPage = () => {
   const { state, dispatch } = usePatientProfileFormContext();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const { mutate: createPatientMutation, isPending, isError, error } = useMutation({
+  const { mutate: createPatientMutation, isPending, error } = useMutation({
     mutationFn: createPatient,
     onSuccess: () => {
       toast.success("Profile created successfully")
       dispatch({ type: "RESET_FORM" })
-      navigate("/patient")
+      queryClient.invalidateQueries({ queryKey: ["patientProfile"] });
+      navigate("/patient", {replace: true})
     },
     onError: () => {
       toast.error("Failed to create profile. Please try again")
@@ -36,9 +39,16 @@ const PatientSubmitInfoPage = () => {
 
   return (
     <section className="flex flex-col gap-8">
+       {error && (
+          <span className="text-red-500">
+            {axios.isAxiosError(error)
+            ? error.response?.data?.error ?? error.message
+            : error.message}
+          </span>
+        )}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">Personal Information</h2>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 grid-cols-2">
           <div className="flex flex-col gap-2">
             <p>
               Address
@@ -74,7 +84,7 @@ const PatientSubmitInfoPage = () => {
       </div>
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">Medical Information</h2>
-        <div className="grid gap-2 sm:grid-cols-2">
+        <div className="grid gap-2 grid-cols-2">
           <div className="flex flex-col gap-2">
             <p>
               Blood type
@@ -101,16 +111,10 @@ const PatientSubmitInfoPage = () => {
           </div>
         </div>
       </div>
-      <button className="p-2 border border-slate-700 rounded-lg transition-colors hover:bg-slate-600 hover:text-slate-100" onClick={() => navigate("/patient/profile/medical-info")}>Back</button>
-      <button className="p-2 border border-slate-700 rounded-lg transition-colors hover:bg-slate-600 hover:text-slate-100" onClick={handleSubmit} disabled={isPending}>
+      <button className="submit-info-button" onClick={() => navigate("/patient/profile/medical-info")}>Back</button>
+      <button className="submit-info-button" onClick={handleSubmit} disabled={isPending}>
         {isPending ? "Submitting..." : "Submit"}
       </button>
-
-      {isError && (
-        <p className="text-red-500">
-          {error instanceof Error ? error.message : "Something went wrong"}
-        </p>
-      )}
     </section>
   )
 }

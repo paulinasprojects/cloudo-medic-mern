@@ -143,7 +143,7 @@ export default function AddPatientPersonalInfoStep({
 					/>
 				</div>
 				<button
-					className="px-6 py-3 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
+					className="create-button"
 					type="submit"
 				>
 					Next

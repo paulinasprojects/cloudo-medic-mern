@@ -5,7 +5,7 @@ import { createMedicalTest } from "@/services/admin-service";
 import { useMutation } from "@tanstack/react-query";
 import { Select, SelectContent, SelectOption, SelectTrigger } from "@/components/common/select";
 import { MultiSelect, MultiSelectContent, MultiSelectOption, MultiSelectTrigger } from "@/components/common/multi-select";
-import { Biochemistry, BloodTest, ImagingTest, MedicalTestStatus, Urine } from "@/types/types";
+import { Biochemistry, BloodTest, MedicalTestStatus, Urine, ImagingTest } from "@/types/types";
 import DatePicker from "@/components/common/date-picker";
 
 interface Props {
@@ -20,7 +20,7 @@ export default function AddMedicalTestForm({ onSuccess }: Props) {
   const [biochemistryTests, setBiochemistryTests] = useState<string[]>([]);
   const [imagingTests, setImagingTests] = useState<string[]>([]);
   const [urineTests, setUrineTests] = useState<string[]>([]);
-  const [status, setStatus] = useState<MedicalTestStatus | string>("");
+  const [status, setStatus] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
 
   const { mutate: createMedicalTestMutation, isPending, error } = useMutation({
@@ -50,7 +50,7 @@ export default function AddMedicalTestForm({ onSuccess }: Props) {
   }
 
   return (
-    <div className="col-span-3 sm:col-span-3 flex flex-col gap-6 px-6">
+    <div className="col-span-3 sm:col-span-3 flex flex-col gap-6 px-6 py-6">
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {error && (
           <span className="text-red-500">
@@ -59,39 +59,40 @@ export default function AddMedicalTestForm({ onSuccess }: Props) {
             : error.message}
           </span>
         )}
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="doctor-id" className="label-class">
-              Doctor Id
-            </label>
-            <input 
-              type="text"
-              id="doctor-id"
-              placeholder="d67cdba2-8731-4e28-aa03-fda59bf16b31"
-              value={doctorId}
-              onChange={(e) => setDoctorId(e.target.value)}
-              disabled={isPending}
-              required
-              className="input-class"
-             />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="patient-id" className="label-class">
-              Patient Id
-            </label>
-            <input 
-              type="text"
-              id="patient-id"
-              placeholder="e50cdba2-8731-4e28-aa03-fda59bf16b31"
-              value={patientId}
-              onChange={(e) => setPatientId(e.target.value)}
-              disabled={isPending}
-              required
-              className="input-class"
-             />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="date" className="label-class">
+          <div className="grid md:grid-cols-2 max-sm:grid-cols-1 md:gap-10 max-sm:gap-2">
+            <div className="flex flex-col md:gap-6 max-sm:gap-4">
+              <div className="flex flex-col gap-2">
+              <label htmlFor="doctor-id" className="label-class">
+                Doctor Id
+              </label>
+              <input 
+                type="text"
+                id="doctor-id"
+                placeholder="d67cdba2-8731-4e28-aa03-fda59bf16b31"
+                value={doctorId}
+                onChange={(e) => setDoctorId(e.target.value)}
+                disabled={isPending}
+                required
+                className="input-class"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="patient-id" className="label-class">
+                Patient Id
+              </label>
+              <input 
+                type="text"
+                id="patient-id"
+                placeholder="e50cdba2-8731-4e28-aa03-fda59bf16b31"
+                value={patientId}
+                onChange={(e) => setPatientId(e.target.value)}
+                disabled={isPending}
+                required
+                className="input-class"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+            <label className="label-class">
               Date
             </label>
             <DatePicker
@@ -102,95 +103,22 @@ export default function AddMedicalTestForm({ onSuccess }: Props) {
               : "")}
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="blood-tests">Blood Tests</label>
-            <MultiSelect 
-              values={bloodTests} 
-              onValuesChange={(value) => setBloodTests(value)}
-              >
-                <MultiSelectTrigger placeholder="Select blood tests"/>
-                <MultiSelectContent>
-                  {Object.values(BloodTest).map((test) => (
-                    <MultiSelectOption
-                      key={test}
-                      value={test}
-                    >
-                      {test}
-                    </MultiSelectOption>
-                  ))}
-                </MultiSelectContent>
-              </MultiSelect>
-            </div>
-            <div className="flex flex-col gap-2">
-            <MultiSelect 
-              values={biochemistryTests} 
-              onValuesChange={(value) => setBiochemistryTests(value)}
-              >
-                <MultiSelectTrigger placeholder="Select biochemistry tests"/>
-                <MultiSelectContent>
-                  {Object.values(Biochemistry).map((test) => (
-                    <MultiSelectOption
-                      key={test}
-                      value={test}
-                    >
-                      {test}
-                    </MultiSelectOption>
-                  ))}
-                </MultiSelectContent>
-              </MultiSelect>
-            </div>
-            <div className="flex flex-col gap-2">
-            <MultiSelect 
-              values={imagingTests} 
-              onValuesChange={(value) => setImagingTests(value)}
-              >
-                <MultiSelectTrigger placeholder="Select imaging tests"/>
-                <MultiSelectContent>
-                  {Object.values(ImagingTest).map((test) => (
-                    <MultiSelectOption
-                      key={test}
-                      value={test}
-                    >
-                      {test}
-                    </MultiSelectOption>
-                  ))}
-                </MultiSelectContent>
-              </MultiSelect>
-            </div>
-            <div className="flex flex-col gap-2">
-            <MultiSelect 
-              values={urineTests} 
-              onValuesChange={(value) => setUrineTests(value)}
-              >
-                <MultiSelectTrigger placeholder="Select urine tests"/>
-                <MultiSelectContent>
-                  {Object.values(Urine).map((test) => (
-                    <MultiSelectOption
-                      key={test}
-                      value={test}
-                    >
-                      {test}
-                    </MultiSelectOption>
-                  ))}
-                </MultiSelectContent>
-              </MultiSelect>
-            </div>
             <div className="flex flex-col gap-2">
               <label className="label-class">
                 Status
               </label>
               <Select
                 value={status}
-                onValueChange={(value) => setStatus(value as MedicalTestStatus)}
+                onValueChange={(value) => setStatus(value)}
               >
                 <SelectTrigger placeholder="Select status"/>
                 <SelectContent>
-                  {Object.values(MedicalTestStatus).map((status) => (
+                  {MedicalTestStatus.map((status) => (
                     <SelectOption
-                      key={status}
-                      value={status}
+                      key={status.id}
+                      value={status.value}
                     >
-                      {status}
+                      {status.placeholder}
                     </SelectOption>
                   ))}
                 </SelectContent>
@@ -201,17 +129,97 @@ export default function AddMedicalTestForm({ onSuccess }: Props) {
               Notes
             </label>
             <input 
+              type="text"
               id="notes" 
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               disabled={isPending}
               required
-              className="resize-none w-full py-4 input-class"
+              className="w-full py-4 input-class"
             />
+          </div>
+          </div>
+          <div className="flex flex-col md:gap-6 max-sm:gap-4">
+            <div className="flex flex-col gap-2">
+              <label className="label-class">Blood Tests</label>
+              <MultiSelect 
+                values={bloodTests} 
+                onValuesChange={(value) => setBloodTests(value)}
+                >
+                  <MultiSelectTrigger placeholder="Select blood tests"/>
+                  <MultiSelectContent>
+                    {BloodTest.map((test) => (
+                      <MultiSelectOption
+                        key={test.id}
+                        value={test.value}
+                      >
+                        {test.placeholder}
+                      </MultiSelectOption>
+                    ))}
+                  </MultiSelectContent>
+                </MultiSelect>
+              </div>
+            <div className="flex flex-col gap-2">
+              <label className="label-class">Biochemistry Tests</label>
+            <MultiSelect 
+              values={biochemistryTests} 
+              onValuesChange={(value) => setBiochemistryTests(value)}
+              >
+                <MultiSelectTrigger placeholder="Select biochemistry tests"/>
+                <MultiSelectContent>
+                  {Biochemistry.map((test) => (
+                    <MultiSelectOption
+                      key={test.id}
+                      value={test.value}
+                    >
+                      {test.placeholder}
+                    </MultiSelectOption>
+                  ))}
+                </MultiSelectContent>
+              </MultiSelect>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="label-class">Imaging Tests</label>
+            <MultiSelect 
+              values={imagingTests} 
+              onValuesChange={(value) => setImagingTests(value)}
+              >
+                <MultiSelectTrigger placeholder="Select imaging tests"/>
+                <MultiSelectContent>
+                  {ImagingTest.map((test) => (
+                    <MultiSelectOption
+                      key={test.id}
+                      value={test.value}
+                    >
+                      {test.placeholder}
+                    </MultiSelectOption>
+                  ))}
+                </MultiSelectContent>
+              </MultiSelect>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="label-class">Urine Tests</label>
+              <MultiSelect 
+                values={urineTests} 
+                onValuesChange={(value) => setUrineTests(value)}
+                >
+                  <MultiSelectTrigger placeholder="Select urine tests"/>
+                  <MultiSelectContent>
+                    {Urine.map((test) => (
+                      <MultiSelectOption
+                        key={test.id}
+                        value={test.value}
+                      >
+                        {test.placeholder}
+                      </MultiSelectOption>
+                    ))}
+                  </MultiSelectContent>
+                </MultiSelect>
+            </div>
           </div>
         </div>
         <button
-          className="px-6 py-3 rounded-full dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="create-button"
           type="submit">
           Create
         </button>

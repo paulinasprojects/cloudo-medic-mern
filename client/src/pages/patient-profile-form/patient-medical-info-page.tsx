@@ -15,17 +15,15 @@ const PatientMedicalInfoPage = () => {
   return (
     <div className="background">
       <form onSubmit={nextPage} className="flex flex-col gap-8">
-        <h1 className="text-4xl font-bold dark:text-white text-black">
+        <h1 className="text-4xl font-bold text-foreground">
           Medical Information
         </h1>
         <div className="flex flex-col gap-y-2">
           <label
-            htmlFor="blood-type"
-            className="font-bold dark:text-white text-black">
+            className="label-class">
             Blood Type
           </label>
           <Select
-            id="blood-type"
             value={state.medicalInfo.bloodType}
             onValueChange={(value) => dispatch({
               type: "UPDATE_MEDICAL_INFO",
@@ -43,7 +41,7 @@ const PatientMedicalInfoPage = () => {
         <div className="flex flex-col gap-y-2">
           <label
             htmlFor="emergency-contact-number"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Emergency Contact Number
           </label>
@@ -61,7 +59,7 @@ const PatientMedicalInfoPage = () => {
         <div className="flex flex-col gap-y-2">
           <label
             htmlFor="emergency-contact-name"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Emergency Contact Name
           </label>
@@ -79,7 +77,7 @@ const PatientMedicalInfoPage = () => {
         <div className="flex flex-col gap-y-2">
           <label
             htmlFor="allergies"
-            className="font-bold dark:text-white text-black"
+            className="label-class"
           >
             Allergies
           </label>
@@ -96,14 +94,14 @@ const PatientMedicalInfoPage = () => {
         </div>
         <div className="flex *:basis-1/2 gap-4">
           <button
-            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+            className="add-work-medical-button"
             type="button"
             onClick={() => navigate("/patient/profile/personal-info")}
           >
             Back
           </button>
           <button
-            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black  duration-500 dark:hover:bg-white"
+            className="add-work-medical-button"
             type="submit">
             Next
           </button>

@@ -137,14 +137,14 @@ export default function AddPatientMedicalInfoStep({
           <button
             type="button"
             onClick={goBack}
-            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
+            className="create-button"
 
           >
             Back
           </button>
           <button
             type="submit"
-            className="p-2 border border-black dark:border-white rounded-sm transition-colors hover:bg-black hover:text-white dark:hover:text-black duration-500 dark:hover:bg-white"
+            className="create-button"
           >
             Next
           </button>

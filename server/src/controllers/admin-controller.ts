@@ -256,12 +256,17 @@ export const createDoctor = asyncHandler(
 
     const profile = await DoctorProfile.findOne({
       where: {
-        id: userId
+        userId
       }
     });
 
+      if (!profile) {
+      throw new AppError("Doctor with this user id does not exists", 404)
+    }
+
+
     if (profile) {
-      throw new AppError("A doctor with this id already have a profile", 400);
+      throw new AppError("A doctor with this id already exists", 400);
     }
 
     const newDoctor = await DoctorProfile.create({
@@ -422,12 +427,16 @@ export const createPatient = asyncHandler(
 
     const profile = await PatientProfile.findOne({
       where: {
-        id: userId
+        userId
       }
     });
 
+    if (!profile) {
+      throw new AppError("Patient with this user id does not exists", 404)
+    }
+
     if (profile) {
-      throw new AppError("A patient with this id already have a profile", 400);
+      throw new AppError("A patient with this id already exist", 400);
     }
 
     const newPatient = await PatientProfile.create({
@@ -801,11 +810,6 @@ export const updateAppointmentByAdmins = asyncHandler(
     };
 
     const date = appointmentDate ? new Date(appointmentDate) : new Date();
-    const today = new Date();
-
-    if (date < today) {
-      throw new AppError("Cannot create an appointment for a past date", 400)
-    }
 
     if (appointmentDate !== undefined) {
       appointment.appointmentDate = date;
@@ -1199,8 +1203,8 @@ export const createMedicalTestByAdmins = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { doctorId, patientId, date, notes, status,  bloodTests, biochemistryTests, imagingTests, urineTests } = req.body;
     
-      if (!doctorId || !patientId || !date ) {
-        throw new AppError("Please provide a doctor, patient", 400)
+      if (!doctorId || !patientId || !date || !bloodTests ) {
+        throw new AppError("Please provide a doctor, patient and date to create a medical test", 400)
       }
 
       const userId = req.userId;
@@ -1296,11 +1300,7 @@ export const updateMedicalTestByAdmins = asyncHandler(
     };
 
      const testDate = date ? new Date(date) : new Date();
-     const today = new Date();
 
-     if (testDate < today) {
-      throw new AppError("Cannot update a medical test for a past date", 400)
-     };
 
      if (date !== undefined) {
       medicalTest.date = testDate

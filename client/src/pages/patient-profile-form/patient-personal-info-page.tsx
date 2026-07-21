@@ -38,12 +38,11 @@ const PatientPersonalInfoPage = () => {
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <label htmlFor="date-of-birth" className="label-class">
+          <label className="label-class">
             Date of birth
           </label>
           <DatePicker
             placeholder="Pick a date of birth"
-            id="date-of-birth"
             value={state.personalInfo.dateOfBirth
               ? new Date(state.personalInfo.dateOfBirth)
               : undefined
@@ -60,13 +59,11 @@ const PatientPersonalInfoPage = () => {
         </div>
         <div className="flex flex-col gap-y-2">
           <label
-            htmlFor="gender"
             className="label-class"
           >
             Gender
           </label>
           <Select
-            id="gender"
             value={state.personalInfo.gender}
             onValueChange={(value) => dispatch({
               type: "UPDATE_PERSONAL_INFO",
@@ -110,11 +107,11 @@ const PatientPersonalInfoPage = () => {
               type: "UPDATE_PERSONAL_INFO",
               payload: { bio: e.target.value }
             })}
-            className="resize-none w-full px-4 py-1 border border-slate-700 rounded-lg text-black dark:text-white placeholder:text-[11px] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:border-slate-300 transition-colors"
+            className="resize-none w-full input-class"
           />
         </div>
         <button
-          className="p-2 border border-slate-700 rounded-lg transition-colors hover:bg-slate-600 hover:text-slate-400"
+          className="create-button"
           type="submit">
           Next
         </button>

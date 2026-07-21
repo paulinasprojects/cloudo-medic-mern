@@ -183,13 +183,13 @@ export default function AddDoctorWorkInfoStep({ state, dispatch, onNext, onBack 
           <button
             type="button"
             onClick={goBack}
-            className="p-2 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="create-button"         
           >
             Back
           </button>
           <button
             type="submit"
-            className="p-2 dark:bg-white hover:dark:bg-white/80 dark:text-black bg-black hover:bg-black/80 text-white rounded-full  transition-colors duration-400 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="create-button"          
           >
             Next
           </button>

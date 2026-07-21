@@ -70,7 +70,20 @@ export const columns: ColumnDef<User>[] = [
           <ArrowUpDown className="ml-2 h-3 w-3" />
         </button>
       )
-    }
+    },
+    cell: ({row}) => (
+      <div>
+        {row.original.role === "admin" && (
+          <span className="text-white bg-red-500 rounded-full p-1.5">{row.original.role}</span>
+        )}
+        {row.original.role === "patient" && (
+          <span className="text-white bg-green-500 rounded-full p-1.5">{row.original.role}</span>
+        )}
+        {row.original.role === "doctor" && (
+          <span className="text-white bg-blue-500 rounded-full p-1.5">{row.original.role}</span>
+        )}
+      </div>
+    )
   },
   {
     accessorKey: "createdAt",
