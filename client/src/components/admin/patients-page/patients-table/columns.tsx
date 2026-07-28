@@ -7,6 +7,7 @@ export const columns: ColumnDef<Patient>[] = [
   {
     accessorKey: "userId",
     header: "User Id",
+		 meta: { label: "User ID" },
     size: 190,
     cell: ({ row }) => (
         <div className="line-clamp-1">
@@ -16,6 +17,7 @@ export const columns: ColumnDef<Patient>[] = [
   },
 	{
 		accessorKey: "user.firstName",
+		meta: { label: "First Name" },
 		header: ({ column}) => {
 			return (
 				<button
@@ -30,6 +32,7 @@ export const columns: ColumnDef<Patient>[] = [
 	},
 	{
 		accessorKey: "user.lastName",
+		meta: { label: "Last Name" },
 		 header: ({ column }) => {
       return (
         <button
@@ -44,6 +47,7 @@ export const columns: ColumnDef<Patient>[] = [
 	},
 	{
 		accessorKey: "bloodType",
+		meta: { label: "Blood Type" },
 		header: ({ column }) => {
 			return (
 				<button
@@ -63,6 +67,7 @@ export const columns: ColumnDef<Patient>[] = [
 	{
 		accessorKey: "medicalHistory",
 		header: "Medical History",
+		meta: { label: "Medical History" },
 		size: 190,
 		cell: ({row}) => (
 			<div className="line-clamp-1">
@@ -72,11 +77,13 @@ export const columns: ColumnDef<Patient>[] = [
 	},
 	{
 		accessorKey: "emergencyContactName",
-		header: "Emergency Contact Name"
+		header: "Emergency Contact Name",
+		meta: { label: "Emergency Contact Name" },
 	},
 	{
 		accessorKey: "emergencyContactNumber",
-		header: "Emergency Contact Number"
+		header: "Emergency Contact Number",
+		meta: { label: "Emergency Contact Number" },
 	},
 	{
 		accessorKey: "action",

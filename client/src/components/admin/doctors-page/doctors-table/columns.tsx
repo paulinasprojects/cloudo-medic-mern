@@ -7,6 +7,7 @@ export const columns: ColumnDef<Doctor>[] = [
   {
     accessorKey: "userId",
     header: "User Id",
+    meta: { label: "User ID" },
     size: 80,
     cell: ({ row }) => (
       <div className="line-clamp-1">
@@ -16,6 +17,7 @@ export const columns: ColumnDef<Doctor>[] = [
   },
   {
     accessorKey: "user.firstName",
+    meta: { label: "First Name" },
     header: ({column}) => {
       return (
         <button
@@ -30,6 +32,7 @@ export const columns: ColumnDef<Doctor>[] = [
   },
   {
     accessorKey: "user.lastName",
+    meta: { label: "Last Name" },
     header: ({ column }) => {
       return (
         <button
@@ -48,6 +51,7 @@ export const columns: ColumnDef<Doctor>[] = [
   },
   {
     accessorKey: "doctorLevel",
+    meta: { label: "Doctor Level" },
     header: ({ column }) => {
       return (
         <button
@@ -66,7 +70,8 @@ export const columns: ColumnDef<Doctor>[] = [
   },
   {
     accessorKey: "workPhoneNumber",
-    header: "Work Phone"
+    header: "Work Phone",
+    meta: { label: "Work Phone" },
   },
   {
     accessorKey: "hospital",
@@ -75,6 +80,7 @@ export const columns: ColumnDef<Doctor>[] = [
   {
     accessorKey: "consultationFee",
     header: "Consultation Fee",
+    meta: { label: "Consultation Fee" },
     cell: ({ row }) => (
       <span>${row.original.consultationFee}</span>
     )

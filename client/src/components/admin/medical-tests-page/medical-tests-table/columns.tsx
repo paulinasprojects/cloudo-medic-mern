@@ -17,6 +17,7 @@ export const columns: ColumnDef<MedicalTests>[] = [
   {
     accessorKey: `${"doctorProfile.user.firstName"} ${"doctorProfile.user.lastName"}`,
     header: "Doctor Full Name",
+    meta: { label: "Doctor Full Name" },
     cell: ({row}) => (
       <span>
         {row.original.doctorProfile?.user.firstName} {row.original.doctorProfile?.user.lastName}
@@ -26,6 +27,7 @@ export const columns: ColumnDef<MedicalTests>[] = [
   {
     accessorKey: `${"patientProfile.user.firstName"} ${"patientProfile.user.lastName"}`,
     header: "Patient Full Name",
+    meta: { label: "Patient Full Name" },
     cell: ({row}) => (
       <span>
         {row.original.patientProfile?.user.firstName} {row.original.patientProfile?.user.lastName}
@@ -45,18 +47,22 @@ export const columns: ColumnDef<MedicalTests>[] = [
   {
     accessorKey: "bloodTests",
     header: "Blood Tests",
+    meta: { label: "Blood Tests" },
   },
   {
     accessorKey: "biochemistryTests",
     header: "Biochemistry Tests",
+    meta: { label: "Biochemistry Tests" },
   },
   {
     accessorKey: "imagingTests",
     header: "Imaging Tests",
+    meta: { label: "Imaging Tests" },
   },
   {
     accessorKey: "urineTests",
     header: "Urine Tests",
+    meta: { label: "Urine Tests" },
   },
   {
     accessorKey: "notes",

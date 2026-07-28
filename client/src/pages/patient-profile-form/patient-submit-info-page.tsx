@@ -16,7 +16,7 @@ const PatientSubmitInfoPage = () => {
       toast.success("Profile created successfully")
       dispatch({ type: "RESET_FORM" })
       queryClient.invalidateQueries({ queryKey: ["patientProfile"] });
-      navigate("/patient", {replace: true})
+      navigate("/patient")
     },
     onError: () => {
       toast.error("Failed to create profile. Please try again")

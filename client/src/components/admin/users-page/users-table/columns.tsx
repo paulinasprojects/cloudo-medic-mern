@@ -9,6 +9,7 @@ export const columns: ColumnDef<User>[] = [
     accessorKey: "id",
     header: "Id",
     size: 370,
+    meta: { label: "ID" },
     cell: ({ row }) => (
       <div className="line-clamp-1">
         {row.original.id}
@@ -17,6 +18,7 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "firstName",
+    meta: { label: "First Name" },
     header: ({column}) => {
       return (
         <button
@@ -31,6 +33,7 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "lastName",
+    meta: { label: "Last Name" },
     header: ({ column }) => {
       return (
         <button
@@ -87,6 +90,7 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "createdAt",
+    meta: { label: "Creation Date" },
     size: 270,
     header: ({ column }) => {
       return (
@@ -109,6 +113,7 @@ export const columns: ColumnDef<User>[] = [
     accessorKey: "action",
     header: "Action",
     id: "actions",
+    meta: { label: "Action" },
     cell: ({ row }) => <CellAction data={row.original} />
   }
 ]

@@ -17,6 +17,7 @@ export const columns: ColumnDef<Appointment>[] = [
   {
     accessorKey: `${"doctorProfile.user.firstName"}`,
     header: "Doctor First Name",
+    meta: { label: "Doctor First Name" },
     cell: ({row}) => (
       <span>
         {row.original.doctorProfile?.user.firstName}
@@ -26,6 +27,7 @@ export const columns: ColumnDef<Appointment>[] = [
   {
     accessorKey: `${"doctorProfile.user.lastName"}`,
     header: "Doctor Last Name",
+    meta: { label: "Doctor Last Name" },
     cell: ({row}) => (
       <span>
         {row.original.doctorProfile?.user.lastName}
@@ -35,6 +37,7 @@ export const columns: ColumnDef<Appointment>[] = [
   {
     accessorKey: `${"patientProfile.user.firstName"}`,
     header: "Patient First Name",
+    meta: { label: "Patient First Name" },
     cell: ({row}) => (
       <span>
         {row.original.patientProfile?.user.firstName}
@@ -44,6 +47,7 @@ export const columns: ColumnDef<Appointment>[] = [
   {
     accessorKey: `${"patientProfile.user.lastName"}`,
     header: "Patient Last Name",
+    meta: { label: "Patient Last Name" },
     cell: ({row}) => (
       <span>
         {row.original.patientProfile?.user.lastName}
@@ -80,6 +84,7 @@ export const columns: ColumnDef<Appointment>[] = [
     accessorKey: "appointmentDate",
     size: 170,
     header: "Appointment Date",
+    meta: { label: "Appointment Date" },
     cell: ({row}) => (
       <span className="text-sm">
         {formatDate(row.original.appointmentDate)}

@@ -84,8 +84,9 @@ export function UsersDataTable<TData, TValue>({
                     onCheckedChange={(value) =>
                       column.toggleVisibility(!!value)
                     }
+                    className="capitalize"
                   >
-                    {column.id}
+                    {column.columnDef.meta?.label ?? column.id}
                   </DropdownMenuCheckboxItem>
                 )
               })}

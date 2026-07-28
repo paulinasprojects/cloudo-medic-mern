@@ -81,7 +81,7 @@ export default function PrescriptionsDataTable<TData, TValue>({
               checked={column.getIsVisible()}
               onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
-                {column.id}
+                {column.columnDef.meta?.label ?? column.id}
               </DropdownMenuCheckboxItem>
             )
           })}

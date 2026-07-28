@@ -69,7 +69,7 @@ export default function MedicalTestsDataTable<TData, TValue>({
                   checked={column.getIsVisible()}
                   onCheckedChange={(value) => column.toggleVisibility(!!value)}
                 >
-                  {column.id}
+                  {column.columnDef.meta?.label ?? column.id}
                 </DropdownMenuCheckboxItem>
               )
             })}
@@ -121,7 +121,7 @@ export default function MedicalTestsDataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "select"}
+                  data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell

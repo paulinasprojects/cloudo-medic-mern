@@ -2,7 +2,6 @@ import { Prescription } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import CellAction from "./cell-actions";
 import { formatDate } from "@/utils/utils";
-// import { ArrowUpDown } from "lucide-react";
 
 export const columns: ColumnDef<Prescription>[] = [
   {
@@ -18,6 +17,7 @@ export const columns: ColumnDef<Prescription>[] = [
   {
     accessorKey: `${"doctorProfile.user.firstName"} ${"doctorProfile.user.lastName"}`,
     header: "Doctor Full Name",
+    meta: { label: "Doctor Full Name" },
     cell: ({row}) => (
       <div className="line-clamp-1">
         {row.original.doctorProfile?.user.firstName} {row.original.doctorProfile?.user.lastName}
@@ -27,6 +27,7 @@ export const columns: ColumnDef<Prescription>[] = [
   {
     accessorKey: `${"patientProfile.user.firstName"} ${"patientProfile.user.lastName"}`,
     header: "Patient Full Name",
+    meta: { label: "Patient Full Name" },
     cell: ({row}) => (
       <div className="line-clamp-1">
         {row.original.patientProfile?.user.firstName} {row.original.patientProfile?.user.lastName}
@@ -54,6 +55,7 @@ export const columns: ColumnDef<Prescription>[] = [
     accessorKey: "startDate",
     size: 170,
     header: "Start Date",
+    meta: { label: "Start Date" },
      cell: ({ row }) => (
       <span className="text-sm">
         {formatDate(row.original.startDate)}
@@ -64,6 +66,7 @@ export const columns: ColumnDef<Prescription>[] = [
     accessorKey: "endDate",
     size: 170,
     header: "End Date",
+    meta: { label: "End Date" },
      cell: ({ row }) => (
       <span className="text-sm">
         {formatDate(row.original.endDate)}
